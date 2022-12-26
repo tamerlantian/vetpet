@@ -1,9 +1,12 @@
 import React from 'react'
+import Topbar from './pages/dashboard/global/Topbar'
 
 const App = () => {
   return (
-    <div>
-        App is working
+    <div className='app'>
+        <main className='content'>
+            <Topbar />
+        </main>
     </div>
   )
 }
