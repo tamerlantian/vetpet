@@ -78,6 +78,7 @@ export const kanbanGrid = [
 
   { headerText: "Done", keyField: "Close", allowToggle: true },
 ];
+
 const gridEmployeeProfile = (props) => (
   <div className="flex items-center gap-2">
     <img
@@ -471,7 +472,7 @@ export const employeesGrid = [
     headerText: "Employee",
     width: "150",
     template: gridEmployeeProfile,
-    textAlign: "Center",z
+    textAlign: "Center",
   },
   { field: "Name", headerText: "", width: "0", textAlign: "Center" },
   {
