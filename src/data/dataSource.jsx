@@ -1,5 +1,5 @@
-import Avatar from "@mui/material/Avatar";
-import { width } from "@mui/system";
+// import Avatar from "@mui/material/Avatar";
+// import { width } from "@mui/system";
 
 const gridEmployeeProfile = (props) => (
   <div className="flex items-center gap-2">
@@ -8,7 +8,7 @@ const gridEmployeeProfile = (props) => (
       src="https://i.pravatar.cc/300"
       alt="employee"
     /> */}
-    <Avatar src="/broken-image.jpg" />
+    {/* <Avatar src="/broken-image.jpg" /> */}
     <p>
       {props.nombre} {props.apellido}
     </p>

@@ -1,21 +1,36 @@
 import React from "react";
 import { Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { useAddUserMutation } from "../../store";
-import { FormSelect, Input } from "../";
+import { FormSelect, Input } from "./";
+import { useEditUserMutation } from "../store";
 
-const Form = ({ onClose }) => {
-  const [addUser, results] = useAddUserMutation();
+const FormEdit = ({ userData, onClose }) => {
+  const [editUser, results] = useEditUserMutation();
   const {
     register,
     handleSubmit,
     reset,
     control,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      id: userData.data.id,
+      cardId: userData.data.cardId,
+      name: userData.data.name,
+      lastname: userData.data.lastname,
+      phone: userData.data.phone,
+      email: userData.data.email,
+      role: {
+        value: userData.data.role,
+        label:
+          userData.data.role?.charAt(0).toUpperCase() +
+          userData.data.role?.slice(1),
+      },
+    },
+  });
 
-  const onSubmit = async (data) => {
-    addUser(data);
+  const onSubmit = (data) => {
+    editUser(data);
     reset();
     onClose();
   };
@@ -25,6 +40,14 @@ const Form = ({ onClose }) => {
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col mt-6">
+        <Input
+          typeName="text"
+          classname="hidden"
+          name="id"
+          register={register}
+          error={errors.id}
+          errorMessage="This is a required field"
+        />
         <label className="mb-1" htmlFor="cedula">
           ID Card
         </label>
@@ -114,7 +137,7 @@ const Form = ({ onClose }) => {
       </div>
       <div className="flex items-center justify-end py-2 gap-2">
         <Button colorScheme="green" type="submit">
-          Add
+          Save
         </Button>
         <Button onClick={onClose} variant="ghost">
           Cancel
@@ -124,4 +147,4 @@ const Form = ({ onClose }) => {
   );
 };
 
-export default Form;
+export default FormEdit;
