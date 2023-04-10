@@ -1,7 +1,7 @@
 import React from "react";
-import { Table, AddUserButton } from "../components";
+import { Table, AddUserButton, Header } from "../components";
 import { useFetchUsersQuery } from "../store";
-import { Spinner } from "@chakra-ui/react";
+import { Spinner, Container } from "@chakra-ui/react";
 import { config } from "../data/dumpData";
 
 const Clients = () => {
@@ -22,12 +22,15 @@ const Clients = () => {
   }
 
   return (
-    <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl">
-      <div className="mb-10">
-        <AddUserButton />
+    <Container maxW="90rem" className="mt-4" >
+      <Header category="Users" title="Clients" /> 
+      <div className="bg-white mt-5 p-5 rounded-3xl">
+        <div className="mb-10 relative left-5">
+          <AddUserButton />
+        </div>
+        {content}
       </div>
-      {content}
-    </div>
+    </Container>
   );
 };
 

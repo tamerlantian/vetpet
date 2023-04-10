@@ -19,3 +19,10 @@ export { default as FormEdit } from "./FormEdit";
 export { default as ModifyUserButton } from "./clientComponents/ModifyUserButton";
 export { default as DeleteUserButton } from "./clientComponents/DeleteUserButton";
 export { default as AddUserButton } from "./clientComponents/AddUserButton";
+
+// product components
+export { default as AddProductForm } from "./productsComponents/AddProductForm";
+export { default as AddProduct } from "./productsComponents/AddProduct";
+export { default as DeleteProduct } from "./productsComponents/DeleteProduct";
+export { default as EditProduct } from "./productsComponents/EditProduct";
+export { default as EditProductForm } from "./productsComponents/EditProductForm";

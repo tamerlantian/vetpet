@@ -1,10 +1,26 @@
 {
+  "products": [
+    {
+      "id": "1",
+      "type": "product",
+      "name": "Croquetas Geminis",
+      "description": "Here we can place a short description about the product: Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+      "price": 80000
+    },
+    {
+      "type": "service",
+      "name": "Haricuting ",
+      "description": "This is a brief description about what this service can include\n",
+      "price": 99000,
+      "id": "bLsG4y2"
+    }
+  ],
   "user": [
     {
       "id": "1",
       "cardId": "1118260344",
-      "name": "sebastian",
-      "lastname": "hoyos p",
+      "name": "Sebastian",
+      "lastname": "hoyos",
       "email": "sebastian@gmail.com",
       "phone": "3163557856",
       "role": "admin"
@@ -44,6 +60,15 @@
       "email": "yamil@gmail.com",
       "role": "client",
       "id": "L-qe_k6"
+    },
+    {
+      "cardId": "812938394",
+      "name": "Cristian",
+      "lastname": "Torres",
+      "phone": "23494039",
+      "email": "cristian@gmail.com",
+      "role": "client",
+      "id": "wgYsr1c"
     }
   ]
 }

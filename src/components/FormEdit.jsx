@@ -3,6 +3,7 @@ import { Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { FormSelect, Input } from "./";
 import { useEditUserMutation } from "../store";
+import uppercaseFirstLetter from "../utils/uppercaseFirstLetter";
 
 const FormEdit = ({ userData, onClose }) => {
   const [editUser, results] = useEditUserMutation();
@@ -22,9 +23,7 @@ const FormEdit = ({ userData, onClose }) => {
       email: userData.data.email,
       role: {
         value: userData.data.role,
-        label:
-          userData.data.role?.charAt(0).toUpperCase() +
-          userData.data.role?.slice(1),
+        label: uppercaseFirstLetter(userData.data.role),
       },
     },
   });
