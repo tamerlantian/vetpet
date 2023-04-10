@@ -1,9 +1,9 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { AiOutlineDelete } from "react-icons/ai";
-import { AlertDialog } from "../";
+import { AlertDialog } from "..";
 import { useDeleteUserMutation } from "../../store";
 
-const DeleteUserButton = ({ id }) => {
+const DeleteUser = ({ id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [deleteUser, results] = useDeleteUserMutation();
   return (
@@ -22,4 +22,4 @@ const DeleteUserButton = ({ id }) => {
   );
 };
 
-export default DeleteUserButton;
+export default DeleteUser;

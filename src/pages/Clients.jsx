@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, AddUserButton, Header } from "../components";
+import { Table, AddUser, Header } from "../components";
 import { useFetchUsersQuery } from "../store";
 import { Spinner, Container } from "@chakra-ui/react";
 import { config } from "../data/dumpData";
@@ -26,7 +26,7 @@ const Clients = () => {
       <Header category="Users" title="Clients" /> 
       <div className="bg-white mt-5 p-5 rounded-3xl">
         <div className="mb-10 relative left-5">
-          <AddUserButton />
+          <AddUser buttonName="Add client" />
         </div>
         {content}
       </div>

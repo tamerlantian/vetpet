@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, AddUserButton, Header } from "../components";
+import { Table, AddUser, Header } from "../components";
 import { useFetchUsersQuery } from "../store";
 import { Spinner, Container } from "@chakra-ui/react";
 import { employeesConfig } from "../data/dumpData";
@@ -23,10 +23,10 @@ const Employees = () => {
 
   return (
     <Container maxW="90rem" className="mt-4">
-      <Header category="Users" title="Employees" /> 
+      <Header category="Users" title="Employees" />
       <div className="bg-white mt-5 p-5 rounded-3xl">
         <div className="mb-10 relative left-5">
-          <AddUserButton />
+          <AddUser buttonName="Add employee" />
         </div>
         {content}
       </div>
