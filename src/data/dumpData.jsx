@@ -1,8 +1,8 @@
 import {
-  ModifyUserButton,
-  DeleteUserButton,
+  EditUser,
+  DeleteUser,
   DeleteProduct,
-  EditProduct
+  EditProduct,
 } from "../components";
 import { Avatar } from "@chakra-ui/react";
 import textHider from "../utils/textHider";
@@ -41,8 +41,8 @@ export const config = [
     tag: "Options",
     render: (data) => (
       <div className="flex justify-around">
-        <DeleteUserButton id={data.id} />
-        <ModifyUserButton data={data} />
+        <DeleteUser id={data.id} />
+        <EditUser data={data} />
       </div>
     ),
   },
@@ -86,8 +86,8 @@ export const employeesConfig = [
     tag: "Options",
     render: (data) => (
       <div className="flex justify-around">
-        <DeleteUserButton id={data.id} />
-        <ModifyUserButton data={data} />
+        <DeleteUser id={data.id} />
+        <EditUser data={data} />
       </div>
     ),
   },

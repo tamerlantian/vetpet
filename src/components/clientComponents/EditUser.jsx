@@ -1,8 +1,8 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { AiOutlineEdit } from "react-icons/ai";
-import { ModalForm, FormEdit } from "../";
+import { ModalForm, EditUserForm } from "..";
 
-const ModifyUserButton = (data) => {
+const EditUser = (data) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -10,15 +10,15 @@ const ModifyUserButton = (data) => {
         <AiOutlineEdit />
       </button>
       <ModalForm
-        title="Modify user"
+        title="Edit user"
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
       >
-        <FormEdit userData={data} onClose={onClose} />
+        <EditUserForm userData={data} onClose={onClose} />
       </ModalForm>
     </>
   );
 };
 
-export default ModifyUserButton;
+export default EditUser;

@@ -6,8 +6,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  Button,
-  useDisclosure,
 } from "@chakra-ui/react";
 
 const ModalForm = ({ children, title, isOpen, onClose, onOpen }) => {

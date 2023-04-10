@@ -2,9 +2,9 @@ import React from "react";
 import { Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useAddUserMutation } from "../../store";
-import { FormSelect, Input } from "../";
+import { FormSelect, Input } from "..";
 
-const Form = ({ onClose }) => {
+const AddUserForm = ({ onClose }) => {
   const [addUser, results] = useAddUserMutation();
   const {
     register,
@@ -124,4 +124,4 @@ const Form = ({ onClose }) => {
   );
 };
 
-export default Form;
+export default AddUserForm;
