@@ -1,55 +1,35 @@
-import React, { useEffect, useState } from "react";
-// import axios from "axios";
-import {
-  GridComponent,
-  ColumnsDirective,
-  ColumnDirective,
-  Sort,
-  Page,
-  Search,
-  Edit,
-  Inject,
-  Toolbar,
-} from "@syncfusion/ej2-react-grids";
-
-import { ordersGrid, ordersData } from "../data/dataSource";
-
-
-import { Header } from "../components";
+import React from "react";
+import { Header, Table, AddProduct } from "../components";
+import { Container, Spinner } from "@chakra-ui/react";
+import { useFetchProductsQuery } from "../store";
+import { productsConfig } from "../data/dumpData";
 
 const Products = () => {
-//   const [data, setData] = useState([]);
+  const { data, isLoading, error } = useFetchProductsQuery();
+  let content;
 
-//   const fetchData = async () => {
-//     const res = await axios.get("http://localhost:3000/usuarios");
-//     setData(res.data);
-//   };
-
-//   useEffect(() => {
-//     fetchData();
-//   }, []);
+  if (isLoading) {
+    content = (
+      <div className="flex justify-center">
+        <Spinner />
+      </div>
+    );
+  } else if (error) {
+    content = <div>Error</div>;
+  } else {
+    content = <Table data={data} config={productsConfig} />;
+  }
 
   return (
-    <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl">
+    <Container maxW="90rem" className="mt-4">
       <Header category="Business" title="Products" />
-
-      <GridComponent
-        id="gridcomp"
-        dataSource={ordersData}
-        allowPaging
-        allowSorting
-        toolbar={["Search"]}
-        width="auto"
-        pageSettings={{ pageSize: 7 }}
-      >
-        <ColumnsDirective>
-          {ordersGrid.map((item, index) => {
-            return <ColumnDirective key={index} {...item} />;
-          })}
-        </ColumnsDirective>
-        <Inject services={[Sort, Page, Edit, Toolbar, Search]} />
-      </GridComponent>
-    </div>
+      <div className="bg-white mt-5 p-5 rounded-3xl">
+        <div className="mb-10 relative left-5">
+          <AddProduct />
+        </div>
+        {content}
+      </div>
+    </Container>
   );
 };
 
