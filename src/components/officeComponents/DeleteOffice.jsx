@@ -1,11 +1,11 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AlertDialog } from "../";
-import { useDeleteProductMutation } from "../../store";
+import { useDeleteOfficeMutation } from "../../store";
 
-const DeleteProduct = ({ id }) => {
+const DeleteOffice = ({ id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [deleteProduct, results] = useDeleteProductMutation();
+  const [deleteOffice, results] = useDeleteOfficeMutation();
   return (
     <>
       <button onClick={onOpen}>
@@ -16,11 +16,11 @@ const DeleteProduct = ({ id }) => {
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
-        onAction={deleteProduct}
-        actionName="Delete product"
+        onAction={deleteOffice}
+        actionName="Delete office"
       />
     </>
   );
 };
 
-export default DeleteProduct;
+export default DeleteOffice;

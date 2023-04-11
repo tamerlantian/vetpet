@@ -9,11 +9,11 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-const AlertDialog = ({ id, isOpen, onOpen, onClose, onAction }) => {
+const AlertDialog = ({ actionName, id, isOpen, onOpen, onClose, onAction }) => {
   const cancelRef = React.useRef();
 
   const handleDelete = () => {
-    onAction(id)
+    onAction(id);
     onClose();
   };
 
@@ -27,7 +27,7 @@ const AlertDialog = ({ id, isOpen, onOpen, onClose, onAction }) => {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete Customer
+              {actionName}
             </AlertDialogHeader>
 
             <AlertDialogBody>

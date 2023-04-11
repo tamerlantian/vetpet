@@ -1,12 +1,11 @@
 import React from "react";
-import { Table, AddUser, Header } from "../components";
-import { useFetchUsersQuery } from "../store";
+import { Table, Header } from "../components";
+import { useFetchProspectsQuery } from "../store";
 import { Spinner, Container } from "@chakra-ui/react";
-import { config } from "../data/dumpData";
+import { prospectsConfig } from "../data/dumpData";
 
 const Prospects = () => {
-  const { data, isLoading, error } = useFetchUsersQuery();
-
+  const { data, isLoading, error } = useFetchProspectsQuery();
   let content;
 
   if (isLoading) {
@@ -18,18 +17,13 @@ const Prospects = () => {
   } else if (error) {
     content = <div>Error</div>;
   } else {
-    content = <Table data={data} config={config} />;
+    content = <Table data={data} config={prospectsConfig} />;
   }
 
   return (
     <Container maxW="90rem" className="mt-4">
-      <Header category="Users" title="Clients" />
-      <div className="bg-white mt-5 p-5 rounded-3xl">
-        <div className="mb-10 relative left-5">
-          <AddUser buttonName="Add client" />
-        </div>
-        {content}
-      </div>
+      <Header category="Users" title="Prospects" />
+      <div className="bg-white mt-5 p-5 rounded-3xl">{content}</div>
     </Container>
   );
 };

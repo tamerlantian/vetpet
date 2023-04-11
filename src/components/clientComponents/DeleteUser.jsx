@@ -17,6 +17,7 @@ const DeleteUser = ({ id }) => {
         onOpen={onOpen}
         onClose={onClose}
         onAction={deleteUser}
+        actionName="Delete user"
       />
     </>
   );

@@ -6,7 +6,7 @@ const AddUser = ({ buttonName }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button leftIcon={<IoMdAdd />} colorScheme={"green"} onClick={onOpen}>
+      <Button leftIcon={<IoMdAdd />} colorScheme="purple" onClick={onOpen}>
         {buttonName}
       </Button>
       <ModalForm
