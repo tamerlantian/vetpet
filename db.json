@@ -1,12 +1,39 @@
 {
-  "products": [
+  "plans": [
     {
-      "id": "1",
-      "type": "product",
-      "name": "Croquetas Geminis",
-      "description": "Here we can place a short description about the product: Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-      "price": 80000
+      "id": 1,
+      "name": "Premium",
+      "description": "This is a brief description about what this service can include\n",
+      "price": 50000
+    }
+  ],
+  "prospects": [
+    {
+      "id": 3,
+      "name": "Sebastian",
+      "lastname": "Hoyos",
+      "email": "hoyos@gmail.com",
+      "phone": "139823429",
+      "comment": "Hello, I'm sebastian and I would like to get an account. Thanks!"
+    }
+  ],
+  "offices": [
+    {
+      "department": "Antioquia",
+      "city": "Medellin",
+      "address": "Calle 10 # 12 - 67",
+      "phone": "83492022",
+      "id": 2
     },
+    {
+      "department": "Casanare",
+      "city": "Yopal",
+      "address": "Calle 10 # 12 - 66",
+      "phone": "6697908",
+      "id": 3
+    }
+  ],
+  "products": [
     {
       "type": "service",
       "name": "Haricuting ",

@@ -1,24 +1,24 @@
 import { useDisclosure, Button } from "@chakra-ui/react";
+import { ModalForm, AddOfficeForm } from "..";
 import { IoMdAdd } from "react-icons/io";
-import { ModalForm, AddProductForm } from "../";
 
-const AddProduct = () => {
+const AddOffice = ({ buttonName }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button leftIcon={<IoMdAdd />} colorScheme="purple" onClick={onOpen}>
-        Add product
+      <Button leftIcon={<IoMdAdd />} colorScheme={"purple"} onClick={onOpen}>
+        {buttonName}
       </Button>
       <ModalForm
-        title="Add product"
+        title="Add office"
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
       >
-        <AddProductForm onClose={onClose} />
+        <AddOfficeForm onClose={onClose} />
       </ModalForm>
     </>
   );
 };
 
-export default AddProduct;
+export default AddOffice;
