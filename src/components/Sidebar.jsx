@@ -1,6 +1,4 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import { SiBaidu } from "react-icons/si";
+import { NavLink } from "react-router-dom";
 import { MdOutlineCancel } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { BiHomeSmile } from "react-icons/bi";
@@ -10,21 +8,21 @@ import { HiOutlineUserPlus } from "react-icons/hi2";
 import { FiMapPin } from "react-icons/fi";
 import { IoPricetagOutline } from "react-icons/io5";
 import { useStateContext } from "../contexts/ContextProvider";
-import { IoCartOutline } from "react-icons/io5"
-
-// here we can import link elements with their respective icons
-// import { links } from "../data/dummy";
+import { IoCartOutline } from "react-icons/io5";
+import { Logo } from "./";
+import { useScreenSize } from "../hooks/useScreenSize";
+import { useDeviceTracker } from "../hooks/useDeviceTracker";
 
 const Sidebar = () => {
-  const { activeMenu, setActiveMenu, screenSize } = useStateContext();
-  const isActive = true; // REMOVE THIS 
+  const { activeMenu, setActiveMenu } = useStateContext();
+  const isMobile = useDeviceTracker(900);
 
   // this function automatically close the sidebar when the user clicks one of the links inside it
   const handleCloseSideBar = () => {
-    if(activeMenu && screenSize <= 900) {
+    if (activeMenu && isMobile) {
       setActiveMenu(false);
     }
-  }
+  };
 
   const activeLink =
     "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2";
@@ -37,13 +35,11 @@ const Sidebar = () => {
       {activeMenu && (
         <>
           <div className="flex justify-between items-center">
-            <Link
-              to="/"
-              onClick={handleCloseSideBar}
-              className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
-            >
-              <SiBaidu /> <span>MascotaFeliz</span>
-            </Link>
+            <Logo
+              action={handleCloseSideBar}
+              classname="ml-3 mt-4 text-xl"
+              linkTo="/home"
+            />
             <TooltipComponent content="Menu" position="BottomCenter">
               <button
                 type="button"
@@ -60,7 +56,7 @@ const Sidebar = () => {
             <div>
               <p className="text-gray-400 m-3 mt-4 uppercase">home</p>
               <NavLink
-                to="/dashboard"
+                to="dashboard"
                 onClick={handleCloseSideBar}
                 className={false ? activeLink : normalLink}
               >
@@ -71,7 +67,7 @@ const Sidebar = () => {
             <div>
               <p className="text-gray-400 m-3 mt-4 uppercase">users</p>
               <NavLink
-                to="/clients"
+                to="clients"
                 onClick={handleCloseSideBar}
                 className={false ? activeLink : normalLink}
               >
@@ -79,7 +75,7 @@ const Sidebar = () => {
                 <span className="capitalize">clients</span>
               </NavLink>
               <NavLink
-                to="/employees"
+                to="employees"
                 onClick={handleCloseSideBar}
                 className={false ? activeLink : normalLink}
               >
@@ -87,7 +83,7 @@ const Sidebar = () => {
                 <span className="capitalize">employees</span>
               </NavLink>
               <NavLink
-                to="/prospects"
+                to="prospects"
                 onClick={handleCloseSideBar}
                 className={false ? activeLink : normalLink}
               >
@@ -98,7 +94,7 @@ const Sidebar = () => {
             <div>
               <p className="text-gray-400 m-3 mt-4 uppercase">Business</p>
               <NavLink
-                to="/products"
+                to="products"
                 onClick={handleCloseSideBar}
                 className={false ? activeLink : normalLink}
               >
@@ -106,7 +102,7 @@ const Sidebar = () => {
                 <span className="capitalize">products</span>
               </NavLink>
               <NavLink
-                to="/offices"
+                to="offices"
                 onClick={handleCloseSideBar}
                 className={false ? activeLink : normalLink}
               >
@@ -114,7 +110,7 @@ const Sidebar = () => {
                 <span className="capitalize">offices</span>
               </NavLink>
               <NavLink
-                to="/plans"
+                to="plans"
                 onClick={handleCloseSideBar}
                 className={false ? activeLink : normalLink}
               >

@@ -9,6 +9,7 @@ export { default as ModalForm } from "./ModalForm";
 export { default as Input } from "./form/Input";
 export { default as FormSelect } from "./form/FormSelect";
 export { default as AlertDialog } from "./AlertDialog";
+export { default as Logo } from "./Logo";
 
 // client components
 export { default as EditUser } from "./clientComponents/EditUser";
@@ -40,3 +41,9 @@ export { default as AddPlanForm } from "./planComponents/AddPlanForm";
 export { default as DeletePlan } from "./planComponents/DeletePlan";
 export { default as EditPlan } from "./planComponents/EditPlan";
 export { default as EditPlanForm } from "./planComponents/EditPlanForm";
+
+// home components
+export { default as HomeNavbar } from "./home/HomeNavbar";
+export { default as Drawer } from "./home/Drawer";
+export { default as HamburguerButton } from "./home/HamburguerButton";
+export { default as Links } from "./home/Links";

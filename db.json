@@ -5,6 +5,12 @@
       "name": "Premium",
       "description": "This is a brief description about what this service can include\n",
       "price": 50000
+    },
+    {
+      "name": "Platinum",
+      "description": "This is just a test\n",
+      "price": 60000,
+      "id": 2
     }
   ],
   "prospects": [
