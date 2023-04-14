@@ -7,10 +7,29 @@ import {
   EditOffice,
   DeleteProspect,
   DeletePlan,
-  EditPlan
+  EditPlan,
 } from "../components";
 import { Avatar } from "@chakra-ui/react";
 import textHider from "../utils/textHider";
+
+export const links = [
+  {
+    title: "Home",
+    name: "home"
+  },
+  {
+    title: "Products",
+    name: "products"
+  },
+  {
+    title: "Services",
+    name: "services"
+  },
+  {
+    title: "Contact",
+    name: "contact"
+  },
+];
 
 export const config = [
   {
