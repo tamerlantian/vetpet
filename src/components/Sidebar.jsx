@@ -15,7 +15,7 @@ import { useDeviceTracker } from "../hooks/useDeviceTracker";
 
 const Sidebar = () => {
   const { activeMenu, setActiveMenu } = useStateContext();
-  const isMobile = useDeviceTracker(900);
+  const isMobile = useDeviceTracker(900);   
 
   // this function automatically close the sidebar when the user clicks one of the links inside it
   const handleCloseSideBar = () => {

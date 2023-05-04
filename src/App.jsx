@@ -4,7 +4,6 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
-import { Spinner } from "@chakra-ui/react";
 import {
   DashboardLayout,
   HomeLayout,
