@@ -1,6 +1,6 @@
 import { Logo } from "../";
 import { HamburguerButton, Links } from "../../components";
-import { Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { useDeviceTracker } from "../../hooks/useDeviceTracker";
 
 const HomeNavbar = () => {
@@ -20,7 +20,7 @@ const HomeNavbar = () => {
         ) : (
           <Links style="flex flex-row gap-4" />
         )}
-        <Button colorScheme="purple">Login</Button>
+        <Link to="login" className="btn">Login</Link>
       </div>
     </div>
   );
