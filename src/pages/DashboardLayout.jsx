@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect} from "react";
 import { Outlet } from "react-router-dom";
 import { Navbar, Sidebar } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";

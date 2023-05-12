@@ -47,3 +47,6 @@ export { default as HomeNavbar } from "./home/HomeNavbar";
 export { default as Drawer } from "./home/Drawer";
 export { default as HamburguerButton } from "./home/HamburguerButton";
 export { default as Links } from "./home/Links";
+
+export { default as RequiredAuth } from "./RequiredAuth";
+export { default as PersistLogin } from "./PersistLogin";
