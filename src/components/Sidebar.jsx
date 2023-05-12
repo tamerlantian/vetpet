@@ -12,10 +12,19 @@ import { IoCartOutline } from "react-icons/io5";
 import { Logo } from "./";
 import { useScreenSize } from "../hooks/useScreenSize";
 import { useDeviceTracker } from "../hooks/useDeviceTracker";
+import useLogout from "../hooks/useLogout";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const logout = useLogout();
   const { activeMenu, setActiveMenu } = useStateContext();
-  const isMobile = useDeviceTracker(900);   
+  const isMobile = useDeviceTracker(900);
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
+  };
 
   // this function automatically close the sidebar when the user clicks one of the links inside it
   const handleCloseSideBar = () => {
@@ -118,6 +127,9 @@ const Sidebar = () => {
                 <span className="capitalize">plans</span>
               </NavLink>
             </div>
+          </div>
+          <div>
+            <button onClick={handleLogout}>Logout</button>
           </div>
         </>
       )}

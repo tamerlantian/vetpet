@@ -12,7 +12,7 @@ import {
 const Table = ({ data, config }) => {
   const dataRendered = data.map((dataRow) => {
     return (
-      <Tr key={dataRow.id}>
+      <Tr key={dataRow.cardId}>
         {config.map(({ tag, render }, i) => {
           return (
             <Td className={0 === i ? "hidden" : ""} key={tag}>
