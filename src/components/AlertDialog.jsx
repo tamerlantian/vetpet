@@ -8,13 +8,22 @@ import {
   AlertDialogOverlay,
   Button,
 } from "@chakra-ui/react";
+import useToastMsg from "../hooks/useToastMsg";
 
 const AlertDialog = ({ actionName, id, isOpen, onOpen, onClose, onAction }) => {
   const cancelRef = React.useRef();
+  const displayToast = useToastMsg();
 
-  const handleDelete = () => {
-    onAction(id);
-    onClose();
+  const handleDelete = async () => {
+    try {
+      await onAction(id).unwrap();
+      onClose();
+      displayToast("Successfully deleted", "success", 2000, true);
+    } catch (error) {
+      if (error.status === 500) {
+        displayToast("An error ocurred", "error", 2000, true);
+      }
+    }
   };
 
   return (

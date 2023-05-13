@@ -3,14 +3,11 @@ import { Table, AddUser, Header } from "../components";
 import { useFetchUsersQuery } from "../store";
 import { Spinner, Container } from "@chakra-ui/react";
 import { config } from "../data/dumpData";
-import { useSelector } from "react-redux";
 
 const Clients = () => {
   const { data, isLoading, error } = useFetchUsersQuery();
-  const selector = useSelector((state) => console.log("STATE: ", state));
 
   let content;
-
   if (isLoading) {
     content = (
       <div className="flex justify-center">

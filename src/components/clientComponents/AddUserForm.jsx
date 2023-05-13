@@ -1,119 +1,172 @@
-import React from "react";
-import { Button } from "@chakra-ui/react";
+import React, { useEffect, useState, useRef } from "react";
+import {
+  Button,
+  Input,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Select,
+  forwardRef,
+} from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useAddUserMutation } from "../../store";
-import { FormSelect, Input } from "..";
+
+const CustomInput = forwardRef((props, ref) => {
+  return <Input {...props} ref={ref} />;
+});
 
 const AddUserForm = ({ onClose }) => {
-  const [addUser, results] = useAddUserMutation();
+  const [addUser, { isLoading }] = useAddUserMutation();
+  const cardIdRef = useRef();
+
+  // state for errors coming from the server
+  const [errMsg, setErrMsg] = useState({});
   const {
     register,
     handleSubmit,
     reset,
-    control,
+    watch,
     formState: { errors },
   } = useForm();
+  // checks for changes in the email field
+  const watchField = watch("email");
 
+  // on submit function
   const onSubmit = async (data) => {
-    addUser(data);
-    reset();
-    onClose();
+    try {
+      await addUser(data).unwrap();
+      reset();
+      onClose();
+    } catch (error) {
+      if (error.status === 409) {
+        console.log(error);
+        setErrMsg(() => {
+          return { ...errMsg, email: error?.data?.message };
+        });
+      }
+    }
   };
 
-  const inputStyle = "border rounded-md py-3 px-5";
+  useEffect(() => {
+    cardIdRef?.current?.focus();
+  }, []);
+
+  // if user type again in the field with the error message then set error message to empty
+  useEffect(() => {
+    setErrMsg({});
+  }, [watchField]);
 
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col mt-6">
-        <label className="mb-1" htmlFor="cedula">
-          ID Card
-        </label>
-        <Input
-          typeName="text"
-          classname={inputStyle}
-          name="cardId"
-          register={register}
-          error={errors.cardId}
-          errorMessage="This is a required field"
+      <FormControl isInvalid={errors?.cardId}>
+        <FormLabel>Card ID</FormLabel>
+        <CustomInput
+          type="number"
+          size="lg"
+          placeholder="e.x 11122233344"
+          {...register("cardId", {
+            required: "Card ID is required",
+          })}
+          ref={cardIdRef}
         />
-      </div>
+        {errors?.cardId && (
+          <FormErrorMessage>{errors.cardId.message}</FormErrorMessage>
+        )}
+      </FormControl>
 
-      <div className="flex flex-col mt-3">
-        <label className="mb-1" htmlFor="nombre">
-          Name
-        </label>
+      <FormControl isInvalid={errors?.name}>
+        <FormLabel>Name</FormLabel>
         <Input
-          typeName="text"
-          classname={inputStyle}
-          name="name"
-          register={register}
-          error={errors.name}
-          errorMessage="This is a required field"
+          type="text"
+          size="lg"
+          placeholder="Michael"
+          {...register("name", {
+            required: "Name is required",
+          })}
         />
-      </div>
+        {errors?.name && (
+          <FormErrorMessage>{errors.name.message}</FormErrorMessage>
+        )}
+      </FormControl>
 
-      <div className="flex flex-col mt-3">
-        <label className="form-label" htmlFor="apellido">
-          Lastname
-        </label>
+      <FormControl isInvalid={errors?.lastname}>
+        <FormLabel>Lastname</FormLabel>
         <Input
-          typeName="text"
-          classname={inputStyle}
-          name="lastname"
-          register={register}
-          error={errors.lastname}
-          errorMessage="This is a required field"
+          type="text"
+          size="lg"
+          placeholder="johnson caerl"
+          {...register("lastname", {
+            required: "Lastname is required",
+          })}
         />
-      </div>
+        {errors?.lastname && (
+          <FormErrorMessage>{errors.lastname.message}</FormErrorMessage>
+        )}
+      </FormControl>
 
-      <div className="flex flex-col mt-3">
-        <label className="mb-1" htmlFor="telefono">
-          Phone
-        </label>
+      <FormControl isInvalid={errors?.phone}>
+        <FormLabel>Phone number</FormLabel>
         <Input
-          typeName="text"
-          classname={inputStyle}
-          name="phone"
-          register={register}
-          error={errors.phone}
-          errorMessage="This is a required field"
+          type="number"
+          size="lg"
+          placeholder="12223334444"
+          {...register("phone", {
+            required: "Phone is required",
+            maxLength: 10,
+          })}
         />
-      </div>
+        {errors?.phone && (
+          <FormErrorMessage>{errors.phone.message}</FormErrorMessage>
+        )}
+        {errors?.phone?.type === "maxLength" && (
+          <FormErrorMessage>Max lenght 10 characters</FormErrorMessage>
+        )}
+      </FormControl>
 
-      <div className="flex flex-col mt-3">
-        <label className="mb-1" htmlFor="correo">
-          Email
-        </label>
+      <FormControl isInvalid={errors?.email || errMsg?.email}>
+        <FormLabel>Email</FormLabel>
         <Input
-          typeName="text"
-          classname={inputStyle}
-          name="email"
-          register={register}
-          error={errors.email}
-          errorMessage="This is a required field"
+          type="text"
+          size="lg"
+          placeholder="michael@example.com"
+          {...register("email", {
+            required: "Email is required",
+            pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+          })}
         />
-      </div>
+        {errors?.email?.type === "pattern" && (
+          <FormErrorMessage>Invalid email</FormErrorMessage>
+        )}
+        {errors?.email && (
+          <FormErrorMessage>{errors.email.message}</FormErrorMessage>
+        )}
+        {errMsg?.email && <FormErrorMessage>{errMsg.email}</FormErrorMessage>}
+      </FormControl>
 
-      <div className="flex flex-col mt-3 mb-6">
-        <label className="mb-1" htmlFor="role">
-          Role
-        </label>
-        <FormSelect
-          name="role"
-          register={register}
-          control={control}
-          rules={{ required: true }}
-          error={errors.role}
-          errorMessage="This is a required field"
-          options={[
-            { value: "admin", label: "Admin" },
-            { value: "client", label: "Client" },
-            { value: "analyst", label: "Analyst" },
-          ]}
-        />
-      </div>
+      <FormControl isInvalid={errors?.role}>
+        <FormLabel>Role</FormLabel>
+        <Select
+          placeholder="Select role"
+          {...register("role", { required: "Role is required" })}
+        >
+          <option>Admin</option>
+          <option>Staff</option>
+          <option>User</option>
+        </Select>
+        {errors?.role && (
+          <FormErrorMessage>{errors.role.message}</FormErrorMessage>
+        )}
+      </FormControl>
+
       <div className="flex items-center justify-end py-2 gap-2">
-        <Button colorScheme="green" type="submit">
+        <Button
+          isLoading={isLoading}
+          isDisabled={
+            Object.keys(errors).length !== 0 || Object.keys(errMsg).length !== 0
+          }
+          colorScheme="green"
+          type="submit"
+        >
           Add
         </Button>
         <Button onClick={onClose} variant="ghost">

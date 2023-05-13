@@ -12,10 +12,13 @@ import {
 const Table = ({ data, config }) => {
   const dataRendered = data.map((dataRow) => {
     return (
-      <Tr key={dataRow.cardId}>
+      <Tr key={dataRow._id}>
         {config.map(({ tag, render }, i) => {
           return (
-            <Td className={0 === i ? "hidden" : ""} key={tag}>
+            <Td
+              className={0 === i ? "hidden" : ""}
+              key={`${dataRow._id}-${tag}`}
+            >
               {render(dataRow)}
             </Td>
           );
@@ -31,9 +34,9 @@ const Table = ({ data, config }) => {
           <Tr>
             {config.map(({ tag }, i) => {
               return (
-                <React.Fragment key={tag}>
-                  <Th className={0 === i ? "hidden" : ""}>{tag}</Th>
-                </React.Fragment>
+                <Th key={tag} className={0 === i ? "hidden" : ""}>
+                  {tag}
+                </Th>
               );
             })}
           </Tr>
