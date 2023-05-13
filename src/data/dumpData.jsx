@@ -65,7 +65,7 @@ export const config = [
     tag: "Options",
     render: (data) => (
       <div className="flex justify-around">
-        <DeleteUser id={data.id} />
+        <DeleteUser id={data._id} />
         <EditUser data={data} />
       </div>
     ),

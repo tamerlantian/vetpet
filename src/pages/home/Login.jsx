@@ -5,7 +5,6 @@ import { useLoginMutation } from "../../store";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
-import { Cookies } from "react-cookie";
 
 const Login = () => {
   const [login, { isLoading }] = useLoginMutation();

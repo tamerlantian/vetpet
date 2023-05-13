@@ -1,4 +1,4 @@
-import { Children, cloneElement, isValidElement } from "react";
+import React, { Children, cloneElement, isValidElement } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -9,9 +9,11 @@ import {
 } from "@chakra-ui/react";
 
 const ModalForm = ({ children, title, isOpen, onClose, onOpen }) => {
-  const childrenWithProps = Children.map(children, (child) => {
+  const childrenWithProps = Children.map(children, (child, i) => {
     if (!isValidElement(child)) return null;
-    return cloneElement(child, { onClose });
+    return (
+      <React.Fragment key={i}>cloneElement(child, {onClose});</React.Fragment>
+    );
   });
 
   return (

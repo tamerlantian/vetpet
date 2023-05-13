@@ -13,7 +13,7 @@ const Input = ({
       <input
         type={typeName}
         className={classname}
-        {...register(name, { required: true })}
+        {...register(name, { max: 10, min: 8 })}
       />
       {error && <p className="text-red-600">{errorMessage}</p>}
     </>
