@@ -9,11 +9,9 @@ import {
 } from "@chakra-ui/react";
 
 const ModalForm = ({ children, title, isOpen, onClose, onOpen }) => {
-  const childrenWithProps = Children.map(children, (child, i) => {
+  const childrenWithProps = Children.map(children, (child) => {
     if (!isValidElement(child)) return null;
-    return (
-      <React.Fragment key={i}>cloneElement(child, {onClose});</React.Fragment>
-    );
+    return cloneElement(child, { onClose });
   });
 
   return (
