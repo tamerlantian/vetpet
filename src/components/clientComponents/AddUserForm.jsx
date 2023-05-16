@@ -6,19 +6,14 @@ import {
   FormErrorMessage,
   FormLabel,
   Select,
-  forwardRef,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useAddUserMutation } from "../../store";
-
-const CustomInput = forwardRef((props, ref) => {
-  return <Input {...props} ref={ref} />;
-});
+import useToasMsg from "./../../hooks/useToastMsg";
 
 const AddUserForm = ({ onClose }) => {
   const [addUser, { isLoading }] = useAddUserMutation();
-  const cardIdRef = useRef();
-
+  const toastMsg = useToasMsg();
   // state for errors coming from the server
   const [errMsg, setErrMsg] = useState({});
   const {
@@ -26,6 +21,7 @@ const AddUserForm = ({ onClose }) => {
     handleSubmit,
     reset,
     watch,
+    setFocus,
     formState: { errors },
   } = useForm();
   // checks for changes in the email field
@@ -35,46 +31,55 @@ const AddUserForm = ({ onClose }) => {
   const onSubmit = async (data) => {
     try {
       await addUser(data).unwrap();
+      toastMsg("Successfully added", "success");
       reset();
       onClose();
     } catch (error) {
-      if (error.status === 409) {
-        console.log(error);
+      const errorMessage = error?.data?.message;
+      if (error.status !== 409) {
+        toastMsg("An error occured", "error");
+      }
+      if (/email/i.test(errorMessage)) {
         setErrMsg(() => {
-          return { ...errMsg, email: error?.data?.message };
+          return { ...errMsg, email: errorMessage };
+        });
+      }
+      if (/cardid/i.test(errorMessage)) {
+        setErrMsg(() => {
+          return { ...errMsg, cardId: errorMessage };
         });
       }
     }
   };
-
-  useEffect(() => {
-    cardIdRef?.current?.focus();
-  }, []);
 
   // if user type again in the field with the error message then set error message to empty
   useEffect(() => {
     setErrMsg({});
   }, [watchField]);
 
+  useEffect(() => {
+    setFocus("cardId");
+  }, [setFocus]);
+
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl isInvalid={errors?.cardId}>
+      <FormControl isInvalid={errors?.cardId || errMsg.cardId}>
         <FormLabel>Card ID</FormLabel>
-        <CustomInput
+        <Input
           type="number"
           size="lg"
           placeholder="e.x 11122233344"
           {...register("cardId", {
             required: "Card ID is required",
           })}
-          ref={cardIdRef}
         />
         {errors?.cardId && (
           <FormErrorMessage>{errors.cardId.message}</FormErrorMessage>
         )}
+        {errMsg?.cardId && <FormErrorMessage>{errMsg.cardId}</FormErrorMessage>}
       </FormControl>
 
-      <FormControl isInvalid={errors?.name}>
+      <FormControl className="mt-5" isInvalid={errors?.name}>
         <FormLabel>Name</FormLabel>
         <Input
           type="text"
@@ -89,7 +94,7 @@ const AddUserForm = ({ onClose }) => {
         )}
       </FormControl>
 
-      <FormControl isInvalid={errors?.lastname}>
+      <FormControl className="mt-5" isInvalid={errors?.lastname}>
         <FormLabel>Lastname</FormLabel>
         <Input
           type="text"
@@ -104,7 +109,7 @@ const AddUserForm = ({ onClose }) => {
         )}
       </FormControl>
 
-      <FormControl isInvalid={errors?.phone}>
+      <FormControl className="mt-5" isInvalid={errors?.phone}>
         <FormLabel>Phone number</FormLabel>
         <Input
           type="number"
@@ -123,7 +128,7 @@ const AddUserForm = ({ onClose }) => {
         )}
       </FormControl>
 
-      <FormControl isInvalid={errors?.email || errMsg?.email}>
+      <FormControl className="mt-5" isInvalid={errors?.email || errMsg?.email}>
         <FormLabel>Email</FormLabel>
         <Input
           type="text"
@@ -143,7 +148,7 @@ const AddUserForm = ({ onClose }) => {
         {errMsg?.email && <FormErrorMessage>{errMsg.email}</FormErrorMessage>}
       </FormControl>
 
-      <FormControl isInvalid={errors?.role}>
+      <FormControl className="mt-5" isInvalid={errors?.role}>
         <FormLabel>Role</FormLabel>
         <Select
           placeholder="Select role"
@@ -158,7 +163,7 @@ const AddUserForm = ({ onClose }) => {
         )}
       </FormControl>
 
-      <div className="flex items-center justify-end py-2 gap-2">
+      <div className="flex items-center justify-end mt-8 pb-4 gap-2">
         <Button
           isLoading={isLoading}
           isDisabled={

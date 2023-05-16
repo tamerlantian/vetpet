@@ -1,5 +1,4 @@
 import { apiSlice } from "../slices/apiSlice";
-import { current } from "@reduxjs/toolkit";
 
 const clientsApi = apiSlice.injectEndpoints({
   tagTypes: ["Client"],
@@ -7,13 +6,15 @@ const clientsApi = apiSlice.injectEndpoints({
     return {
       fetchUsers: builder.query({
         providesTags: ["Client"],
-        query: () => {
+        query: (page = 1, limit = 5) => {
           return {
-            url: "/user",
+            url: `/user?page=${page}&limit=${limit}`,
             method: "GET",
           };
         },
-        transformResponse: (result) => result.data.users,
+        transformResponse: (result) => {
+          return { users: result.data.users, totalPages: result.totalPages };
+        },
       }),
       editUser: builder.mutation({
         invalidatesTags: ["Client"],

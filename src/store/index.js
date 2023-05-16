@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 // reducers
 import authSlice from "./slices/authSlice";
+import clientsSlice from "./slices/clientsSlice";
 import { apiSlice } from "./slices/apiSlice";
 // APIs
 import { clientsApi } from "./apis/clientsApi";
@@ -21,6 +22,7 @@ export const store = configureStore({
     [plansApi.reducerPath]: plansApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     authSlice,
+    clientsSlice,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware()
