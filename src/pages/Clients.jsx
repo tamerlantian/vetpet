@@ -1,11 +1,14 @@
 import React from "react";
-import { Table, AddUser, Header } from "../components";
+import { Table, AddUser, Header, Paginator } from "../components";
 import { useFetchUsersQuery } from "../store";
 import { Spinner, Container } from "@chakra-ui/react";
 import { config } from "../data/dumpData";
+import { useSelector } from "react-redux";
+import { selectCurrentPage } from "../store/slices/clientsSlice";
 
 const Clients = () => {
-  const { data, isLoading, error } = useFetchUsersQuery();
+  const page = useSelector(selectCurrentPage);
+  const { data, isLoading, isFetching, error } = useFetchUsersQuery(page);
 
   let content;
   if (isLoading) {
@@ -17,7 +20,12 @@ const Clients = () => {
   } else if (error) {
     content = <div>Error</div>;
   } else {
-    content = <Table data={data} config={config} />;
+    content = (
+      <>
+        <Table data={data.users} config={config} />
+        <Paginator isLoading={isFetching} totalPages={data.totalPages} />
+      </>
+    );
   }
 
   return (
