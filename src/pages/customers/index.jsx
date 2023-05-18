@@ -1,12 +1,12 @@
 import React from "react";
-import { Table, AddUser, Header, Paginator } from "../components";
-import { useFetchUsersQuery } from "../store";
+import { Table, AddUser, Header, Paginator } from "../../components";
+import { useFetchUsersQuery } from "../../store";
 import { Spinner, Container } from "@chakra-ui/react";
-import { config } from "../data/dumpData";
+import { config } from "../../data/dumpData";
 import { useSelector } from "react-redux";
-import { selectCurrentPage } from "../store/slices/clientsSlice";
+import { selectCurrentPage } from "../../store/slices/clientsSlice";
 
-const Clients = () => {
+const Customers = () => {
   const page = useSelector(selectCurrentPage);
   const { data, isLoading, isFetching, error } = useFetchUsersQuery(page);
 
@@ -41,4 +41,4 @@ const Clients = () => {
   );
 };
 
-export default Clients;
+export default Customers;

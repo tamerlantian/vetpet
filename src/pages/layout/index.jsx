@@ -1,10 +1,9 @@
-import React, { useEffect} from "react";
 import { Outlet } from "react-router-dom";
-import { Navbar, Sidebar } from "../components";
-import { useStateContext } from "../contexts/ContextProvider";
-import "../App.css";
+import { Navbar, Sidebar } from "../../components";
+import { useStateContext } from "../../contexts/ContextProvider";
+import "../../App.css";
 
-const DashboardLayout = () => {
+const Layout = () => {
   const { activeMenu } = useStateContext();
 
   return (
@@ -36,4 +35,4 @@ const DashboardLayout = () => {
   );
 };
 
-export default DashboardLayout;
+export default Layout;

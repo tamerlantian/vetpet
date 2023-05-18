@@ -1,8 +1,8 @@
 import React from "react";
-import { Table, Header } from "../components";
-import { useFetchProspectsQuery } from "../store";
+import { Table, Header } from "../../components";
+import { useFetchProspectsQuery } from "../../store";
 import { Spinner, Container } from "@chakra-ui/react";
-import { prospectsConfig } from "../data/dumpData";
+import { prospectsConfig } from "../../data/dumpData";
 
 const Prospects = () => {
   const { data, isLoading, error } = useFetchProspectsQuery();
