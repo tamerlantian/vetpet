@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { FormSelect, Input } from "..";
@@ -12,6 +12,7 @@ const EditUserForm = ({ userData, onClose }) => {
     handleSubmit,
     reset,
     control,
+    setFocus,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -33,6 +34,10 @@ const EditUserForm = ({ userData, onClose }) => {
     reset();
     onClose();
   };
+
+  useEffect(() => {
+    setFocus("cardId");
+  }, [setFocus]);
 
   const inputStyle = "border rounded-md py-3 px-5";
 

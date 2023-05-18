@@ -3,10 +3,11 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { AlertDialog } from "..";
 import { useDeleteUserMutation } from "../../store";
 
+
 const DeleteUser = ({ id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [deleteUser, results] = useDeleteUserMutation();
-  return (
+    return (
     <>
       <button onClick={onOpen}>
         <AiOutlineDelete />

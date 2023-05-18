@@ -1,36 +1,77 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   Button,
   Input,
   FormControl,
-  FormErrorMessage,
   FormLabel,
   Select,
 } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-import { useAddUserMutation } from "../../store";
 import useToasMsg from "./../../hooks/useToastMsg";
+import { ErrorMessage } from "../";
 
-const AddUserForm = ({ onClose }) => {
-  const [addUser, { isLoading }] = useAddUserMutation();
+const getDirtyFieldsData = (formData, dirtyFields) => {
+  dirtyFields = Object.keys(dirtyFields);
+  const fieldSelector = Object.entries(formData).filter((formField) =>
+    dirtyFields.includes(formField[0])
+  );
+  return Object.fromEntries(fieldSelector);
+};
+
+// userForm or AddUserForm
+const AddUserForm = ({ onClose, action, userData, loading }) => {
   const toastMsg = useToasMsg();
   // state for errors coming from the server
   const [errMsg, setErrMsg] = useState({});
+  const defaultValues = userData
+    ? {
+        id: userData.data?._id,
+        cardId: userData.data?.cardId,
+        name: userData.data?.name,
+        lastname: userData.data?.lastname,
+        phone: userData.data?.phone,
+        email: userData.data?.email,
+        role: userData.data?.role,
+      }
+    : {
+        cardId: "",
+        name: "",
+        lastname: "",
+        phone: "",
+        email: "",
+        role: "",
+      };
+
   const {
     register,
     handleSubmit,
     reset,
     watch,
     setFocus,
-    formState: { errors },
-  } = useForm();
+    formState: { errors, dirtyFields },
+  } = useForm({
+    defaultValues,
+  });
   // checks for changes in the email field
-  const watchField = watch("email");
+  const watchEmail = watch("email");
+  const watchCardId = watch("cardId");
 
   // on submit function
   const onSubmit = async (data) => {
     try {
-      await addUser(data).unwrap();
+      // this conditional will send data only when user's trying to udpate
+      if (userData !== undefined) {
+        const dirtyFieldsData = getDirtyFieldsData(data, dirtyFields);
+        dirtyFieldsData.id = defaultValues.id;
+        console.log("DATA: ", dirtyFieldsData)
+        await action(dirtyFieldsData).unwrap();
+        onClose();
+        reset();
+        return;
+      }
+
+      // this code here will only run if user's trying to create a new user
+      await action(data).unwrap();
       toastMsg("Successfully added", "success");
       reset();
       onClose();
@@ -40,14 +81,10 @@ const AddUserForm = ({ onClose }) => {
         toastMsg("An error occured", "error");
       }
       if (/email/i.test(errorMessage)) {
-        setErrMsg(() => {
-          return { ...errMsg, email: errorMessage };
-        });
+        setErrMsg({ ...errMsg, email: errorMessage });
       }
       if (/cardid/i.test(errorMessage)) {
-        setErrMsg(() => {
-          return { ...errMsg, cardId: errorMessage };
-        });
+        setErrMsg({ ...errMsg, cardId: errorMessage });
       }
     }
   };
@@ -55,15 +92,27 @@ const AddUserForm = ({ onClose }) => {
   // if user type again in the field with the error message then set error message to empty
   useEffect(() => {
     setErrMsg({});
-  }, [watchField]);
+  }, [watchCardId, watchEmail]);
 
   useEffect(() => {
     setFocus("cardId");
-  }, [setFocus]);
+  }, []);
 
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl isInvalid={errors?.cardId || errMsg.cardId}>
+      {userData !== undefined && (
+        <FormControl className="hidden">
+          <FormLabel>ID</FormLabel>
+          <Input
+            isDisabled
+            type="text"
+            size="lg"
+            {...register("id", { required: true })}
+          />
+        </FormControl>
+      )}
+
+      <FormControl className="mt-5" isInvalid={errors?.cardId || errMsg.cardId}>
         <FormLabel>Card ID</FormLabel>
         <Input
           type="number"
@@ -73,10 +122,8 @@ const AddUserForm = ({ onClose }) => {
             required: "Card ID is required",
           })}
         />
-        {errors?.cardId && (
-          <FormErrorMessage>{errors.cardId.message}</FormErrorMessage>
-        )}
-        {errMsg?.cardId && <FormErrorMessage>{errMsg.cardId}</FormErrorMessage>}
+        <ErrorMessage error={errors?.name} message={errors?.name?.message} />
+        <ErrorMessage error={errMsg?.cardId} message={errMsg.cardId} />
       </FormControl>
 
       <FormControl className="mt-5" isInvalid={errors?.name}>
@@ -89,9 +136,7 @@ const AddUserForm = ({ onClose }) => {
             required: "Name is required",
           })}
         />
-        {errors?.name && (
-          <FormErrorMessage>{errors.name.message}</FormErrorMessage>
-        )}
+        <ErrorMessage error={errors?.name} message={errors?.name?.message} />
       </FormControl>
 
       <FormControl className="mt-5" isInvalid={errors?.lastname}>
@@ -104,9 +149,10 @@ const AddUserForm = ({ onClose }) => {
             required: "Lastname is required",
           })}
         />
-        {errors?.lastname && (
-          <FormErrorMessage>{errors.lastname.message}</FormErrorMessage>
-        )}
+        <ErrorMessage
+          error={errors?.lastname}
+          message={errors?.lastname?.message}
+        />
       </FormControl>
 
       <FormControl className="mt-5" isInvalid={errors?.phone}>
@@ -120,12 +166,11 @@ const AddUserForm = ({ onClose }) => {
             maxLength: 10,
           })}
         />
-        {errors?.phone && (
-          <FormErrorMessage>{errors.phone.message}</FormErrorMessage>
-        )}
-        {errors?.phone?.type === "maxLength" && (
-          <FormErrorMessage>Max lenght 10 characters</FormErrorMessage>
-        )}
+        <ErrorMessage error={errors?.phone} message={errors?.phone?.message} />
+        <ErrorMessage
+          error={errors?.phone?.type === "maxLength"}
+          message="Max length 10"
+        />
       </FormControl>
 
       <FormControl className="mt-5" isInvalid={errors?.email || errMsg?.email}>
@@ -139,13 +184,12 @@ const AddUserForm = ({ onClose }) => {
             pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
           })}
         />
-        {errors?.email?.type === "pattern" && (
-          <FormErrorMessage>Invalid email</FormErrorMessage>
-        )}
-        {errors?.email && (
-          <FormErrorMessage>{errors.email.message}</FormErrorMessage>
-        )}
-        {errMsg?.email && <FormErrorMessage>{errMsg.email}</FormErrorMessage>}
+        <ErrorMessage
+          error={errors?.email?.type === "pattern"}
+          message="Invalid email"
+        />
+        <ErrorMessage error={errors?.email} message={errors?.email?.message} />
+        <ErrorMessage error={errMsg?.email} message={errMsg?.email} />
       </FormControl>
 
       <FormControl className="mt-5" isInvalid={errors?.role}>
@@ -154,18 +198,16 @@ const AddUserForm = ({ onClose }) => {
           placeholder="Select role"
           {...register("role", { required: "Role is required" })}
         >
-          <option>Admin</option>
-          <option>Staff</option>
-          <option>User</option>
+          <option value="admin">Admin</option>
+          <option value="staff">Staff</option>
+          <option value="user">User</option>
         </Select>
-        {errors?.role && (
-          <FormErrorMessage>{errors.role.message}</FormErrorMessage>
-        )}
+        <ErrorMessage error={errors?.role} message={errors?.role?.message} />
       </FormControl>
 
       <div className="flex items-center justify-end mt-8 pb-4 gap-2">
         <Button
-          isLoading={isLoading}
+          isLoading={loading}
           isDisabled={
             Object.keys(errors).length !== 0 || Object.keys(errMsg).length !== 0
           }

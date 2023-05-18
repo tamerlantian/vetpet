@@ -11,6 +11,7 @@ export { default as FormSelect } from "./form/FormSelect";
 export { default as AlertDialog } from "./AlertDialog";
 export { default as Logo } from "./Logo";
 export { default as Paginator } from "./Paginator";
+export { default as ErrorMessage } from "./form/ErrorMessage";
 
 // client components
 export { default as EditUser } from "./clientComponents/EditUser";
