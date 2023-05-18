@@ -1,11 +1,11 @@
 import React from "react";
-import { Table, AddOffice, Header } from "../components";
-import { useFetchOfficesQuery } from "../store";
+import { Table, AddUser, Header } from "../../components";
+import { useFetchUsersQuery } from "../../store";
 import { Spinner, Container } from "@chakra-ui/react";
-import { officesConfig } from "../data/dumpData";
+import { employeesConfig } from "../../data/dumpData";
 
-const Offices = () => {
-  const { data, isLoading, error } = useFetchOfficesQuery();
+const Employees = () => {
+  const { data, isLoading, error } = useFetchUsersQuery();
 
   let content;
 
@@ -18,15 +18,15 @@ const Offices = () => {
   } else if (error) {
     content = <div>Error</div>;
   } else {
-    content = <Table data={data} config={officesConfig} />;
+    content = <Table data={data} config={employeesConfig} />;
   }
 
   return (
     <Container maxW="90rem" className="mt-4">
-      <Header category="Business" title="Offices" />
+      <Header category="Users" title="Employees" />
       <div className="bg-white mt-5 p-5 rounded-3xl">
         <div className="mb-10 relative left-5">
-          <AddOffice buttonName="Add office" />
+          <AddUser buttonName="Add employee" />
         </div>
         {content}
       </div>
@@ -34,4 +34,5 @@ const Offices = () => {
   );
 };
 
-export default Offices;
+export default Employees;
+Employees;

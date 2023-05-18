@@ -5,18 +5,16 @@ import {
   Route,
 } from "react-router-dom";
 import { RequiredAuth, PersistLogin } from "./components";
-import {
-  DashboardLayout,
-  HomeLayout,
-  Login,
-  Clients,
-  Dashboard,
-  Employees,
-  Offices,
-  Plans,
-  Prospects,
-  Products,
-} from "./pages";
+import { HomeLayout } from "./pages";
+import Layout from "./pages/layout";
+import Dashboard from "./pages/dashboard";
+import Offices from "./pages/offices";
+import Customers from "./pages/customers";
+import Employees from "./pages/employees";
+import Plans from "./pages/plans";
+import Products from "./pages/products";
+import Prospects from "./pages/prospects";
+import Login from "./pages/login";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,12 +22,12 @@ const router = createBrowserRouter(
       {/* PRIVATE ROUTES */}
       <Route element={<PersistLogin />}>
         <Route element={<RequiredAuth allowedRoles={["admin"]} />}>
-          <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route path="/dashboard" element={<Layout />}>
             <Route path="dashboard" element={<Dashboard />} />
+            <Route path="clients" element={<Customers />} />
             <Route path="plans" element={<Plans />} />
             <Route path="prospects" element={<Prospects />} />
             <Route path="offices" element={<Offices />} />
-            <Route path="clients" element={<Clients />} />
             <Route path="employees" element={<Employees />} />
             <Route path="products" element={<Products />} />
           </Route>

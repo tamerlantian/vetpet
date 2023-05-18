@@ -1,8 +1,8 @@
 import React from "react";
-import { Table, AddPlan, Header } from "../components";
-import { useFetchPlansQuery } from "../store";
+import { Table, AddPlan, Header } from "../../components";
+import { useFetchPlansQuery } from "../../store";
 import { Spinner, Container } from "@chakra-ui/react";
-import { plansConfig } from "../data/dumpData";
+import { plansConfig } from "../../data/dumpData";
 
 const Plans = () => {
   const { data, isLoading, error } = useFetchPlansQuery();

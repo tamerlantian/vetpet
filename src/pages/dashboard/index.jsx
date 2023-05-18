@@ -1,5 +1,4 @@
-import React from "react";
-import { Header } from "../components";
+import { Header } from "../../components";
 import { Container } from "@chakra-ui/react";
 
 const Dashboard = () => {

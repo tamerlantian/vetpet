@@ -1,8 +1,8 @@
 import React from "react";
-import { Header, Table, AddProduct } from "../components";
+import { Header, Table, AddProduct } from "../../components";
 import { Container, Spinner } from "@chakra-ui/react";
-import { useFetchProductsQuery } from "../store";
-import { productsConfig } from "../data/dumpData";
+import { useFetchProductsQuery } from "../../store";
+import { productsConfig } from "../../data/dumpData";
 
 const Products = () => {
   const { data, isLoading, error } = useFetchProductsQuery();
