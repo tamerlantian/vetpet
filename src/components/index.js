@@ -10,13 +10,13 @@ export { default as Input } from "./form/Input";
 export { default as FormSelect } from "./form/FormSelect";
 export { default as AlertDialog } from "./AlertDialog";
 export { default as Logo } from "./Logo";
-export { default as Paginator } from "./Paginator";
+export { default as Pagination } from "./Pagination";
 export { default as ErrorMessage } from "./form/ErrorMessage";
 
 // client components
 export { default as EditUser } from "./clientComponents/EditUser";
 export { default as DeleteUser } from "./clientComponents/DeleteUser";
-export { default as AddUser } from "./clientComponents/AddUser";
+export { default as AddUser } from "./AddUser";
 export { default as AddUserForm } from "./clientComponents/AddUserForm";
 export { default as EditUserForm } from "./clientComponents/EditUserForm";
 

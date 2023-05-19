@@ -15,19 +15,19 @@ import textHider from "../utils/textHider";
 export const links = [
   {
     title: "Home",
-    name: "home"
+    name: "home",
   },
   {
     title: "Products",
-    name: "products"
+    name: "products",
   },
   {
     title: "Services",
-    name: "services"
+    name: "services",
   },
   {
     title: "Contact",
-    name: "contact"
+    name: "contact",
   },
 ];
 
@@ -65,8 +65,8 @@ export const config = [
     tag: "Options",
     render: (data) => (
       <div className="flex justify-around">
-        <DeleteUser id={data._id} />
-        <EditUser data={data} />
+        <DeleteUser id={data._id} title="Delete customer" />
+        <EditUser data={data} title="Edit customer" />
       </div>
     ),
   },
@@ -110,8 +110,8 @@ export const employeesConfig = [
     tag: "Options",
     render: (data) => (
       <div className="flex justify-around">
-        <DeleteUser id={data.id} />
-        <EditUser data={data} />
+        <DeleteUser id={data._id} title="Delete employee" />
+        <EditUser data={data} title="Edit employee" />
       </div>
     ),
   },

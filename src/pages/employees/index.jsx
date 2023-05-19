@@ -1,11 +1,16 @@
-import React from "react";
-import { Table, AddUser, Header } from "../../components";
-import { useFetchUsersQuery } from "../../store";
+import { Table, AddUser, Header, Pagination } from "../../components";
+import { useFetchEmployeesQuery } from "../../store";
 import { Spinner, Container } from "@chakra-ui/react";
 import { employeesConfig } from "../../data/dumpData";
+import { useSelector } from "react-redux";
+import { addPage, subPage } from "../../store/slices/employeesSlice";
 
 const Employees = () => {
-  const { data, isLoading, error } = useFetchUsersQuery();
+  const { currentPage, limit } = useSelector((state) => state.employeesSlice);
+  const { data, isLoading, isFetching, error } = useFetchEmployeesQuery(
+    currentPage,
+    limit
+  );
 
   let content;
 
@@ -18,7 +23,18 @@ const Employees = () => {
   } else if (error) {
     content = <div>Error</div>;
   } else {
-    content = <Table data={data} config={employeesConfig} />;
+    content = (
+      <>
+        <Table data={data.employees} config={employeesConfig} />
+        <Pagination
+          isLoading={isFetching}
+          totalPages={data.totalPages}
+          currentPage={currentPage}
+          nextPage={addPage}
+          prevPage={subPage}
+        />
+      </>
+    );
   }
 
   return (
@@ -26,7 +42,7 @@ const Employees = () => {
       <Header category="Users" title="Employees" />
       <div className="bg-white mt-5 p-5 rounded-3xl">
         <div className="mb-10 relative left-5">
-          <AddUser buttonName="Add employee" />
+          <AddUser actionTitle="Add employee" />
         </div>
         {content}
       </div>

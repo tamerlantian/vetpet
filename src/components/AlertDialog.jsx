@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   AlertDialog as _AlertDialog,
   AlertDialogBody,
@@ -10,15 +10,17 @@ import {
 } from "@chakra-ui/react";
 import useToastMsg from "../hooks/useToastMsg";
 import { useDispatch, useSelector } from "react-redux";
-import { subPage } from "./../store/slices/clientsSlice";
+import { subPage } from "../store/slices/customersSlice";
 
 const AlertDialog = ({ actionName, id, isOpen, onOpen, onClose, onAction }) => {
   const cancelRef = React.useRef();
   const displayToast = useToastMsg();
   const dispatch = useDispatch();
   const { results, limit, totalUsers } = useSelector(
-    (state) => state.clientsSlice
+    (state) => state.customersSlice
   );
+
+  console.log(id)
 
   const handleDelete = async () => {
     try {

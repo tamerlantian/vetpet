@@ -1,14 +1,15 @@
 import React from "react";
-import { Table, AddUser, Header, Paginator } from "../../components";
+import { Table, AddUser, Header, Pagination } from "../../components";
 import { useFetchUsersQuery } from "../../store";
 import { Spinner, Container } from "@chakra-ui/react";
 import { config } from "../../data/dumpData";
 import { useSelector } from "react-redux";
-import { selectCurrentPage } from "../../store/slices/clientsSlice";
+import { addPage, subPage } from "../../store/slices/customersSlice";
 
 const Customers = () => {
-  const page = useSelector(selectCurrentPage);
-  const { data, isLoading, isFetching, error } = useFetchUsersQuery(page);
+  const { currentPage } = useSelector((state) => state.customersSlice);
+  const { data, isLoading, isFetching, error } =
+    useFetchUsersQuery(currentPage);
 
   let content;
   if (isLoading) {
@@ -23,17 +24,23 @@ const Customers = () => {
     content = (
       <>
         <Table data={data.users} config={config} />
-        <Paginator isLoading={isFetching} totalPages={data.totalPages} />
+        <Pagination
+          isLoading={isFetching}
+          totalPages={data.totalPages}
+          currentPage={currentPage}
+          nextPage={addPage}
+          prevPage={subPage}
+        />
       </>
     );
   }
 
   return (
     <Container maxW="90rem" className="mt-4">
-      <Header category="Users" title="Clients" />
+      <Header category="Users" title="Customers" />
       <div className="bg-white mt-5 p-5 rounded-3xl">
         <div className="mb-10 relative left-5">
-          <AddUser buttonName="Add client" />
+          <AddUser actionTitle="Add customer" />
         </div>
         {content}
       </div>
