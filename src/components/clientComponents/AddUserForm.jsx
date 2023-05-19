@@ -25,13 +25,13 @@ const AddUserForm = ({ onClose, action, userData, loading }) => {
   const [errMsg, setErrMsg] = useState({});
   const defaultValues = userData
     ? {
-        id: userData.data?._id,
-        cardId: userData.data?.cardId,
-        name: userData.data?.name,
-        lastname: userData.data?.lastname,
-        phone: userData.data?.phone,
-        email: userData.data?.email,
-        role: userData.data?.role,
+        id: userData?._id,
+        cardId: userData?.cardId,
+        name: userData?.name,
+        lastname: userData?.lastname,
+        phone: userData?.phone,
+        email: userData?.email,
+        role: userData?.role,
       }
     : {
         cardId: "",

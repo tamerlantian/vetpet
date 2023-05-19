@@ -1,18 +1,18 @@
 import { useDisclosure, Button } from "@chakra-ui/react";
-import { ModalForm, AddUserForm } from "..";
+import { ModalForm, AddUserForm } from ".";
 import { IoMdAdd } from "react-icons/io";
-import { useAddUserMutation } from "../../store";
+import { useAddUserMutation } from "../store";
 
-const AddUser = ({ buttonName }) => {
+const AddUser = ({ actionTitle }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [addUser, { isLoading }] = useAddUserMutation();
   return (
     <>
       <Button leftIcon={<IoMdAdd />} colorScheme="purple" onClick={onOpen}>
-        {buttonName}
+        {actionTitle}
       </Button>
       <ModalForm
-        title="Add client"
+        title={actionTitle}
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}

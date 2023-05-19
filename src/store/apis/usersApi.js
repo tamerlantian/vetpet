@@ -1,12 +1,36 @@
 import { apiSlice } from "../slices/apiSlice";
-import { setPage } from "../slices/clientsSlice";
+import { setPage } from "../slices/customersSlice";
 
-const clientsApi = apiSlice.injectEndpoints({
-  tagTypes: ["Client"],
+const usersApi = apiSlice.injectEndpoints({
+  tagTypes: ["Users", "Employees"],
   endpoints: (builder) => {
     return {
+      fetchEmployees: builder.query({
+        providesTags: ["Employees"],
+        query: (page = 1, limit = 5) =>
+          `user/employees?page=${page}&limit=${limit}`,
+        transformResponse: (result) => {
+          return {
+            employees: result.data.employees,
+            results: result.results,
+            totalPages: result.totalPages,
+            //   totalUsers: result.totalUsers,
+          };
+        },
+        async onQueryStarted(undefined, { dispatch, queryFulfilled }) {
+          try {
+            const { data } = await queryFulfilled;
+            dispatch(
+              setPage({
+                totalPages: data.totalPages,
+                results: data.results,
+              })
+            );
+          } catch (error) {}
+        },
+      }),
       fetchUsers: builder.query({
-        providesTags: ["Client"],
+        providesTags: ["Users"],
         query: (page = 1, limit = 5) => {
           return {
             url: `/user?page=${page}&limit=${limit}`,
@@ -35,7 +59,7 @@ const clientsApi = apiSlice.injectEndpoints({
         },
       }),
       editUser: builder.mutation({
-        invalidatesTags: ["Client"],
+        invalidatesTags: ["Users", "Employees"],
         query: (user) => {
           return {
             url: `/user/${user.id}`,
@@ -49,7 +73,7 @@ const clientsApi = apiSlice.injectEndpoints({
       }),
       deleteUser: builder.mutation({
         // temporal solution
-        invalidatesTags: ["Client"],
+        invalidatesTags: ["Users", "Employees"],
         query: (id) => {
           return {
             url: `/user/${id}`,
@@ -80,7 +104,7 @@ const clientsApi = apiSlice.injectEndpoints({
         //   },
       }),
       addUser: builder.mutation({
-        invalidatesTags: ["Client"],
+        invalidatesTags: ["Users", "Employees"],
         query: (user) => {
           return {
             url: "/user",
@@ -105,5 +129,6 @@ export const {
   useDeleteUserMutation,
   useFetchUsersQuery,
   useAddUserMutation,
-} = clientsApi;
-export { clientsApi };
+  useFetchEmployeesQuery,
+} = usersApi;
+export { usersApi };

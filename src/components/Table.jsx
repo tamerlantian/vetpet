@@ -3,7 +3,6 @@ import {
   Table as _Table,
   Thead,
   Tbody,
-  
   Tr,
   Th,
   Td,
