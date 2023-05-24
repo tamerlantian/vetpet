@@ -1,6 +1,7 @@
 import { useDisclosure, Button } from "@chakra-ui/react";
 import { IoMdAdd } from "react-icons/io";
-import { ModalForm, AddProductForm } from "../../components";
+import { ModalForm } from "../../components";
+import ProductForm from "./ProductForm";
 import { useAddProductMutation } from "../../store";
 
 const AddProduct = () => {
@@ -17,7 +18,7 @@ const AddProduct = () => {
         onOpen={onOpen}
         onClose={onClose}
       >
-        <AddProductForm
+        <ProductForm
           onClose={onClose}
           action={addProduct}
           loading={isLoading}

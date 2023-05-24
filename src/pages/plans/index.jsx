@@ -1,10 +1,11 @@
 import React from "react";
-import { Table, AddPlan, Header, Pagination } from "../../components";
+import { Table, Header, Pagination } from "../../components";
 import { useFetchPlansQuery } from "../../store";
 import { Spinner, Container } from "@chakra-ui/react";
 import { plansConfig } from "../../data/dumpData";
 import { useSelector } from "react-redux";
 import { addPage, subPage } from "../../store/slices/plansSlice";
+import AddPlan from "./AddPlan";
 
 const Plans = () => {
   const { currentPage, limit } = useSelector((state) => state.plansSlice);

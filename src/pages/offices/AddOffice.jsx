@@ -1,7 +1,8 @@
 import { useDisclosure, Button } from "@chakra-ui/react";
-import { ModalForm, AddOfficeForm } from "../../components";
+import { ModalForm } from "../../components";
 import { IoMdAdd } from "react-icons/io";
 import { useAddOfficeMutation } from "../../store";
+import OfficeForm from "./OfficeForm";
 
 const AddOffice = ({ buttonName }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -17,7 +18,7 @@ const AddOffice = ({ buttonName }) => {
         onOpen={onOpen}
         onClose={onClose}
       >
-        <AddOfficeForm
+        <OfficeForm
           onClose={onClose}
           action={addOffice}
           isLoading={isLoading}

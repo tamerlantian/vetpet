@@ -4,15 +4,14 @@ import {
   Input,
   FormControl,
   FormLabel,
-  Select,
   Textarea,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "../../components/";
+import ErrorMessage from "../../components/form/ErrorMessage";
 import useToastMsg from "../../hooks/useToastMsg";
 import getDirtyFieldsData from "../../utils/getDirtyFieldsData";
 
-const AddProductForm = ({ onClose, action, loading, defaultValues = {} }) => {
+const PlanForm = ({ onClose, action, loading, defaultValues = {} }) => {
   const toastMsg = useToastMsg();
   const {
     register,
@@ -23,8 +22,9 @@ const AddProductForm = ({ onClose, action, loading, defaultValues = {} }) => {
   } = useForm({ defaultValues });
 
   useEffect(() => {
-    setFocus("kind");
+    setFocus("name");
   }, []);
+
 
   const onSubmit = async (data) => {
     try {
@@ -50,25 +50,13 @@ const AddProductForm = ({ onClose, action, loading, defaultValues = {} }) => {
 
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl className="mt-5" isInvalid={errors?.kind}>
-        <FormLabel>Kind</FormLabel>
-        <Select
-          placeholder="Select kind"
-          {...register("kind", { required: "This field is required" })}
-        >
-          <option value="product">Product</option>
-          <option value="service">Service</option>
-        </Select>
-        <ErrorMessage error={errors?.kind} message={errors?.kind?.message} />
-      </FormControl>
-
       <FormControl className="mt-5" isInvalid={errors?.name}>
-        <FormLabel>Name</FormLabel>
+        <FormLabel>Plan name</FormLabel>
         <Input
           type="text"
           size="lg"
-          placeholder="Dog show 1g puppets"
-          {...register("name", { required: "Name is required" })}
+          placeholder="Premium"
+          {...register("name", { required: "Plan name is required" })}
         />
         <ErrorMessage error={errors?.name} message={errors?.name?.message} />
       </FormControl>
@@ -78,7 +66,7 @@ const AddProductForm = ({ onClose, action, loading, defaultValues = {} }) => {
         <Input
           type="number"
           size="lg"
-          placeholder="20000"
+          placeholder="19000"
           {...register("price", { required: "Price is required" })}
         />
         <ErrorMessage error={errors?.price} message={errors?.price?.message} />
@@ -87,13 +75,13 @@ const AddProductForm = ({ onClose, action, loading, defaultValues = {} }) => {
       <FormControl className="mt-5" isInvalid={errors?.description}>
         <FormLabel>Description</FormLabel>
         <Textarea
+          placeholder="A short description of the plan ..."
           size="lg"
-          placeholder="Croquets contains chicken and beef"
-          {...register("description", { required: "Description is required" })}
+          {...register("description", { required: true })}
         />
         <ErrorMessage
-          error={errors?.description}
-          message={errors?.description?.message}
+          error={errors?.department}
+          message={errors?.department?.message}
         />
       </FormControl>
 
@@ -114,4 +102,4 @@ const AddProductForm = ({ onClose, action, loading, defaultValues = {} }) => {
   );
 };
 
-export default AddProductForm;
+export default PlanForm;

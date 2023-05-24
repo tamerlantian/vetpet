@@ -1,32 +1,32 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { AiOutlineEdit } from "react-icons/ai";
-import { ModalForm, AddPlanForm } from "..";
-import { useEditPlanMutation } from "../../store";
+import { ModalForm } from "../../components";
+import ProductForm from "./ProductForm";
+import { useEditProductMutation } from "../../store";
 
-const EditPlan = ({ data }) => {
-  const [editPlan, { isLoading }] = useEditPlanMutation();
+const EditProduct = ({ data }) => {
+  const [editProduct, { isLoading }] = useEditProductMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log(data)
   return (
     <>
       <button onClick={onOpen}>
         <AiOutlineEdit />
       </button>
       <ModalForm
-        title="Edit plan"
+        title="Edit Product"
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
       >
-        <AddPlanForm
+        <ProductForm
+          action={editProduct}
+          loading={isLoading}
           defaultValues={data}
           onClose={onClose}
-          action={editPlan}
-          loading={isLoading}
         />
       </ModalForm>
     </>
   );
 };
 
-export default EditPlan;
+export default EditProduct;

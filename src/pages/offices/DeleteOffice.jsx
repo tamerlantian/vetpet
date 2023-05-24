@@ -1,6 +1,6 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { AiOutlineDelete } from "react-icons/ai";
-import { AlertDialog } from "../";
+import { AlertDialog } from "../../components";
 import { useDeleteOfficeMutation } from "../../store";
 import { useSelector } from "react-redux";
 import { subPage } from "../../store/slices/officesSlice";
