@@ -3,13 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   currentPage: 1,
   limit: 5,
+  totalProspects: 0,
   totalPages: 0,
-  totalEmployees: 0,
   results: 0,
 };
 
-const employeesSlice = createSlice({
-  name: "employees",
+const prospectsSlice = createSlice({
+  name: "prospects",
   initialState,
   reducers: {
     addPage: (state, { payload }) => {
@@ -20,11 +20,11 @@ const employeesSlice = createSlice({
     },
     setPage: (state, { payload }) => {
       state.totalPages = payload.totalPages;
+      state.totalProspects = payload.totalProspects;
       state.results = payload.results;
-      state.totalEmployees = payload.totalEmployees;
     },
   },
 });
 
-export default employeesSlice.reducer;
-export const { addPage, subPage, setPage } = employeesSlice.actions;
+export default prospectsSlice.reducer;
+export const { addPage, subPage, setPage } = prospectsSlice.actions;

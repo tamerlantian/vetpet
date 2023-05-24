@@ -1,11 +1,17 @@
 import React from "react";
-import { Table, Header } from "../../components";
+import { Table, Header, Pagination } from "../../components";
 import { useFetchProspectsQuery } from "../../store";
 import { Spinner, Container } from "@chakra-ui/react";
 import { prospectsConfig } from "../../data/dumpData";
+import { useSelector } from "react-redux";
+import { addPage, subPage } from "../../store/slices/prospectsSlice";
 
 const Prospects = () => {
-  const { data, isLoading, error } = useFetchProspectsQuery();
+  const { limit, currentPage } = useSelector((state) => state.prospectsSlice);
+  const { data, isLoading, isFetching, error } = useFetchProspectsQuery(
+    currentPage,
+    limit
+  );
   let content;
 
   if (isLoading) {
@@ -17,7 +23,18 @@ const Prospects = () => {
   } else if (error) {
     content = <div>Error</div>;
   } else {
-    content = <Table data={data} config={prospectsConfig} />;
+    content = (
+      <>
+        <Table data={data.prospects} config={prospectsConfig} />
+        <Pagination
+          isLoading={isFetching}
+          totalPages={data.totalPages}
+          currentPage={currentPage}
+          nextPage={addPage}
+          prevPage={subPage}
+        />
+      </>
+    );
   }
 
   return (

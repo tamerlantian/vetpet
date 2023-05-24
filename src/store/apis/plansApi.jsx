@@ -4,7 +4,7 @@ import { BASE_URL } from "../../config/config";
 const plansApi = createApi({
   reducerPath: "Plan",
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_URL,
+    baseUrl: "http://localhost:5001/",
   }),
   endpoints: (builder) => {
     return {

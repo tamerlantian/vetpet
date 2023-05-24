@@ -15,14 +15,13 @@ export { default as ErrorMessage } from "./form/ErrorMessage";
 
 // client components
 export { default as EditUser } from "./clientComponents/EditUser";
-export { default as DeleteUser } from "./clientComponents/DeleteUser";
+export { default as DeleteUser } from "../pages/customers/DeleteCustomer";
 export { default as AddUser } from "./AddUser";
 export { default as AddUserForm } from "./clientComponents/AddUserForm";
-export { default as EditUserForm } from "./clientComponents/EditUserForm";
 
 // product components
-export { default as AddProductForm } from "./productsComponents/AddProductForm";
-export { default as AddProduct } from "./productsComponents/AddProduct";
+export { default as AddProductForm } from "../pages/products/AddProductForm";
+export { default as AddProduct } from "../pages/products/AddProduct";
 export { default as DeleteProduct } from "./productsComponents/DeleteProduct";
 export { default as EditProduct } from "./productsComponents/EditProduct";
 export { default as EditProductForm } from "./productsComponents/EditProductForm";
@@ -35,7 +34,7 @@ export { default as EditOffice } from "./officeComponents/EditOffice";
 export { default as EditOfficeForm } from "./officeComponents/EditOfficeForm";
 
 // prospect components
-export { default as DeleteProspect } from "./prospectComponents/DeleteProspect";
+export { default as DeleteProspect } from "../pages/prospects/DeleteProspect";
 
 // plan components
 export { default as AddPlan } from "./planComponents/AddPlan";

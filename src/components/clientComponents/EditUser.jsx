@@ -18,7 +18,7 @@ const EditUser = ({ data, title }) => {
         onClose={onClose}
       >
         <AddUserForm
-          userData={data}
+          defaultValues={data}
           onClose={onClose}
           action={editUser}
           loading={isLoading}
