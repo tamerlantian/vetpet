@@ -19,29 +19,10 @@ const getDirtyFieldsData = (formData, dirtyFields) => {
 };
 
 // userForm or AddUserForm
-const AddUserForm = ({ onClose, action, userData, loading }) => {
+const AddUserForm = ({ onClose, action, defaultValues, loading }) => {
   const toastMsg = useToasMsg();
   // state for errors coming from the server
   const [errMsg, setErrMsg] = useState({});
-  const defaultValues = userData
-    ? {
-        id: userData?._id,
-        cardId: userData?.cardId,
-        name: userData?.name,
-        lastname: userData?.lastname,
-        phone: userData?.phone,
-        email: userData?.email,
-        role: userData?.role,
-      }
-    : {
-        cardId: "",
-        name: "",
-        lastname: "",
-        phone: "",
-        email: "",
-        role: "",
-      };
-
   const {
     register,
     handleSubmit,
@@ -60,11 +41,9 @@ const AddUserForm = ({ onClose, action, userData, loading }) => {
   const onSubmit = async (data) => {
     try {
       // this conditional will send data only when user's trying to udpate
-      if (userData !== undefined) {
+      if (Object.keys(defaultValues).length !== 0) {
         const dirtyFieldsData = getDirtyFieldsData(data, dirtyFields);
-        dirtyFieldsData.id = defaultValues.id;
-        console.log("DATA: ", dirtyFieldsData)
-        await action(dirtyFieldsData).unwrap();
+        await action({ data: dirtyFieldsData, id: defaultValues._id }).unwrap();
         onClose();
         reset();
         return;
@@ -100,18 +79,6 @@ const AddUserForm = ({ onClose, action, userData, loading }) => {
 
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-      {userData !== undefined && (
-        <FormControl className="hidden">
-          <FormLabel>ID</FormLabel>
-          <Input
-            isDisabled
-            type="text"
-            size="lg"
-            {...register("id", { required: true })}
-          />
-        </FormControl>
-      )}
-
       <FormControl className="mt-5" isInvalid={errors?.cardId || errMsg.cardId}>
         <FormLabel>Card ID</FormLabel>
         <Input

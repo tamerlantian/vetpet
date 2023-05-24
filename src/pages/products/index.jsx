@@ -1,13 +1,17 @@
 import React from "react";
-import { Header, Table, AddProduct } from "../../components";
-import { Container, Spinner } from "@chakra-ui/react";
+import { Header, Table, AddProduct, Pagination } from "../../components";
 import { useFetchProductsQuery } from "../../store";
+import { Container, Spinner } from "@chakra-ui/react";
 import { productsConfig } from "../../data/dumpData";
+import { useSelector } from "react-redux";
+import { addPage, subPage } from "../../store/slices/productsSlice";
 
 const Products = () => {
-  const { data, isLoading, error } = useFetchProductsQuery();
-  let content;
+  const { currentPage } = useSelector((state) => state.productsSlice);
+  const { data, isLoading, isFetching, error } =
+    useFetchProductsQuery(currentPage);
 
+  let content;
   if (isLoading) {
     content = (
       <div className="flex justify-center">
@@ -17,7 +21,18 @@ const Products = () => {
   } else if (error) {
     content = <div>Error</div>;
   } else {
-    content = <Table data={data} config={productsConfig} />;
+    content = (
+      <>
+        <Table data={data?.products} config={productsConfig} />
+        <Pagination
+          isLoading={isFetching}
+          totalPages={data.totalPages}
+          currentPage={currentPage}
+          nextPage={addPage}
+          prevPage={subPage}
+        />
+      </>
+    );
   }
 
   return (

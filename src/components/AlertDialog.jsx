@@ -9,23 +9,25 @@ import {
   Button,
 } from "@chakra-ui/react";
 import useToastMsg from "../hooks/useToastMsg";
-import { useDispatch, useSelector } from "react-redux";
-import { subPage } from "../store/slices/customersSlice";
+import { useDispatch } from "react-redux";
 
-const AlertDialog = ({ actionName, id, isOpen, onOpen, onClose, onAction }) => {
+const AlertDialog = ({
+  actionName,
+  id,
+  isOpen,
+  onClose,
+  onAction,
+  isLastItem,
+  prevPage
+}) => {
   const cancelRef = React.useRef();
   const displayToast = useToastMsg();
   const dispatch = useDispatch();
-  const { results, limit, totalUsers } = useSelector(
-    (state) => state.customersSlice
-  );
-
-  console.log(id)
 
   const handleDelete = async () => {
     try {
       await onAction(id).unwrap();
-      if (results === 1 && totalUsers > limit) dispatch(subPage(1));
+      if (isLastItem) dispatch(prevPage(1));
       onClose();
       displayToast("Successfully deleted", "success", 2000, true);
     } catch (error) {

@@ -14,7 +14,7 @@ const usersApi = apiSlice.injectEndpoints({
             employees: result.data.employees,
             results: result.results,
             totalPages: result.totalPages,
-            //   totalUsers: result.totalUsers,
+            totalEmployees: result.totalEmployees,
           };
         },
         async onQueryStarted(undefined, { dispatch, queryFulfilled }) {
@@ -24,6 +24,7 @@ const usersApi = apiSlice.injectEndpoints({
               setPage({
                 totalPages: data.totalPages,
                 results: data.results,
+                totalEmployees: data.totalEmployees,
               })
             );
           } catch (error) {}
@@ -60,14 +61,14 @@ const usersApi = apiSlice.injectEndpoints({
       }),
       editUser: builder.mutation({
         invalidatesTags: ["Users", "Employees"],
-        query: (user) => {
+        query: ({ data, id }) => {
           return {
-            url: `/user/${user.id}`,
+            url: `/user/${id}`,
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
             },
-            body: user,
+            body: data,
           };
         },
       }),

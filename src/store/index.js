@@ -3,8 +3,10 @@ import { setupListeners } from "@reduxjs/toolkit/dist/query";
 // reducers
 import authSlice from "./slices/authSlice";
 import customersSlice from "./slices/customersSlice";
-import { apiSlice } from "./slices/apiSlice";
 import employeesSlice from "./slices/employeesSlice";
+import prospectsSlice from "./slices/prospectsSlice";
+import productsSlice from "./slices/productsSlice";
+import { apiSlice } from "./slices/apiSlice";
 // APIs
 import { usersApi } from "./apis/usersApi";
 import { productsApi } from "./apis/productsApi";
@@ -23,10 +25,11 @@ export const store = configureStore({
     [prospectsApi.reducerPath]: prospectsApi.reducer,
     [plansApi.reducerPath]: plansApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
-    // [employeesApi.reducerPath]: employeesApi.reducer,
     authSlice,
     customersSlice,
     employeesSlice,
+    prospectsSlice,
+    productsSlice
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat([

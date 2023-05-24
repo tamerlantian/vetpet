@@ -81,7 +81,7 @@ const Sidebar = () => {
                 className={false ? activeLink : normalLink}
               >
                 <BsPeople />
-                <span className="capitalize">clients</span>
+                <span className="capitalize">customers</span>
               </NavLink>
               <NavLink
                 to="employees"

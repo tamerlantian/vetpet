@@ -1,6 +1,5 @@
 import {
   EditUser,
-  DeleteUser,
   DeleteProduct,
   EditProduct,
   DeleteOffice,
@@ -9,6 +8,8 @@ import {
   DeletePlan,
   EditPlan,
 } from "../components";
+import DeleteCustomer from "../pages/customers/DeleteCustomer";
+import DeleteEmployee from "../pages/employees/DeleteEmployee";
 import { Avatar } from "@chakra-ui/react";
 import textHider from "../utils/textHider";
 
@@ -65,7 +66,7 @@ export const config = [
     tag: "Options",
     render: (data) => (
       <div className="flex justify-around">
-        <DeleteUser id={data._id} title="Delete customer" />
+        <DeleteCustomer id={data._id} title="Delete customer" />
         <EditUser data={data} title="Edit customer" />
       </div>
     ),
@@ -110,7 +111,7 @@ export const employeesConfig = [
     tag: "Options",
     render: (data) => (
       <div className="flex justify-around">
-        <DeleteUser id={data._id} title="Delete employee" />
+        <DeleteEmployee id={data._id} title="Delete employee" />
         <EditUser data={data} title="Edit employee" />
       </div>
     ),
@@ -132,7 +133,7 @@ export const productsConfig = [
   },
   {
     tag: "Type",
-    render: ({ type }) => type,
+    render: ({ kind }) => kind,
   },
   {
     tag: "Name",
@@ -150,7 +151,7 @@ export const productsConfig = [
     tag: "Actions",
     render: (data) => (
       <div className="flex justify-around">
-        <DeleteProduct id={data.id} />
+        <DeleteProduct id={data._id} />
         <EditProduct data={data} />
       </div>
     ),
@@ -221,7 +222,7 @@ export const prospectsConfig = [
     tag: "Options",
     render: (data) => (
       <div className="flex justify-around">
-        <DeleteProspect id={data.id} />
+        <DeleteProspect id={data._id} />
       </div>
     ),
   },
