@@ -9,14 +9,7 @@ import {
 } from "@chakra-ui/react";
 import useToasMsg from "./../../hooks/useToastMsg";
 import { ErrorMessage } from "../";
-
-const getDirtyFieldsData = (formData, dirtyFields) => {
-  dirtyFields = Object.keys(dirtyFields);
-  const fieldSelector = Object.entries(formData).filter((formField) =>
-    dirtyFields.includes(formField[0])
-  );
-  return Object.fromEntries(fieldSelector);
-};
+import getDirtyFieldsData from "../../utils/getDirtyFieldsData";
 
 // userForm or AddUserForm
 const AddUserForm = ({ onClose, action, defaultValues, loading }) => {

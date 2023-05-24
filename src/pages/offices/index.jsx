@@ -1,14 +1,17 @@
 import React from "react";
-import { Table, AddOffice, Header } from "../../components";
+import { Table, AddOffice, Header, Pagination } from "../../components";
 import { useFetchOfficesQuery } from "../../store";
 import { Spinner, Container } from "@chakra-ui/react";
 import { officesConfig } from "../../data/dumpData";
+import { useSelector } from "react-redux";
+import { addPage, subPage } from "../../store/slices/officesSlice";
 
 const Offices = () => {
-  const { data, isLoading, error } = useFetchOfficesQuery();
+  const { currentPage } = useSelector((state) => state.officesSlice);
+  const { data, isLoading, isFetching, error } =
+    useFetchOfficesQuery(currentPage);
 
   let content;
-
   if (isLoading) {
     content = (
       <div className="flex justify-center">
@@ -18,7 +21,18 @@ const Offices = () => {
   } else if (error) {
     content = <div>Error</div>;
   } else {
-    content = <Table data={data} config={officesConfig} />;
+    content = (
+      <>
+        <Table data={data.offices} config={officesConfig} />
+        <Pagination
+          isLoading={isFetching}
+          totalPages={data.totalPages}
+          currentPage={currentPage}
+          nextPage={addPage}
+          prevPage={subPage}
+        />
+      </>
+    );
   }
 
   return (

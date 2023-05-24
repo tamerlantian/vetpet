@@ -6,6 +6,7 @@ import customersSlice from "./slices/customersSlice";
 import employeesSlice from "./slices/employeesSlice";
 import prospectsSlice from "./slices/prospectsSlice";
 import productsSlice from "./slices/productsSlice";
+import officesSlice from "./slices/officesSlice";
 import { apiSlice } from "./slices/apiSlice";
 // APIs
 import { usersApi } from "./apis/usersApi";
@@ -29,7 +30,8 @@ export const store = configureStore({
     customersSlice,
     employeesSlice,
     prospectsSlice,
-    productsSlice
+    productsSlice,
+    officesSlice
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat([

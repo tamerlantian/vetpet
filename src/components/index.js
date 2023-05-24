@@ -27,8 +27,8 @@ export { default as EditProduct } from "./productsComponents/EditProduct";
 export { default as EditProductForm } from "./productsComponents/EditProductForm";
 
 // office components
-export { default as AddOffice } from "./officeComponents/AddOffice";
-export { default as AddOfficeForm } from "./officeComponents/AddOfficeForm";
+export { default as AddOffice } from "../pages/offices/AddOffice";
+export { default as AddOfficeForm } from "../pages/offices/AddOfficeForm";
 export { default as DeleteOffice } from "./officeComponents/DeleteOffice";
 export { default as EditOffice } from "./officeComponents/EditOffice";
 export { default as EditOfficeForm } from "./officeComponents/EditOfficeForm";
