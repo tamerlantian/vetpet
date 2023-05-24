@@ -1,15 +1,12 @@
-import {
-  EditUser,
-  DeleteProduct,
-  EditProduct,
-  DeleteOffice,
-  EditOffice,
-  DeleteProspect,
-  DeletePlan,
-  EditPlan,
-} from "../components";
+import { EditUser, DeleteProspect } from "../components";
+import EditProduct from "../pages/products/EditProduct";
+import DeleteProduct from "../pages/products/DeleteProduct";
+import DeletePlan from "../pages/plans/DeletePlan";
 import DeleteCustomer from "../pages/customers/DeleteCustomer";
 import DeleteEmployee from "../pages/employees/DeleteEmployee";
+import DeleteOffice from "../pages/offices/DeleteOffice";
+import EditOffice from "../pages/offices/EditOffice";
+import EditPlan from "../pages/plans/EditPlan";
 import { Avatar } from "@chakra-ui/react";
 import textHider from "../utils/textHider";
 

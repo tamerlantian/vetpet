@@ -1,32 +1,33 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { AiOutlineEdit } from "react-icons/ai";
-import { ModalForm,  AddOfficeForm } from "..";
-import { useEditOfficeMutation } from "../../store";
+import { ModalForm } from "../../components";
+import PlanForm from "./PlanForm";
+import { useEditPlanMutation } from "../../store";
 
-const EditOffice = ({ data }) => {
-  const [editOffice, { isLoading }] = useEditOfficeMutation();
+const EditPlan = ({ data }) => {
+  const [editPlan, { isLoading }] = useEditPlanMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  console.log(data)
   return (
     <>
       <button onClick={onOpen}>
         <AiOutlineEdit />
       </button>
       <ModalForm
-        title="Edit Office"
+        title="Edit plan"
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
       >
-        <AddOfficeForm
-          action={editOffice}
-          loading={isLoading}
+        <PlanForm
           defaultValues={data}
           onClose={onClose}
+          action={editPlan}
+          loading={isLoading}
         />
       </ModalForm>
     </>
   );
 };
 
-export default EditOffice;
+export default EditPlan;

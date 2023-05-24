@@ -1,17 +1,11 @@
 import React, { useEffect } from "react";
-import {
-  Button,
-  Input,
-  FormControl,
-  FormLabel,
-  Textarea,
-} from "@chakra-ui/react";
+import { Button, Input, FormControl, FormLabel } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import ErrorMessage from "../form/ErrorMessage";
+import { ErrorMessage } from "../../components";
 import useToastMsg from "../../hooks/useToastMsg";
 import getDirtyFieldsData from "../../utils/getDirtyFieldsData";
 
-const AddPlanForm = ({ onClose, action, loading, defaultValues = {} }) => {
+const OfficeForm = ({ onClose, action, loading, defaultValues = {} }) => {
   const toastMsg = useToastMsg();
   const {
     register,
@@ -22,13 +16,11 @@ const AddPlanForm = ({ onClose, action, loading, defaultValues = {} }) => {
   } = useForm({ defaultValues });
 
   useEffect(() => {
-    setFocus("name");
+    setFocus("department");
   }, []);
-
 
   const onSubmit = async (data) => {
     try {
-      if (data.price) data.price = data.price * 1;
       if (Object.keys(defaultValues).length !== 0) {
         const dirtyFieldsData = getDirtyFieldsData(data, dirtyFields);
         await action({ data: dirtyFieldsData, id: defaultValues._id });
@@ -50,39 +42,54 @@ const AddPlanForm = ({ onClose, action, loading, defaultValues = {} }) => {
 
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl className="mt-5" isInvalid={errors?.name}>
-        <FormLabel>Plan name</FormLabel>
+      <FormControl className="mt-5" isInvalid={errors?.department}>
+        <FormLabel>Department</FormLabel>
         <Input
           type="text"
           size="lg"
-          placeholder="Premium"
-          {...register("name", { required: "Plan name is required" })}
-        />
-        <ErrorMessage error={errors?.name} message={errors?.name?.message} />
-      </FormControl>
-
-      <FormControl className="mt-5" isInvalid={errors?.price}>
-        <FormLabel>Price</FormLabel>
-        <Input
-          type="number"
-          size="lg"
-          placeholder="19000"
-          {...register("price", { required: "Price is required" })}
-        />
-        <ErrorMessage error={errors?.price} message={errors?.price?.message} />
-      </FormControl>
-
-      <FormControl className="mt-5" isInvalid={errors?.description}>
-        <FormLabel>Description</FormLabel>
-        <Textarea
-          placeholder="A short description of the plan ..."
-          size="lg"
-          {...register("description", { required: true })}
+          placeholder="Valle del Cauca"
+          {...register("department", { required: "Department is required" })}
         />
         <ErrorMessage
           error={errors?.department}
           message={errors?.department?.message}
         />
+      </FormControl>
+
+      <FormControl className="mt-5" isInvalid={errors?.city}>
+        <FormLabel>City</FormLabel>
+        <Input
+          type="text"
+          size="lg"
+          placeholder="Cali"
+          {...register("city", { required: "City is required" })}
+        />
+        <ErrorMessage error={errors?.city} message={errors?.city?.message} />
+      </FormControl>
+
+      <FormControl className="mt-5" isInvalid={errors?.address}>
+        <FormLabel>Address</FormLabel>
+        <Input
+          type="text"
+          size="lg"
+          placeholder="Calle 5 # 12b -5"
+          {...register("address", { required: "Address is required" })}
+        />
+        <ErrorMessage
+          error={errors?.address}
+          message={errors?.address?.message}
+        />
+      </FormControl>
+
+      <FormControl className="mt-5" isInvalid={errors?.phone}>
+        <FormLabel>Phone</FormLabel>
+        <Input
+          type="text"
+          size="lg"
+          placeholder="6697908"
+          {...register("phone", { required: "Phone is required" })}
+        />
+        <ErrorMessage error={errors?.phone} message={errors?.phone?.message} />
       </FormControl>
 
       <div className="flex items-center justify-end mt-8 pb-4 gap-2">
@@ -102,4 +109,4 @@ const AddPlanForm = ({ onClose, action, loading, defaultValues = {} }) => {
   );
 };
 
-export default AddPlanForm;
+export default OfficeForm;

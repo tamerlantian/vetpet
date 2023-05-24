@@ -1,6 +1,7 @@
 import { useDisclosure, Button } from "@chakra-ui/react";
-import { ModalForm, AddPlanForm } from "../../components";
+import { ModalForm } from "../../components";
 import { IoMdAdd } from "react-icons/io";
+import PlanForm from "./PlanForm";
 import { useAddPlanMutation } from "../../store";
 
 const AddPlan = ({ buttonName }) => {
@@ -18,7 +19,7 @@ const AddPlan = ({ buttonName }) => {
         onOpen={onOpen}
         onClose={onClose}
       >
-        <AddPlanForm onClose={onClose} action={addPlan} loading={isLoading} />
+        <PlanForm onClose={onClose} action={addPlan} loading={isLoading} />
       </ModalForm>
     </>
   );

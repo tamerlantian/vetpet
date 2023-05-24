@@ -1,5 +1,6 @@
 import React from "react";
-import { Header, Table, AddProduct, Pagination } from "../../components";
+import { Header, Table, Pagination } from "../../components";
+import AddProduct from "./AddProduct";
 import { useFetchProductsQuery } from "../../store";
 import { Container, Spinner } from "@chakra-ui/react";
 import { productsConfig } from "../../data/dumpData";
