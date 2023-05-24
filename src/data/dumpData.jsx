@@ -248,7 +248,7 @@ export const plansConfig = [
     tag: "Options",
     render: (data) => (
       <div className="flex justify-around">
-        <DeletePlan id={data.id} />
+        <DeletePlan id={data._id} />
         <EditPlan data={data} />
       </div>
     ),

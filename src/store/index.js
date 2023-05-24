@@ -7,6 +7,7 @@ import employeesSlice from "./slices/employeesSlice";
 import prospectsSlice from "./slices/prospectsSlice";
 import productsSlice from "./slices/productsSlice";
 import officesSlice from "./slices/officesSlice";
+import plansSlice from "./slices/plansSlice";
 import { apiSlice } from "./slices/apiSlice";
 // APIs
 import { usersApi } from "./apis/usersApi";
@@ -15,7 +16,6 @@ import { officesApi } from "./apis/officesApi";
 import { prospectsApi } from "./apis/prospectsApi";
 import { plansApi } from "./apis/plansApi";
 import { authApi } from "./apis/authApi";
-// import { employeesApi } from "./apis/employeesApi";
 
 export const store = configureStore({
   reducer: {
@@ -31,7 +31,8 @@ export const store = configureStore({
     employeesSlice,
     prospectsSlice,
     productsSlice,
-    officesSlice
+    officesSlice,
+    plansSlice,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat([

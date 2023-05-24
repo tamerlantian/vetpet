@@ -37,7 +37,7 @@ export { default as EditOfficeForm } from "./officeComponents/EditOfficeForm";
 export { default as DeleteProspect } from "../pages/prospects/DeleteProspect";
 
 // plan components
-export { default as AddPlan } from "./planComponents/AddPlan";
+export { default as AddPlan } from "../pages/plans/AddPlan";
 export { default as AddPlanForm } from "./planComponents/AddPlanForm";
 export { default as DeletePlan } from "./planComponents/DeletePlan";
 export { default as EditPlan } from "./planComponents/EditPlan";
