@@ -191,7 +191,7 @@ export const officesConfig = [
     tag: "Actions",
     render: (data) => (
       <div className="flex justify-around">
-        <DeleteOffice id={data.id} />
+        <DeleteOffice id={data._id} />
         <EditOffice data={data} />
       </div>
     ),

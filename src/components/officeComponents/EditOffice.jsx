@@ -1,9 +1,12 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { AiOutlineEdit } from "react-icons/ai";
-import { ModalForm, EditOfficeForm } from "..";
+import { ModalForm,  AddOfficeForm } from "..";
+import { useEditOfficeMutation } from "../../store";
 
-const EditOffice = (data) => {
+const EditOffice = ({ data }) => {
+  const [editOffice, { isLoading }] = useEditOfficeMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       <button onClick={onOpen}>
@@ -15,7 +18,12 @@ const EditOffice = (data) => {
         onOpen={onOpen}
         onClose={onClose}
       >
-        <EditOfficeForm officeData={data} onClose={onClose} />
+        <AddOfficeForm
+          action={editOffice}
+          loading={isLoading}
+          defaultValues={data}
+          onClose={onClose}
+        />
       </ModalForm>
     </>
   );
