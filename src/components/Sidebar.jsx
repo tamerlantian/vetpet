@@ -1,30 +1,22 @@
 import { NavLink } from "react-router-dom";
 import { MdOutlineCancel } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-import { BiHomeSmile } from "react-icons/bi";
+import { BiHomeSmile, BiUser } from "react-icons/bi";
+import { HiOutlineUserPlus } from "react-icons/hi2";
 import { BsPeople } from "react-icons/bs";
 import { AiOutlineIdcard } from "react-icons/ai";
-import { HiOutlineUserPlus } from "react-icons/hi2";
-import { FiMapPin } from "react-icons/fi";
 import { IoPricetagOutline } from "react-icons/io5";
+import { FiMapPin } from "react-icons/fi";
 import { useStateContext } from "../contexts/ContextProvider";
 import { IoCartOutline } from "react-icons/io5";
 import { Logo } from "./";
-import { useScreenSize } from "../hooks/useScreenSize";
 import { useDeviceTracker } from "../hooks/useDeviceTracker";
-import useLogout from "../hooks/useLogout";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const logout = useLogout();
   const { activeMenu, setActiveMenu } = useStateContext();
   const isMobile = useDeviceTracker(900);
-
-  const handleLogout = async () => {
-    await logout();
-    navigate("/login");
-  };
 
   // this function automatically close the sidebar when the user clicks one of the links inside it
   const handleCloseSideBar = () => {
@@ -34,7 +26,7 @@ const Sidebar = () => {
   };
 
   const activeLink =
-    "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2";
+    "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2 bg-gray-400";
 
   const normalLink =
     "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2";
@@ -67,7 +59,9 @@ const Sidebar = () => {
               <NavLink
                 to="dashboard"
                 onClick={handleCloseSideBar}
-                className={false ? activeLink : normalLink}
+                className={({ isActive }) =>
+                  isActive ? activeLink : normalLink
+                }
               >
                 <BiHomeSmile />
                 <span className="capitalize">dashboard</span>
@@ -78,7 +72,9 @@ const Sidebar = () => {
               <NavLink
                 to="clients"
                 onClick={handleCloseSideBar}
-                className={false ? activeLink : normalLink}
+                className={({ isActive }) =>
+                  isActive ? activeLink : normalLink
+                }
               >
                 <BsPeople />
                 <span className="capitalize">customers</span>
@@ -86,7 +82,9 @@ const Sidebar = () => {
               <NavLink
                 to="employees"
                 onClick={handleCloseSideBar}
-                className={false ? activeLink : normalLink}
+                className={({ isActive }) =>
+                  isActive ? activeLink : normalLink
+                }
               >
                 <AiOutlineIdcard />
                 <span className="capitalize">employees</span>
@@ -94,7 +92,9 @@ const Sidebar = () => {
               <NavLink
                 to="prospects"
                 onClick={handleCloseSideBar}
-                className={false ? activeLink : normalLink}
+                className={({ isActive }) =>
+                  isActive ? activeLink : normalLink
+                }
               >
                 <HiOutlineUserPlus />
                 <span className="capitalize">prospects</span>
@@ -105,7 +105,9 @@ const Sidebar = () => {
               <NavLink
                 to="products"
                 onClick={handleCloseSideBar}
-                className={false ? activeLink : normalLink}
+                className={({ isActive }) =>
+                  isActive ? activeLink : normalLink
+                }
               >
                 <IoCartOutline />
                 <span className="capitalize">products</span>
@@ -113,7 +115,9 @@ const Sidebar = () => {
               <NavLink
                 to="offices"
                 onClick={handleCloseSideBar}
-                className={false ? activeLink : normalLink}
+                className={({ isActive }) =>
+                  isActive ? activeLink : normalLink
+                }
               >
                 <FiMapPin />
                 <span className="capitalize">offices</span>
@@ -121,15 +125,28 @@ const Sidebar = () => {
               <NavLink
                 to="plans"
                 onClick={handleCloseSideBar}
-                className={false ? activeLink : normalLink}
+                className={({ isActive }) =>
+                  isActive ? activeLink : normalLink
+                }
               >
                 <IoPricetagOutline />
                 <span className="capitalize">plans</span>
               </NavLink>
             </div>
-          </div>
-          <div>
-            <button onClick={handleLogout}>Logout</button>
+
+            <div>
+              <p className="text-gray-400 m-3 mt-4 uppercase">Settings</p>
+              <NavLink
+                to="profile"
+                onClick={handleCloseSideBar}
+                className={({ isActive }) =>
+                  isActive ? activeLink : normalLink
+                }
+              >
+                <BiUser />
+                <span className="capitalize">profile  </span>
+              </NavLink>  
+            </div>
           </div>
         </>
       )}

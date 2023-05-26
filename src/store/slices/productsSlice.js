@@ -9,7 +9,7 @@ const initialState = {
 };
 
 const productsSlice = createSlice({
-  name: "customers",
+  name: "products",
   initialState,
   reducers: {
     addPage: (state, { payload }) => {
@@ -28,4 +28,4 @@ const productsSlice = createSlice({
 
 export default productsSlice.reducer;
 export const { addPage, subPage, setPage } = productsSlice.actions;
-export const selectCurrentPage = (state) => state.customersSlice.page;
+export const selectCurrentPage = (state) => state.productsSlice.currentPage; 
