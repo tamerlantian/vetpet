@@ -15,14 +15,15 @@ import Plans from "./pages/plans";
 import Products from "./pages/products";
 import Prospects from "./pages/prospects";
 import Login from "./pages/login";
-import Profile from "./pages/profile"
+import Profile from "./pages/profile";
+import Signup from "./pages/signup";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       {/* PRIVATE ROUTES */}
       <Route element={<PersistLogin />}>
-        <Route element={<RequiredAuth allowedRoles={["admin"]} />}>
+        <Route element={<RequiredAuth allowedRoles={["admin", "user"]} />}>
           <Route path="/dashboard" element={<Layout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="clients" element={<Customers />} />
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
       {/* PUBLIC ROUTES */}
       <Route path="/" element={<HomeLayout />}></Route>
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/unauthorized" element={<div>403 UNAUTHORIZED</div>} />
     </>
   )

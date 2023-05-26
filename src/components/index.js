@@ -25,7 +25,6 @@ export { default as DeleteProspect } from "../pages/prospects/DeleteProspect";
 // plan components
 export { default as DeletePlan } from "../pages/plans/DeletePlan";
 
-
 // home components
 export { default as HomeNavbar } from "./home/HomeNavbar";
 export { default as Drawer } from "./home/Drawer";
@@ -34,3 +33,7 @@ export { default as Links } from "./home/Links";
 
 export { default as RequiredAuth } from "./RequiredAuth";
 export { default as PersistLogin } from "./PersistLogin";
+
+// form
+export { default as InputPassword } from "./form/InputPassword";
+export { default as InputEmail } from "./form/InputEmail";
