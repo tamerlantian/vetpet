@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import { RiNotification3Line } from "react-icons/ri";
-import { MdKeyboardArrowDown } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-import { Notification, UserProfile } from ".";
-import { useStateContext } from "../contexts/ContextProvider";
-import { useDeviceTracker } from "../hooks/useDeviceTracker";
+import { useStateContext } from "../../contexts/ContextProvider";
+import { useDeviceTracker } from "../../hooks/useDeviceTracker";
+import { useDisclosure } from "@chakra-ui/react";
+import ProfileMenu from "./ProfileMenu";
+import DrawerOptions from "./DrawerOptions";
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   <TooltipComponent content={title} position="BottomCenter">
@@ -24,7 +24,8 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   </TooltipComponent>
 );
 
-const Navbar = () => {
+const Topbar = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const isMobile = useDeviceTracker(900);
   const { activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick } =
     useStateContext();
@@ -50,34 +51,11 @@ const Navbar = () => {
       />
 
       <div className="flex">
-        <NavButton
-          title="Notifications"
-          dotColor="#03C9D7"
-          customFunc={() => handleClick("notification")}
-          color="blue"
-          icon={<RiNotification3Line />}
-        />
-
-        <TooltipComponent content="Profile" position="BottomCenter">
-          <div
-            className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
-            onClick={() => handleClick("userProfile")}
-          >
-            <p>
-              <span className="text-gray-400 text-14">Hi, </span>{" "}
-              <span className="text-gray-400 font-bold ml-1 text-14">
-                Sebastian
-              </span>
-            </p>
-            <MdKeyboardArrowDown className="text-gray-400 text-14" />
-          </div>
-        </TooltipComponent>
-
-        {isClicked.notification && <Notification />}
-        {isClicked.userProfile && <UserProfile />}
+        <ProfileMenu onOpen={onOpen} />
+        <DrawerOptions isOpen={isOpen} onClose={onClose} />
       </div>
     </div>
   );
 };
 
-export default Navbar;
+export default Topbar;

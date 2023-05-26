@@ -1,4 +1,5 @@
 import { apiSlice } from "../slices/apiSlice";
+import { updateUser } from "../slices/authSlice";
 
 const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -15,18 +16,21 @@ const authApi = apiSlice.injectEndpoints({
         return { token: response.token, user: response.data.user };
       },
     }),
-    getMe: builder.query({
-      query: () => ({
-        url: "/user/getMe",
-        method: "GET",
+    updateMe: builder.mutation({
+      query: (data) => ({
+        url: "/user/updateMe",
+        method: "PATCH",
+        body: data,
       }),
-      transformResponse: (response) => {
-        return { token: response.token, user: response.data.user };
+      async onQueryStarted(data, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(updateUser(data));
+        } catch (error) {}
       },
     }),
   }),
 });
 
-export const { useLoginMutation, useGetMeQuery, useRefreshTokenMutation } =
-  authApi;
+export const { useLoginMutation, useUpdateMeMutation } = authApi;
 export { authApi };

@@ -15,6 +15,7 @@ import Plans from "./pages/plans";
 import Products from "./pages/products";
 import Prospects from "./pages/prospects";
 import Login from "./pages/login";
+import Profile from "./pages/profile"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
             <Route path="offices" element={<Offices />} />
             <Route path="employees" element={<Employees />} />
             <Route path="products" element={<Products />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
         </Route>
       </Route>
