@@ -37,3 +37,4 @@ export { default as PersistLogin } from "./PersistLogin";
 // form
 export { default as InputPassword } from "./form/InputPassword";
 export { default as InputEmail } from "./form/InputEmail";
+export { default as Select } from "./form/Select";

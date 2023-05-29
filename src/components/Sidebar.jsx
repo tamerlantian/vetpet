@@ -1,20 +1,15 @@
-import { NavLink } from "react-router-dom";
+import { useStateContext } from "../contexts/ContextProvider";
+import { useDeviceTracker } from "../hooks/useDeviceTracker";
+import NavListAdmin from "./navList/NavListAdmin";
+import NavListUser from "./navList/navListUser";
+import { Logo } from "./";
 import { MdOutlineCancel } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-import { BiHomeSmile, BiUser } from "react-icons/bi";
-import { HiOutlineUserPlus } from "react-icons/hi2";
-import { BsPeople } from "react-icons/bs";
-import { AiOutlineIdcard } from "react-icons/ai";
-import { IoPricetagOutline } from "react-icons/io5";
-import { FiMapPin } from "react-icons/fi";
-import { useStateContext } from "../contexts/ContextProvider";
-import { IoCartOutline } from "react-icons/io5";
-import { Logo } from "./";
-import { useDeviceTracker } from "../hooks/useDeviceTracker";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../store/slices/authSlice";
 
 const Sidebar = () => {
-  const navigate = useNavigate();
+  const { role } = useSelector(selectCurrentUser);
   const { activeMenu, setActiveMenu } = useStateContext();
   const isMobile = useDeviceTracker(900);
 
@@ -24,12 +19,6 @@ const Sidebar = () => {
       setActiveMenu(false);
     }
   };
-
-  const activeLink =
-    "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2 bg-gray-400";
-
-  const normalLink =
-    "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2";
 
   return (
     <div className="ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10">
@@ -53,101 +42,11 @@ const Sidebar = () => {
               </button>
             </TooltipComponent>
           </div>
-          <div className="mt-10">
-            <div>
-              <p className="text-gray-400 m-3 mt-4 uppercase">home</p>
-              <NavLink
-                to="dashboard"
-                onClick={handleCloseSideBar}
-                className={({ isActive }) =>
-                  isActive ? activeLink : normalLink
-                }
-              >
-                <BiHomeSmile />
-                <span className="capitalize">dashboard</span>
-              </NavLink>
-            </div>
-            <div>
-              <p className="text-gray-400 m-3 mt-4 uppercase">users</p>
-              <NavLink
-                to="clients"
-                onClick={handleCloseSideBar}
-                className={({ isActive }) =>
-                  isActive ? activeLink : normalLink
-                }
-              >
-                <BsPeople />
-                <span className="capitalize">customers</span>
-              </NavLink>
-              <NavLink
-                to="employees"
-                onClick={handleCloseSideBar}
-                className={({ isActive }) =>
-                  isActive ? activeLink : normalLink
-                }
-              >
-                <AiOutlineIdcard />
-                <span className="capitalize">employees</span>
-              </NavLink>
-              <NavLink
-                to="prospects"
-                onClick={handleCloseSideBar}
-                className={({ isActive }) =>
-                  isActive ? activeLink : normalLink
-                }
-              >
-                <HiOutlineUserPlus />
-                <span className="capitalize">prospects</span>
-              </NavLink>
-            </div>
-            <div>
-              <p className="text-gray-400 m-3 mt-4 uppercase">Business</p>
-              <NavLink
-                to="products"
-                onClick={handleCloseSideBar}
-                className={({ isActive }) =>
-                  isActive ? activeLink : normalLink
-                }
-              >
-                <IoCartOutline />
-                <span className="capitalize">products</span>
-              </NavLink>
-              <NavLink
-                to="offices"
-                onClick={handleCloseSideBar}
-                className={({ isActive }) =>
-                  isActive ? activeLink : normalLink
-                }
-              >
-                <FiMapPin />
-                <span className="capitalize">offices</span>
-              </NavLink>
-              <NavLink
-                to="plans"
-                onClick={handleCloseSideBar}
-                className={({ isActive }) =>
-                  isActive ? activeLink : normalLink
-                }
-              >
-                <IoPricetagOutline />
-                <span className="capitalize">plans</span>
-              </NavLink>
-            </div>
-
-            <div>
-              <p className="text-gray-400 m-3 mt-4 uppercase">Settings</p>
-              <NavLink
-                to="profile"
-                onClick={handleCloseSideBar}
-                className={({ isActive }) =>
-                  isActive ? activeLink : normalLink
-                }
-              >
-                <BiUser />
-                <span className="capitalize">profile  </span>
-              </NavLink>  
-            </div>
-          </div>
+          {role === "admin" ? (
+            <NavListAdmin handleCloseSideBar={handleCloseSideBar} />
+          ) : (
+            <NavListUser handleCloseSideBar={handleCloseSideBar} />
+          )}
         </>
       )}
     </div>

@@ -19,7 +19,7 @@ const SignupForm = ({ signup, results }) => {
   } = useForm({});
 
   useEffect(() => {
-    setFocus("idCard");
+    setFocus("cardId");
   }, []);
 
   const onSubmit = async (data) => {
