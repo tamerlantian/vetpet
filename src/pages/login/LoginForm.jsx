@@ -15,6 +15,7 @@ const LoginForm = ({ loginUser, results }) => {
     handleSubmit,
     reset,
     watch,
+    setFocus,
     formState: { errors },
   } = useForm();
 
@@ -35,6 +36,10 @@ const LoginForm = ({ loginUser, results }) => {
     setErrMsg(null);
   }, [email, password]);
 
+  useEffect(() => {
+    setFocus("email");
+  }, []);
+
   const onSubmit = async (data, e) => {
     try {
       e.preventDefault();
@@ -44,7 +49,13 @@ const LoginForm = ({ loginUser, results }) => {
       }).unwrap();
       dispatch(setCredentials(userData));
       reset();
-      navigate("/dashboard");
+      const { role } = userData.user;
+      if (role === "admin") {
+        navigate("/admin");
+      }
+      if (role === "user") {
+        navigate("/user");
+      }
     } catch (error) {
       if (error.status === 401) {
         setErrMsg("Incorrect email or password");

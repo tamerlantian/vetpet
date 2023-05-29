@@ -7,8 +7,10 @@ import DeleteEmployee from "../pages/employees/DeleteEmployee";
 import DeleteOffice from "../pages/offices/DeleteOffice";
 import EditOffice from "../pages/offices/EditOffice";
 import EditPlan from "../pages/plans/EditPlan";
+import DeletePet from "../pages/affiliations/DeletePet";
 import { Avatar } from "@chakra-ui/react";
 import textHider from "../utils/textHider";
+import moment from "moment";
 
 export const links = [
   {
@@ -150,6 +152,45 @@ export const productsConfig = [
       <div className="flex justify-around">
         <DeleteProduct id={data._id} />
         <EditProduct data={data} />
+      </div>
+    ),
+  },
+];
+
+export const petsConfig = [
+  {
+    render: ({ id }) => <div className="hidden">{id}</div>,
+  },
+  {
+    tag: "Name",
+    render: ({ name }) => {
+      return (
+        <div className="flex items-center gap-4">
+          <div>
+            <Avatar name={name} size="md" src="" />
+          </div>
+          <span>{name}</span>
+        </div>
+      );
+    },
+  },
+  {
+    tag: "specie",
+    render: ({ specie }) => specie,
+  },
+  {
+    tag: "created",
+    render: ({ createdAt }) => moment(createdAt.toString()).format("YYYY/MM/DD"),
+  },
+  {
+    tag: "state",
+    render: ({ state }) => state,
+  },
+  {
+    tag: "Options",
+    render: (data) => (
+      <div className="flex justify-around">
+        <DeletePet id={data._id} title="Delete pet" />
       </div>
     ),
   },

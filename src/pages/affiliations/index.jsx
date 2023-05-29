@@ -1,19 +1,20 @@
-import { Table, AddUser, Header, Pagination } from "../../components";
-import { useFetchEmployeesQuery } from "../../store";
-import { Spinner, Container } from "@chakra-ui/react";
-import { employeesConfig } from "../../data/dumpData";
+import React from "react";
+import { Header, Table, Pagination } from "../../components";
+import { Container, Spinner } from "@chakra-ui/react";
+import { useFetchMyPetsQuery } from "../../store";
+import { petsConfig } from "../../data/dumpData";
+import { addPage, subPage } from "../../store/slices/petsSlice";
+import AddPet from "./addPet";
 import { useSelector } from "react-redux";
-import { addPage, subPage } from "../../store/slices/employeesSlice";
 
-const Employees = () => {
-  const { currentPage, limit } = useSelector((state) => state.employeesSlice);
-  const { data, isLoading, isFetching, error } = useFetchEmployeesQuery(
+const Affiliations = () => {
+  const { currentPage, limit } = useSelector((state) => state.petsSlice);
+  const { data, isLoading, isFetching, error } = useFetchMyPetsQuery(
     currentPage,
     limit
   );
 
   let content;
-
   if (isLoading) {
     content = (
       <div className="flex justify-center">
@@ -25,7 +26,7 @@ const Employees = () => {
   } else {
     content = (
       <>
-        <Table data={data.employees} config={employeesConfig} />
+        <Table data={data.pets} config={petsConfig} />
         <Pagination
           isLoading={isFetching}
           totalPages={data.totalPages}
@@ -39,10 +40,10 @@ const Employees = () => {
 
   return (
     <Container maxW="90rem" className="mt-4">
-      <Header category="Users" title="Employees" />
+      <Header category="Menu" title="Affiliation" />
       <div className="bg-white mt-5 p-5 rounded-3xl">
         <div className="mb-10 relative left-5">
-          <AddUser actionTitle="Add employee" />
+          <AddPet buttonName="Add pet" />
         </div>
         {content}
       </div>
@@ -50,4 +51,4 @@ const Employees = () => {
   );
 };
 
-export default Employees;
+export default Affiliations;

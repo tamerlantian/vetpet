@@ -2,10 +2,10 @@ import { apiSlice } from "../slices/apiSlice";
 import { setPage } from "../slices/officesSlice";
 
 const officesApi = apiSlice.injectEndpoints({
-  providesTags: "Offices",
+  tagTypes: "Offices",
   endpoints: (builder) => ({
     fetchOffices: builder.query({
-      providesTags: ["Office"],
+      providesTags: ["Offices"],
       query: (page = 1, limit = 5) => `/office?page=${page}&limit=${limit}`,
       transformResponse: (result) => ({
         offices: result.data.offices,
@@ -27,7 +27,7 @@ const officesApi = apiSlice.injectEndpoints({
       },
     }),
     editOffice: builder.mutation({
-      invalidatesTags: ["Office"],
+      invalidatesTags: ["Offices"],
       query: ({ data, id }) => {
         return {
           url: `/office/${id}`,
@@ -37,7 +37,7 @@ const officesApi = apiSlice.injectEndpoints({
       },
     }),
     deleteOffice: builder.mutation({
-      invalidatesTags: ["Office"],
+      invalidatesTags: ["Offices"],
       query: (id) => {
         return {
           url: `/office/${id}`,
@@ -46,7 +46,7 @@ const officesApi = apiSlice.injectEndpoints({
       },
     }),
     addOffice: builder.mutation({
-      invalidatesTags: ["Office"],
+      invalidatesTags: ["Offices"],
       query: (office) => ({
         url: "/office",
         method: "POST",
