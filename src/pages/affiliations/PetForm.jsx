@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button, Input, FormControl, FormLabel } from "@chakra-ui/react";
+import { Button, Input, FormControl, FormLabel, Select as CSelect } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage, Select } from "../../components";
 import useToastMsg from "../../hooks/useToastMsg";
@@ -56,12 +56,13 @@ const PetForm = ({ onClose, action, loading, defaultValues = {} }) => {
 
       <FormControl className="mt-5" isInvalid={errors?.specie}>
         <FormLabel>Specie</FormLabel>
-        <Input
-          type="text"
-          size="lg"
-          placeholder="Dog"
+        <CSelect
+          placeholder="Select specie..."
           {...register("specie", { required: "Specie is required" })}
-        />
+        >
+          <option value="dog">Dog</option>
+          <option value="cat">Cat</option>
+        </CSelect>
         <ErrorMessage
           error={errors?.specie}
           message={errors?.specie?.message}
@@ -76,14 +77,6 @@ const PetForm = ({ onClose, action, loading, defaultValues = {} }) => {
           name="plan"
           register={register}
         />
-        {/* <Select
-          placeholder="Select role"
-          {...register("plan", { required: "Plan is required" })}
-        >
-          <option value="admin">Admin</option>
-          <option value="staff">Staff</option>
-          <option value="user">User</option>
-        </Select> */}
         <ErrorMessage error={errors?.role} message={errors?.role?.message} />
       </FormControl>
 

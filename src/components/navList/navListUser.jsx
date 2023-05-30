@@ -30,11 +30,12 @@ const NavListUser = ({ handleCloseSideBar }) => {
       <div className="mt-10">
         {items.map(({ title, links }) => {
           return (
-            <div>
+            <div key={title}>
               <p className="text-gray-400 m-3 mt-4 uppercase">{title}</p>
               {links.map(({ name, icon }) => {
                 return (
                   <NavItem
+                    key={name}
                     to={name}
                     handleAction={handleCloseSideBar}
                     linkName={name}

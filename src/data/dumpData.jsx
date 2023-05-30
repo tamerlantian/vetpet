@@ -1,4 +1,4 @@
-import { EditUser, DeleteProspect } from "../components";
+import { EditUser, DeleteProspect, OptionButton } from "../components";
 import EditProduct from "../pages/products/EditProduct";
 import DeleteProduct from "../pages/products/DeleteProduct";
 import DeletePlan from "../pages/plans/DeletePlan";
@@ -11,6 +11,7 @@ import DeletePet from "../pages/affiliations/DeletePet";
 import { Avatar } from "@chakra-ui/react";
 import textHider from "../utils/textHider";
 import moment from "moment";
+import ViewPet from "../pages/affiliations/ViewPet";
 
 export const links = [
   {
@@ -180,7 +181,8 @@ export const petsConfig = [
   },
   {
     tag: "created",
-    render: ({ createdAt }) => moment(createdAt.toString()).format("YYYY/MM/DD"),
+    render: ({ createdAt }) =>
+      moment(createdAt.toString()).format("YYYY/MM/DD"),
   },
   {
     tag: "state",
@@ -189,9 +191,12 @@ export const petsConfig = [
   {
     tag: "Options",
     render: (data) => (
-      <div className="flex justify-around">
-        <DeletePet id={data._id} title="Delete pet" />
-      </div>
+      <>
+        <OptionButton>
+          <DeletePet id={data._id} title="Delete pet" />
+          {data.state !== "pending" && <ViewPet data={data} />}
+        </OptionButton>
+      </>
     ),
   },
 ];

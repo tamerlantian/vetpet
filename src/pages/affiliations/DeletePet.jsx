@@ -1,5 +1,4 @@
-import { useDisclosure } from "@chakra-ui/react";
-import { AiOutlineDelete } from "react-icons/ai";
+import { Box, useDisclosure } from "@chakra-ui/react";
 import { AlertDialog } from "../../components";
 import { useDeletePetMutation } from "../../store";
 import { useSelector } from "react-redux";
@@ -14,8 +13,8 @@ const DeletePet = ({ id }) => {
 
   return (
     <>
-      <button onClick={onOpen}>
-        <AiOutlineDelete />
+      <button className="w-full flex justify-start" onClick={onOpen}>
+        Delete
       </button>
       <AlertDialog
         id={id}
