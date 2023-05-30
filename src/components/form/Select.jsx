@@ -20,8 +20,8 @@ const Select = ({
       {isLoading ? (
         <Spinner />
       ) : (
-        data?.plans?.map(({ name, _id }) => {
-          return <option value={_id}>{name}</option>;
+        data?.plans?.map(({ name, _id, price }) => {
+          return <option value={_id}>{name} - ${price}</option>;
         })
       )}
     </_Select>

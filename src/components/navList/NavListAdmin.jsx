@@ -16,7 +16,7 @@ const NavListAdmin = ({
       title: "home",
       links: [
         {
-          name: "main",
+          name: "dashboard",
           icon: <BiHomeSmile />,
         },
       ],
