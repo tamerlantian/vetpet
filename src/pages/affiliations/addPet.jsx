@@ -18,7 +18,7 @@ const AddPet = ({ buttonName }) => {
         onOpen={onOpen}
         onClose={onClose}
       >
-        <PetForm onClose={onClose} action={addPet} isLoading={isLoading} />
+        <PetForm onClose={onClose} action={addPet} loading={isLoading} />
       </ModalForm>
     </>
   );

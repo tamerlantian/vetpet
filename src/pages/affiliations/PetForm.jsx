@@ -1,10 +1,17 @@
 import React, { useEffect } from "react";
-import { Button, Input, FormControl, FormLabel, Select as CSelect } from "@chakra-ui/react";
+import {
+  Button,
+  Input,
+  FormControl,
+  FormLabel,
+  Select,
+} from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { ErrorMessage, Select } from "../../components";
+import { ErrorMessage } from "../../components";
+import DynamicPlanSelector from "../../components/form/DynamicPlanSelector";
+import DynamicCitySelector from "../../components/form/DynamicCitySelector";
 import useToastMsg from "../../hooks/useToastMsg";
 import getDirtyFieldsData from "../../utils/getDirtyFieldsData";
-import { useFetchPlansQuery } from "../../store";
 
 const PetForm = ({ onClose, action, loading, defaultValues = {} }) => {
   const toastMsg = useToastMsg();
@@ -54,15 +61,38 @@ const PetForm = ({ onClose, action, loading, defaultValues = {} }) => {
         <ErrorMessage error={errors?.name} message={errors?.name?.message} />
       </FormControl>
 
+      <FormControl className="mt-5" isInvalid={errors?.address}>
+        <FormLabel>Address</FormLabel>
+        <Input
+          type="text"
+          size="lg"
+          placeholder="cra. 5 # 12b -25"
+          {...register("address", { required: "Address is required" })}
+        />
+        <ErrorMessage
+          error={errors?.address}
+          message={errors?.address?.message}
+        />
+      </FormControl>
+
+      <FormControl className="mt-5" isInvalid={errors?.city}>
+        <FormLabel>City</FormLabel>
+        <DynamicCitySelector
+          placeholder="select city..."
+          name="city"
+          register={register}
+        />
+      </FormControl>
+
       <FormControl className="mt-5" isInvalid={errors?.specie}>
         <FormLabel>Specie</FormLabel>
-        <CSelect
+        <Select
           placeholder="Select specie..."
           {...register("specie", { required: "Specie is required" })}
         >
           <option value="dog">Dog</option>
           <option value="cat">Cat</option>
-        </CSelect>
+        </Select>
         <ErrorMessage
           error={errors?.specie}
           message={errors?.specie?.message}
@@ -71,9 +101,8 @@ const PetForm = ({ onClose, action, loading, defaultValues = {} }) => {
 
       <FormControl className="mt-5" isInvalid={errors?.plan}>
         <FormLabel>Plan</FormLabel>
-        <Select
-          useQuery={useFetchPlansQuery}
-          placeholder="Select plan..."
+        <DynamicPlanSelector
+          placeholder="select plan..."
           name="plan"
           register={register}
         />

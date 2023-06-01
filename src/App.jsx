@@ -18,6 +18,7 @@ import Login from "./pages/login";
 import Profile from "./pages/profile";
 import Signup from "./pages/signup";
 import Affiliations from "./pages/affiliations";
+import Requests from "./pages/requests/index";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,15 @@ const router = createBrowserRouter(
             <Route path="profile" element={<Profile />} />
           </Route>
         </Route>
+
+        <Route element={<RequiredAuth allowedRoles={["staff"]} />}>
+          <Route path="/staff" element={<Layout />}>
+            <Route path="profile" element={<Profile />} />
+            <Route path="prospects" element={<Prospects />} />
+            <Route path="requests" element={<Requests />} />
+          </Route>
+        </Route>
+
         <Route element={<RequiredAuth allowedRoles={["admin"]} />}>
           <Route path="/admin" element={<Layout />}>
             <Route path="dashboard" element={<Dashboard />} />
