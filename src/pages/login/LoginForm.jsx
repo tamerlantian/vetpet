@@ -40,6 +40,10 @@ const LoginForm = ({ loginUser, results }) => {
     setFocus("email");
   }, []);
 
+  const navigateToProperRoute = (role) => {
+    navigate(`/${role}`);
+  };
+
   const onSubmit = async (data, e) => {
     try {
       e.preventDefault();
@@ -50,12 +54,7 @@ const LoginForm = ({ loginUser, results }) => {
       dispatch(setCredentials(userData));
       reset();
       const { role } = userData.user;
-      if (role === "admin") {
-        navigate("/admin");
-      }
-      if (role === "user") {
-        navigate("/user");
-      }
+      navigateToProperRoute(role);
     } catch (error) {
       if (error.status === 401) {
         setErrMsg("Incorrect email or password");

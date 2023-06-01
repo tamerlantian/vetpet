@@ -2,6 +2,7 @@ import { useStateContext } from "../contexts/ContextProvider";
 import { useDeviceTracker } from "../hooks/useDeviceTracker";
 import NavListAdmin from "./navList/NavListAdmin";
 import NavListUser from "./navList/navListUser";
+import NavListStaff from "./navList/NavListStaff";
 import { Logo } from "./";
 import { MdOutlineCancel } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
@@ -44,6 +45,8 @@ const Sidebar = () => {
           </div>
           {role === "admin" ? (
             <NavListAdmin handleCloseSideBar={handleCloseSideBar} />
+          ) : role === "staff" ? (
+            <NavListStaff handleCloseSideBar={handleCloseSideBar} />
           ) : (
             <NavListUser handleCloseSideBar={handleCloseSideBar} />
           )}

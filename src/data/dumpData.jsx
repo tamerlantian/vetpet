@@ -12,6 +12,7 @@ import { Avatar } from "@chakra-ui/react";
 import textHider from "../utils/textHider";
 import moment from "moment";
 import ViewPet from "../pages/affiliations/ViewPet";
+import Evaluate from "../pages/requests/Evaluate";
 
 export const links = [
   {
@@ -194,7 +195,55 @@ export const petsConfig = [
       <>
         <OptionButton>
           <DeletePet id={data._id} title="Delete pet" />
-          {data.state !== "pending" && <ViewPet data={data} />}
+          {/^(accepted|rejected)$/.test(data.state) && <ViewPet data={data} />}
+        </OptionButton>
+      </>
+    ),
+  },
+];
+
+export const petsStaffConfig = [
+  {
+    render: ({ id }) => <div className="hidden">{id}</div>,
+  },
+  {
+    tag: "Pet name",
+    render: ({ name }) => {
+      return (
+        <div className="flex items-center gap-4">
+          <div>
+            <Avatar name={name} size="md" src="" />
+          </div>
+          <span>{name}</span>
+        </div>
+      );
+    },
+  },
+  {
+    tag: "address",
+    render: ({ address }) => address,
+  },
+  {
+    tag: "city",
+    render: ({ city }) => city?.city,
+  },
+  {
+    tag: "created",
+    render: ({ createdAt }) =>
+      moment(createdAt.toString()).format("YYYY/MM/DD"),
+  },
+  {
+    tag: "state",
+    render: ({ state }) => state,
+  },
+  {
+    tag: "Options",
+    render: (data) => (
+      <>
+        <OptionButton>
+          <DeletePet id={data._id} title="Delete pet" />
+          <Evaluate id={data._id} petState={data.state} />
+          <div>Decision</div>
         </OptionButton>
       </>
     ),
