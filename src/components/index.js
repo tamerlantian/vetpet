@@ -1,8 +1,5 @@
-export { default as Footer } from "./Footer";
 export { default as Header } from "./Header";
-export { default as Notification } from "./Notification";
 export { default as Sidebar } from "./Sidebar";
-export { default as UserProfile } from "./UserProfile";
 export { default as Table } from "./Table";
 export { default as ModalForm } from "./ModalForm";
 export { default as AlertDialog } from "./AlertDialog";

@@ -1,13 +1,13 @@
 import React from "react";
 import { HomeNavbar } from "../../components";
 import { Container } from "@chakra-ui/react";
-import Hero from "./Hero";
+import { Outlet } from "react-router-dom";
 
 const HomeLayout = () => {
   return (
     <Container maxW="" padding="0">
       <HomeNavbar />
-      <Hero />
+      <Outlet />
     </Container>
   );
 };

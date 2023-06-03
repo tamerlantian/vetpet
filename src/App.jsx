@@ -19,11 +19,13 @@ import Profile from "./pages/profile";
 import Signup from "./pages/signup";
 import Affiliations from "./pages/affiliations";
 import Requests from "./pages/requests/index";
+import Landing from "./pages/landing";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       {/* PRIVATE ROUTES */}
+      {/* Role user */}
       <Route element={<PersistLogin />}>
         <Route element={<RequiredAuth allowedRoles={["user"]} />}>
           <Route path="/user" element={<Layout />}>
@@ -32,6 +34,7 @@ const router = createBrowserRouter(
           </Route>
         </Route>
 
+        {/* Role staff */}
         <Route element={<RequiredAuth allowedRoles={["staff"]} />}>
           <Route path="/staff" element={<Layout />}>
             <Route path="profile" element={<Profile />} />
@@ -40,6 +43,7 @@ const router = createBrowserRouter(
           </Route>
         </Route>
 
+        {/* Role admin */}
         <Route element={<RequiredAuth allowedRoles={["admin"]} />}>
           <Route path="/admin" element={<Layout />}>
             <Route path="dashboard" element={<Dashboard />} />
@@ -55,7 +59,10 @@ const router = createBrowserRouter(
       </Route>
 
       {/* PUBLIC ROUTES */}
-      <Route path="/" element={<HomeLayout />}></Route>
+      <Route path="/" element={<HomeLayout />}>
+        <Route path="/" element={<Landing />} />
+        <Route path="landing" element={<Landing />} />
+      </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/unauthorized" element={<div>403 UNAUTHORIZED</div>} />
