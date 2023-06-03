@@ -21,9 +21,11 @@ const ProductsSection = () => {
       </div>
     );
   } else {
-    content = data.products.map(({ image, name, description, price }) => {
+    content = data.products.map(({ image, name, description, price, kind }) => {
       return (
         <ProductCard
+          key={name}
+          kind={kind}
           imageLink={image}
           productName={name}
           description={description}
@@ -32,24 +34,11 @@ const ProductsSection = () => {
       );
     });
   }
-  console.log(data);
   return (
     <Box mt={20}>
       <SectionTitle title={"Products"} />
       <SimpleGrid mt={10} columns={[1, 2, 3]} gap={4}>
         {content}
-        {/* 
-        <ProductCard
-          imageLink={"https://m.media-amazon.com/images/I/61IUJIyK2yL.jpg"}
-        />
-        <ProductCard
-          imageLink={
-            "https://images-ap-prod.cms.commerce.dynamics.com/cms/api/qwvspcbgds/imageFileData/search?fileName=/Products%2F1001597_000_001.png&m=6&q=80"
-          }
-        />
-        <ProductCard
-          imageLink={"https://m.media-amazon.com/images/I/61kFnC+Uo9L.jpg"}
-        /> */}
       </SimpleGrid>
       <Stack align={"flex-end"} mt={4}>
         <PrimaryButton name={"view all"} />

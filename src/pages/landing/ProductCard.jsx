@@ -8,6 +8,7 @@ import {
   Text,
   Badge,
 } from "@chakra-ui/react";
+import textHider from "../../utils/textHider";
 
 const ProductCard = ({ imageLink, productName, price, description, kind }) => {
   return (
@@ -25,7 +26,7 @@ const ProductCard = ({ imageLink, productName, price, description, kind }) => {
           <Heading size={"md"}>{productName}</Heading>
         </Stack>
         <Text color={"gray.600"} mt={2}>
-          {description}
+          {textHider(description, 150)}
         </Text>
         <Text
           mt={4}

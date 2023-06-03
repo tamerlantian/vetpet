@@ -28,11 +28,11 @@ const ContactForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      await addProspect(data);
+      await addProspect(data).unwrap();
       reset();
       toastMsg("Message sent", "success");
     } catch (error) {
-      toastMsg("An error has occured", "fail");
+      toastMsg("An error has occured", "error");
     }
   };
 
@@ -58,10 +58,7 @@ const ContactForm = () => {
             placeholder="Antoine"
             {...register("name", { required: "This field is required" })}
           />
-          <ErrorMessage
-            error={errors?.name}
-            message={errors?.name?.message}
-          />
+          <ErrorMessage error={errors?.name} message={errors?.name?.message} />
         </FormControl>
 
         <FormControl isInvalid={errors?.lastname}>
@@ -85,10 +82,7 @@ const ContactForm = () => {
           placeholder="example@gmail.com"
           {...register("email", { required: "This field is required" })}
         />
-        <ErrorMessage
-          error={errors?.email}
-          message={errors?.email?.message}
-        />
+        <ErrorMessage error={errors?.email} message={errors?.email?.message} />
       </FormControl>
 
       <FormControl isInvalid={errors?.phone}>
@@ -98,10 +92,7 @@ const ContactForm = () => {
           placeholder="6054856059"
           {...register("phone", { required: "This field is required" })}
         />
-        <ErrorMessage
-          error={errors?.phone}
-          message={errors?.phone?.message}
-        />
+        <ErrorMessage error={errors?.phone} message={errors?.phone?.message} />
       </FormControl>
 
       <FormControl isInvalid={errors?.comment}>

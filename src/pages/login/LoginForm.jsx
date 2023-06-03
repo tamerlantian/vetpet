@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { setCredentials } from "../../store/slices/authSlice";
 import { ErrorMessage, InputEmail, InputPassword } from "../../components";
-import { Button, FormControl, FormLabel, Box } from "@chakra-ui/react";
+import { useLoginMutation } from "../../store";
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Box,
+  Text,
+  VStack,
+  HStack,
+} from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
+import { Logo } from "../../components";
 
-const LoginForm = ({ loginUser, results }) => {
+const LoginForm = () => {
+  const [loginUser, results] = useLoginMutation();
   const [errMsg, setErrMsg] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -64,21 +75,23 @@ const LoginForm = ({ loginUser, results }) => {
 
   return (
     <form
-      className="w-full p-8 shadow-xl rounded-lg"
+      className="w-full p-8 shadow-xl rounded-lg bg-white"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Box textAlign="center" marginBottom="3.5rem">
-        <Box as="h1" fontSize="1.8rem" fontWeight="bold" marginBottom=".6rem">
+      <VStack textAlign="center">
+        <Logo linkTo={"/"} classname={"text-xl self-start mb-5"} />
+        <Box as="h1" fontSize="1.8rem" fontWeight="bold">
           Sign in
         </Box>
-        <Box as="p" display="inline" color="gray.500">
-          Don't have an account yet?
-        </Box>
-        <Link to="/signup" className="underline text-blue-500">
-          {" "}
-          Sign up
-        </Link>
-      </Box>
+        <HStack>
+          <Text display="inline" color="gray.500">
+            Don't have an account yet?
+          </Text>
+          <Link to="/signup" className="underline text-blue-500">
+            Sign up
+          </Link>
+        </HStack>
+      </VStack>
 
       <FormControl className="mt-5" isInvalid={errors?.email}>
         <FormLabel>Email</FormLabel>
@@ -97,9 +110,19 @@ const LoginForm = ({ loginUser, results }) => {
           message={errors?.password?.message}
         />
       </FormControl>
-
       {errMsg && <div className="text-red-500 mt-2">{errMsg}</div>}
-      <div className="flex justify-center mt-10 ">
+      <HStack mt={5} justifyContent={"flex-end"}>
+        <Button
+          as={Link}
+          variant={"link"}
+          fontSize={"sm"}
+          color={"blue.500"}
+          to={"/reset-password"}
+        >
+          Forgot password?
+        </Button>
+      </HStack>
+      <div className="flex justify-center mt-6">
         <Button
           w="100%"
           size="lg"

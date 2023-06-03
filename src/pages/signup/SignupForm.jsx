@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { Input, FormControl, FormLabel, Button, Box } from "@chakra-ui/react";
+import {
+  Input,
+  FormControl,
+  FormLabel,
+  Button,
+  Box,
+  Text,
+  VStack,
+  HStack,
+  Flex,
+} from "@chakra-ui/react";
+import { useSignupMutation } from "../../store";
 import { useForm } from "react-hook-form";
 import { ErrorMessage, InputPassword, InputEmail } from "../../components";
 import { VscArrowRight } from "react-icons/vsc";
 import { Link, useNavigate } from "react-router-dom";
 import useToastMsg from "../../hooks/useToastMsg";
+import { Logo } from "../../components";
 
-const SignupForm = ({ signup, results }) => {
+const SignupForm = () => {
+  const [signup, results] = useSignupMutation();
   const [errMsg, setErrMsg] = useState({});
   const toastMsg = useToastMsg();
   const navigate = useNavigate();
@@ -37,21 +50,24 @@ const SignupForm = ({ signup, results }) => {
 
   return (
     <form
-      className="w-full shadow-xl p-8 rounded-lg"
+      className="w-full shadow-xl p-8 rounded-lg bg-white"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Box textAlign="center" marginBottom="3.5rem">
+      <VStack textAlign="center">
+        <Logo linkTo={"/"} classname={"text-xl self-start mb-5"} />
         <Box as="h1" fontSize="1.8rem" fontWeight="bold" marginBottom=".6rem">
           Create account
         </Box>
-        <Box as="p" display="inline" color="gray.500">
-          Already have an account?
-        </Box>
-        <Link to="/login" className="underline text-blue-500">
-          {" "}
-          Sign in
-        </Link>
-      </Box>
+        <HStack>
+          <Box as="p" display="inline" color="gray.500">
+            Already have an account?
+          </Box>
+          <Link to="/login" className="underline text-blue-500">
+            {" "}
+            Sign in
+          </Link>
+        </HStack>
+      </VStack>
 
       <FormControl className="mt-5" isInvalid={errors?.cardId || errMsg.cardId}>
         <FormLabel>Card ID</FormLabel>
@@ -67,7 +83,7 @@ const SignupForm = ({ signup, results }) => {
         <ErrorMessage error={errMsg?.cardId} message={errMsg.cardId} />
       </FormControl>
 
-      <div className="flex gap-4">
+      <Flex direction={{ base: "column", md: "row" }} gap={2}>
         <FormControl className="mt-5" isInvalid={errors?.name}>
           <FormLabel>Name</FormLabel>
           <Input
@@ -96,7 +112,7 @@ const SignupForm = ({ signup, results }) => {
             message={errors?.lastname?.message}
           />
         </FormControl>
-      </div>
+      </Flex>
 
       <FormControl className="mt-5" isInvalid={errors?.phone}>
         <FormLabel>Phone number</FormLabel>
