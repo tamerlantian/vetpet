@@ -2,6 +2,8 @@ import { Logo } from "../";
 import { HamburguerButton, Links } from "../../components";
 import { Link } from "react-router-dom";
 import { useDeviceTracker } from "../../hooks/useDeviceTracker";
+import { Box, Button, Flex, HStack } from "@chakra-ui/react";
+import PrimaryButton from "../../pages/landing/PrimaryButton";
 
 const HomeNavbar = () => {
   const isMobile = useDeviceTracker(900);
@@ -14,14 +16,27 @@ const HomeNavbar = () => {
           <span className="font-bold">Open: </span>7:00 - 17:00{" "}
         </p>
       </div>
-      <div className="flex items-center justify-between w-full">
-        {isMobile ? (
-          <HamburguerButton />
-        ) : (
-          <Links style="flex flex-row gap-4" />
-        )}
-        <Link to="login" className="btn">Login</Link>
-      </div>
+      <Box w={"full"}>
+        <Flex justifyContent={"space-between"}>
+          {isMobile ? (
+            <HamburguerButton />
+          ) : (
+            <Links style="flex flex-row gap-4" />
+          )}
+          <HStack spacing={4}>
+            <Button
+              as={Link}
+              variant={"link"}
+              fontSize={"sm"}
+              fontWeight={"400"}
+              to={"/login"}
+            >
+              Sign In
+            </Button>
+            <PrimaryButton name={"Sign Up"} to={"/signup"} fontSize={"sm"} />
+          </HStack>
+        </Flex>
+      </Box>
     </div>
   );
 };

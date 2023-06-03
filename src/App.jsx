@@ -20,6 +20,8 @@ import Signup from "./pages/signup";
 import Affiliations from "./pages/affiliations";
 import Requests from "./pages/requests/index";
 import Landing from "./pages/landing";
+import ForgotPassword from "./pages/forgotPassword";
+import ResetPassword from "./pages/resetPassword";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -63,6 +65,9 @@ const router = createBrowserRouter(
         <Route path="/" element={<Landing />} />
         <Route path="landing" element={<Landing />} />
       </Route>
+
+      <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
+      <Route path="/reset-password" element={<ForgotPassword />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/unauthorized" element={<div>403 UNAUTHORIZED</div>} />

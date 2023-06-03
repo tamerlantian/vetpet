@@ -6,6 +6,7 @@ export { default as AlertDialog } from "./AlertDialog";
 export { default as Logo } from "./Logo";
 export { default as Pagination } from "./Pagination";
 export { default as ErrorMessage } from "./form/ErrorMessage";
+export { default as AuthLayout } from "./AuthLayout";
 
 // client components
 export { default as EditUser } from "./clientComponents/EditUser";

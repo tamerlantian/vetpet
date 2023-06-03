@@ -9,7 +9,7 @@ import {
 import { AiOutlineLock } from "react-icons/ai";
 import { BiShow, BiHide } from "react-icons/bi";
 
-const InputPassword = ({ register }) => {
+const InputPassword = ({ register, name }) => {
   const [show, setShow] = useState(false);
 
   const handleClick = () => setShow(!show);
@@ -21,8 +21,8 @@ const InputPassword = ({ register }) => {
       </InputLeftElement>
       <Input
         pr="4.5rem"
-        type={show ? "text" : "password" }
-        {...register("password", { required: "Password is required" })}
+        type={show ? "text" : "password"}
+        {...register(name || "password", { required: "Password is required" })}
         size="lg"
         placeholder="*********"
       />
