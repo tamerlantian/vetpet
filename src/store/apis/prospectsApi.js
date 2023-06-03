@@ -26,6 +26,13 @@ const prospectsApi = apiSlice.injectEndpoints({
         } catch (error) {}
       },
     }),
+    addProspect: builder.mutation({
+      query: (data) => ({
+        url: "/prospect",
+        method: "POST",
+        body: data,
+      }),
+    }),
     deleteProspect: builder.mutation({
       invalidatesTags: ["Prospects"],
       query: (id) => ({
@@ -36,6 +43,9 @@ const prospectsApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useFetchProspectsQuery, useDeleteProspectMutation } =
-  prospectsApi;
+export const {
+  useFetchProspectsQuery,
+  useDeleteProspectMutation,
+  useAddProspectMutation,
+} = prospectsApi;
 export { prospectsApi };

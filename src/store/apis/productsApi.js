@@ -7,7 +7,7 @@ const productsApi = apiSlice.injectEndpoints({
     return {
       fetchProducts: builder.query({
         providesTags: ["Product"],
-        query: (page = 1, limit = 5) => `/product?page=${page}&limit=${limit}`,
+        query: ({ page, limit }) => `/product?page=${page}&limit=${limit}`,
         transformResponse: (result) => ({
           products: result.data.products,
           results: result.results,
