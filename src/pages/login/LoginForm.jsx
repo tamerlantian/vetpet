@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { setCredentials } from "../../store/slices/authSlice";
 import { ErrorMessage, InputEmail, InputPassword } from "../../components";
 import { useLoginMutation } from "../../store";
+import useToastMsg from "../../hooks/useToastMsg";
 import {
   Button,
   FormControl,
@@ -18,6 +19,7 @@ import { Logo } from "../../components";
 
 const LoginForm = () => {
   const [loginUser, results] = useLoginMutation();
+  const toastMsg = useToastMsg();
   const [errMsg, setErrMsg] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -62,6 +64,7 @@ const LoginForm = () => {
         email: data.email,
         password: data.password,
       }).unwrap();
+      toastMsg("Logged in successfully", "success");
       dispatch(setCredentials(userData));
       reset();
       const { role } = userData.user;
@@ -69,7 +72,10 @@ const LoginForm = () => {
     } catch (error) {
       if (error.status === 401) {
         setErrMsg("Incorrect email or password");
+        return;
       }
+
+      toastMsg("An error ocurred", "error");
     }
   };
 

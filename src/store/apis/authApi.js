@@ -51,15 +51,17 @@ const authApi = apiSlice.injectEndpoints({
       }),
     }),
     updateMe: builder.mutation({
-      query: (data) => ({
-        url: "/user/updateMe",
-        method: "PATCH",
-        body: data,
-      }),
-      async onQueryStarted(data, { dispatch, queryFulfilled }) {
+      query: (data) => {
+        return {
+          url: "/user/updateMe",
+          method: "PATCH",
+          body: data,
+        };
+      },
+      async onQueryStarted(undefined, { dispatch, queryFulfilled }) {
         try {
-          await queryFulfilled;
-          dispatch(updateUser(data));
+          const { data } = await queryFulfilled;
+          dispatch(updateUser(data.data.user));
         } catch (error) {}
       },
     }),

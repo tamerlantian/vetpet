@@ -2,24 +2,14 @@ import React from "react";
 import { Header } from "../../components";
 import { Container, GridItem } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import { BiTrashAlt } from "react-icons/bi";
-import settingImage from "../../../public/settings.svg";
 import EditMeForm from "./EditMeForm";
-import {
-  Button,
-  Avatar,
-  Flex,
-  Box,
-  AspectRatio,
-  Image,
-  SimpleGrid,
-  Show,
-  Hide,
-} from "@chakra-ui/react";
+import { Avatar, Box, SimpleGrid } from "@chakra-ui/react";
+import { SERVER } from "../../config/config";
+import UpdatePhoto from "./UpdatePhoto";
 
 const Profile = () => {
   const {
-    user: { lastname, name, cardId, phone, email },
+    user: { lastname, name, cardId, phone, email, photo },
   } = useSelector((state) => state.authSlice);
 
   let content = (
@@ -41,7 +31,7 @@ const Profile = () => {
             <Avatar
               size="2xl"
               name="Christian Nwamba"
-              src="https://bit.ly/code-beast"
+              src={`${SERVER}${photo}`}
             />
           </Box>
           <Box
@@ -52,17 +42,7 @@ const Profile = () => {
             w="16rem"
             maxW="60%"
           >
-            <Button colorScheme="gray" w="100%">
-              Change photo
-            </Button>
-            <Button
-              leftIcon={<BiTrashAlt />}
-              variant="outline"
-              colorScheme="red"
-              w="100%"
-            >
-              Remove
-            </Button>
+            <UpdatePhoto />
           </Box>
         </SimpleGrid>
 

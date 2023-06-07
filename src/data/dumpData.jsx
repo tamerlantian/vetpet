@@ -13,11 +13,16 @@ import textHider from "../utils/textHider";
 import moment from "moment";
 import ViewPet from "../pages/affiliations/ViewPet";
 import Evaluate from "../pages/requests/Evaluate";
+import { SERVER } from "../config/config";
+
+const pictureLinkBuilder = (photoName) => {
+  return `${SERVER}${photoName}`;
+};
 
 export const links = [
   {
     title: "Home",
-    name: "home",
+    name: "landing",
   },
   {
     title: "Products",
@@ -43,12 +48,12 @@ export const config = [
   },
   {
     tag: "Name",
-    render: ({ name, lastname }) => {
+    render: ({ name, lastname, photo }) => {
       const _name = `${name} ${lastname}`;
       return (
         <div className="flex items-center gap-4">
           <div>
-            <Avatar name={_name} size="md" src="" />
+            <Avatar name={_name} size="md" src={pictureLinkBuilder(photo)} />
           </div>
           <span>{_name}</span>
         </div>
@@ -84,12 +89,12 @@ export const employeesConfig = [
   },
   {
     tag: "Name",
-    render: ({ name, lastname }) => {
+    render: ({ name, lastname, photo }) => {
       const _name = `${name} ${lastname}`;
       return (
         <div className="flex items-center gap-4">
           <div>
-            <Avatar name={_name} size="md" src="" />
+            <Avatar name={_name} size="md" src={pictureLinkBuilder(photo)} />
           </div>
           <span>{_name}</span>
         </div>
