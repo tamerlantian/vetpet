@@ -6,14 +6,17 @@ import {
   MenuGroup,
   MenuDivider,
   Button,
+  Avatar,
+  Center,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/slices/authSlice";
 import useLogout from "../../hooks/useLogout";
-
-
+import { SERVER } from "../../config/config";
 
 const ProfileMenu = ({ onOpen }) => {
   const navigate = useNavigate();
@@ -30,11 +33,25 @@ const ProfileMenu = ({ onOpen }) => {
       <MenuButton
         as={Button}
         aria-label="Options"
-        rightIcon={<MdKeyboardArrowDown />}
+        variant={"link"}
+        cursor={"pointer"}
+        minW={0}
       >
-        {user.name}
+        <Avatar size={"sm"} src={`${SERVER}${user.photo}`} />
       </MenuButton>
-      <MenuList>
+
+      <MenuList alignItems={"center"}>
+        <br />
+        <Center>
+          <Avatar size={"2xl"} src={`${SERVER}${user.photo}`} />
+        </Center>
+        <br />
+        <VStack spacing={0}>
+          <Text>{user.name}</Text>
+          <Text color={"gray.500"}>{user.role}</Text>
+        </VStack>
+        <br />
+        <MenuDivider />
         <MenuGroup>
           <MenuItem onClick={onOpen}>Profile</MenuItem>
           <MenuItem onClick={onOpen}>Settings</MenuItem>

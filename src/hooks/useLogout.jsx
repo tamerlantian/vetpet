@@ -2,9 +2,11 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logOut } from "../store/slices/authSlice";
 import { BASE_URL } from "../config/config";
+import useToastMsg from "./useToastMsg";
 
 const useLogout = () => {
   const dispatch = useDispatch();
+  const toastMsg = useToastMsg();
 
   const logout = async () => {
     dispatch(logOut());
@@ -12,7 +14,10 @@ const useLogout = () => {
       await axios.post(`${BASE_URL}/user/logout`, null, {
         withCredentials: "true",
       });
-    } catch (error) {}
+      toastMsg("Logged out successfully", "success");
+    } catch (error) {
+      toastMsg("An error ocurred", "error");
+    }
   };
 
   return logout;
