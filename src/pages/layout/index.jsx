@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "../../components";
-import Topbar from "./Topbar"
+import Topbar from "./Topbar";
 import { useStateContext } from "../../contexts/ContextProvider";
 import "../../App.css";
 
@@ -24,7 +24,11 @@ const Layout = () => {
             activeMenu ? "md:ml-72" : "flex-2"
           }`}
         >
-          <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
+          <div
+            className={`bg-main-bg navbar w-full ${
+              activeMenu ? "sidebar--active" : ""
+            } `}
+          >
             <Topbar />
           </div>
           <div>

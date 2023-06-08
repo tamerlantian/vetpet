@@ -1,12 +1,12 @@
-import { Box, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import { AlertDialog } from "../../components";
-import { useDeletePetMutation } from "../../store";
+import { useDeleteMyPetMutation } from "../../store";
 import { useSelector } from "react-redux";
 import { subPage } from "../../store/slices/officesSlice";
 
 const DeletePet = ({ id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [deletePet] = useDeletePetMutation();
+  const [deletePet] = useDeleteMyPetMutation();
   const { results, limit, totalPets } = useSelector((state) => state.petsSlice);
 
   const isLastItem = results === 1 && totalPets > limit;

@@ -4,6 +4,27 @@ import SectionTitle from "./SectionTitle";
 import PriceItem from "./PriceItem";
 
 const Pricing = () => {
+  const data = [
+    {
+      name: "premium",
+      mostPopular: false,
+      price: 6000,
+      planDetails: ["Veterinary Consultations", "Pet Grooming", "Pet Boarding"],
+    },
+    {
+      name: "gold",
+      mostPopular: true,
+      price: 7000,
+      planDetails: ["Laboratory Services", "Vaccinations", "Pet Training Classes", "Veterinary Consultations", "Pet Grooming", "Pet Boarding"],
+    },
+    {
+      name: "diamong",
+      mostPopular: false,
+      price: 9000,
+      planDetails: ["Pet Grooming", "Veterinary Consultations", "Pet Boarding", "Vaccinations"],
+    },
+  ];
+
   return (
     <Box mt={20}>
       <SectionTitle title={"Plans"} />
@@ -14,15 +35,15 @@ const Pricing = () => {
         </Text>
       </VStack>
       <Stack
-        direction={{ base: "column", md: "row" }}
+        direction={{ base: "column", lg: "row" }}
         textAlign={"center"}
         justify={"center"}
-        spacing={{ base: 4, lg: 10 }}
+        spacing={{ base: 4, xl: 10 }}
         py={10}
       >
-        <PriceItem />
-        <PriceItem bestPrice />
-        <PriceItem />
+        {data.map((planData) => (
+          <PriceItem key={planData.name} data={planData} />
+        ))}
       </Stack>
     </Box>
   );

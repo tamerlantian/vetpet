@@ -7,7 +7,8 @@ import DeleteEmployee from "../pages/employees/DeleteEmployee";
 import DeleteOffice from "../pages/offices/DeleteOffice";
 import EditOffice from "../pages/offices/EditOffice";
 import EditPlan from "../pages/plans/EditPlan";
-import DeletePet from "../pages/affiliations/DeletePet";
+import DeleteMyPet from "../pages/affiliations/DeleteMyPet";
+import DeletePet from "../pages/requests/DeletePet";
 import { Avatar } from "@chakra-ui/react";
 import textHider from "../utils/textHider";
 import moment from "moment";
@@ -200,7 +201,7 @@ export const petsConfig = [
     render: (data) => (
       <>
         <OptionButton>
-          <DeletePet id={data._id} title="Delete pet" />
+          <DeleteMyPet id={data._id} title="Delete pet" />
           {/^(accepted|rejected)$/.test(data.state) && <ViewPet data={data} />}
         </OptionButton>
       </>
@@ -248,7 +249,9 @@ export const petsStaffConfig = [
       <>
         <OptionButton>
           <DeletePet id={data._id} title="Delete pet" />
-          <Evaluate id={data._id} petState={data.state} />
+          {!/^(accepted|rejected)$/.test(data.state) && (
+            <Evaluate id={data._id} petState={data.state} />
+          )}
           {data.state === "pending" && <AssignDecision id={data._id} />}
         </OptionButton>
       </>

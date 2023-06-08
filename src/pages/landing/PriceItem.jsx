@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { FaCheckCircle } from "react-icons/fa";
 
-const PriceItem = ({ bestPrice }) => {
+const PriceItem = ({ data }) => {
   return (
     <Box
       mb={4}
@@ -23,7 +23,7 @@ const PriceItem = ({ bestPrice }) => {
       borderColor={useColorModeValue("gray.200", "gray.500")}
       position={"relative"}
     >
-      {bestPrice && (
+      {data.mostPopular && (
         <Box
           position={"absolute"}
           top={"-16px"}
@@ -46,14 +46,14 @@ const PriceItem = ({ bestPrice }) => {
       )}
       <Box py={4} px={12}>
         <Text fontWeight={"500"} fontSize={"2xl"}>
-          Premium
+          {data.name}
         </Text>
         <HStack justifyContent={"center"}>
           <Text fontSize={"3xl"} fontWeight={"600"}>
             $
           </Text>
           <Text fontSize={"5xl"} fontWeight={"900"}>
-            79
+            {data.price}
           </Text>
           <Text fontSize={"3xl"} color={"gray.500"}>
             /month
@@ -62,34 +62,14 @@ const PriceItem = ({ bestPrice }) => {
       </Box>
       <VStack bg={"gray.50"} py={4} borderBottomRadius={"xl"}>
         <List spacing={3} textAlign={"start"} px={12}>
-          <ListItem>
-            <ListIcon as={FaCheckCircle} color={"green.500"} />
-            unlimited build minutes
-          </ListItem>
-          <ListItem>
-            <ListIcon as={FaCheckCircle} color={"green.500"} />
-            Lorem, ipsum
-          </ListItem>
-          <ListItem>
-            <ListIcon as={FaCheckCircle} color={"green.500"} />
-            Another information
-          </ListItem>
-          {bestPrice && (
-            <>
-              <ListItem>
+          {data.planDetails.map((detail, i) => {
+            return (
+              <ListItem key={i}>
                 <ListIcon as={FaCheckCircle} color={"green.500"} />
-                Another information
+                {detail}
               </ListItem>
-              <ListItem>
-                <ListIcon as={FaCheckCircle} color={"green.500"} />
-                Another information
-              </ListItem>
-              <ListItem>
-                <ListIcon as={FaCheckCircle} color={"green.500"} />
-                Another information
-              </ListItem>
-            </>
-          )}
+            );
+          })}
         </List>
         <Box w={"80%"} pt={7}>
           <Button w={"full"} colorScheme="purple" variant={"outline"}>

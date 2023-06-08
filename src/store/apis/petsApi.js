@@ -49,13 +49,23 @@ const petsApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    deletePet: builder.mutation({
+    deleteMyPet: builder.mutation({
       invalidatesTags: (result, error, arg) => [
         { type: "Pet", id: arg.id },
         { type: "MyPet", id: arg.id },
       ],
       query: (id) => ({
         url: `/pet/mypets/${id}`,
+        method: "DELETE",
+      }),
+    }),
+    deletePet: builder.mutation({
+      invalidatesTags: (result, error, arg) => [
+        { type: "Pet", id: arg.id },
+        { type: "MyPet", id: arg.id },
+      ],
+      query: (id) => ({
+        url: `/pet/${id}`,
         method: "DELETE",
       }),
     }),
@@ -68,5 +78,6 @@ export const {
   useDeletePetMutation,
   useFetchPetsQuery,
   useUpdatePetMutation,
+  useDeleteMyPetMutation
 } = petsApi;
 export { petsApi };
