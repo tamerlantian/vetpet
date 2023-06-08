@@ -1,5 +1,11 @@
 import React from "react";
-import { Table, AddOffice, Header, Pagination } from "../../components";
+import {
+  Table,
+  AddOffice,
+  Header,
+  Pagination,
+  NoContentMessage,
+} from "../../components";
 import { useFetchOfficesQuery } from "../../store";
 import { Spinner, Container } from "@chakra-ui/react";
 import { officesConfig } from "../../data/dumpData";
@@ -19,7 +25,7 @@ const Offices = () => {
       </div>
     );
   } else if (error) {
-    content = <div>Error</div>;
+    content = <NoContentMessage />;
   } else {
     content = (
       <>

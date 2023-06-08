@@ -82,8 +82,8 @@ const Footer = () => {
           </Stack>
           {footerItems.map(({ header, links }) => {
             return (
-              <Stack align={"flex-start"}>
-                <Text key={header} fontWeight={"500"} fontSize={"lg"} mb={2}>
+              <Stack key={header} align={"flex-start"}>
+                <Text  fontWeight={"500"} fontSize={"lg"} mb={2}>
                   {header}
                 </Text>
                 {links.map(({ name, link }) => {

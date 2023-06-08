@@ -1,6 +1,6 @@
 import React from "react";
-import { Header, Table, Pagination } from "../../components";
-import { Container, Spinner } from "@chakra-ui/react";
+import { Header, Table, Pagination, NoContentMessage } from "../../components";
+import { Container, Spinner, Text } from "@chakra-ui/react";
 import { useFetchMyPetsQuery } from "../../store";
 import { petsConfig } from "../../data/dumpData";
 import { addPage, subPage } from "../../store/slices/petsSlice";
@@ -22,7 +22,7 @@ const Affiliations = () => {
       </div>
     );
   } else if (error) {
-    content = <div>Error</div>;
+    content = <NoContentMessage />;
   } else {
     content = (
       <>

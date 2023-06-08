@@ -7,7 +7,6 @@ import { useEditPlanMutation } from "../../store";
 const EditPlan = ({ data }) => {
   const [editPlan, { isLoading }] = useEditPlanMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log(data)
   return (
     <>
       <button onClick={onOpen}>

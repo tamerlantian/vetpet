@@ -1,5 +1,5 @@
 import { apiSlice } from "../slices/apiSlice";
-import { updateUser, setCredentials } from "../slices/authSlice";
+import {  setCredentials } from "../slices/authSlice";
 
 const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -50,28 +50,13 @@ const authApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    updateMe: builder.mutation({
-      query: (data) => {
-        return {
-          url: "/user/updateMe",
-          method: "PATCH",
-          body: data,
-        };
-      },
-      async onQueryStarted(undefined, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(updateUser(data.data.user));
-        } catch (error) {}
-      },
-    }),
+    
   }),
 });
 
 export const {
   useLoginMutation,
   useForgotPasswordMutation,
-  useUpdateMeMutation,
   useSignupMutation,
   useChangePasswordMutation,
 } = authApi;

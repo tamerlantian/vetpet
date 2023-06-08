@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Table, Pagination } from "../../components";
+import { Header, Table, Pagination, NoContentMessage } from "../../components";
 import AddProduct from "./AddProduct";
 import { useFetchProductsQuery } from "../../store";
 import { Container, Spinner } from "@chakra-ui/react";
@@ -20,7 +20,7 @@ const Products = () => {
       </div>
     );
   } else if (error) {
-    content = <div>Error</div>;
+    content = <NoContentMessage />;
   } else {
     content = (
       <>

@@ -1,12 +1,16 @@
 import { apiSlice } from "../slices/apiSlice";
 import { setPage } from "../slices/customersSlice";
+import { updateUser } from "../slices/authSlice";
 
 const usersApi = apiSlice.injectEndpoints({
-  tagTypes: ["Users", "Employees"],
+  tagTypes: ["User", "Employees"],
   endpoints: (builder) => {
     return {
       fetchEmployees: builder.query({
-        providesTags: ["Employees"],
+        providesTags: (result, error, arg) =>
+          result
+            ? result.employees.map(({ id }) => ({ type: "User", id }))
+            : ["User"],
         query: (page = 1, limit = 5) =>
           `user/employees?page=${page}&limit=${limit}`,
         transformResponse: (result) => {
@@ -30,8 +34,29 @@ const usersApi = apiSlice.injectEndpoints({
           } catch (error) {}
         },
       }),
+      updateMe: builder.mutation({
+        invalidatesTags: (result, error, arg) => [
+          { type: "User", id: result.data.user.id },
+        ],
+        query: (data) => {
+          return {
+            url: "/user/updateMe",
+            method: "PATCH",
+            body: data,
+          };
+        },
+        async onQueryStarted(undefined, { dispatch, queryFulfilled }) {
+          try {
+            const { data } = await queryFulfilled;
+            dispatch(updateUser(data.data.user));
+          } catch (error) {}
+        },
+      }),
       fetchUsers: builder.query({
-        providesTags: ["Users"],
+        providesTags: (result, error, arg) =>
+          result
+            ? result.users.map(({ id }) => ({ type: "User", id }))
+            : ["User"],
         query: (page = 1, limit = 5) => {
           return {
             url: `/user?page=${page}&limit=${limit}`,
@@ -60,7 +85,7 @@ const usersApi = apiSlice.injectEndpoints({
         },
       }),
       editUser: builder.mutation({
-        invalidatesTags: ["Users", "Employees"],
+        invalidatesTags: (result, error, arg) => [{ type: "User", id: arg.id }],
         query: ({ data, id }) => {
           return {
             url: `/user/${id}`,
@@ -73,39 +98,16 @@ const usersApi = apiSlice.injectEndpoints({
         },
       }),
       deleteUser: builder.mutation({
-        // temporal solution
-        invalidatesTags: ["Users", "Employees"],
+        invalidatesTags: (result, error, arg) => [{ type: "User", id: arg.id }],
         query: (id) => {
           return {
             url: `/user/${id}`,
             method: "DELETE",
           };
         },
-        // fix error here
-        //   async onQueryStarted(id, { dispatch, queryFulfilled }) {
-        //     const removeResult = dispatch(
-        //       clientsApi.util.updateQueryData(
-        //         "fetchUsers",
-        //         undefined,
-        //         (users) => {
-        //           console.log(users);
-        //           const idx = users.findIndex((user) => user._id === id);
-        //           if (idx !== -1) {
-        //             users.splice(idx, 1);
-        //           }
-        //         }
-        //       )
-        //     );
-
-        //     try {
-        //       await queryFulfilled;
-        //     } catch (error) {
-        //       removeResult.undo();
-        //     }
-        //   },
       }),
       addUser: builder.mutation({
-        invalidatesTags: ["Users", "Employees"],
+        invalidatesTags: [{ type: "User" }],
         query: (user) => {
           return {
             url: "/user",
@@ -131,5 +133,6 @@ export const {
   useFetchUsersQuery,
   useAddUserMutation,
   useFetchEmployeesQuery,
+  useUpdateMeMutation,
 } = usersApi;
 export { usersApi };

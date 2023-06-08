@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, AddUser, Header, Pagination } from "../../components";
+import { Table, AddUser, Header, Pagination, NoContentMessage } from "../../components";
 import { useFetchUsersQuery } from "../../store";
 import { Spinner, Container } from "@chakra-ui/react";
 import { config } from "../../data/dumpData";
@@ -19,7 +19,7 @@ const Customers = () => {
       </div>
     );
   } else if (error) {
-    content = <div>Error</div>;
+    content = <NoContentMessage />
   } else {
     content = (
       <>

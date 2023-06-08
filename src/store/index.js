@@ -49,7 +49,6 @@ export const store = configureStore({
       petsApi.middleware,
     ]);
   },
-  devTools: true,
 });
 
 setupListeners(store.dispatch);
