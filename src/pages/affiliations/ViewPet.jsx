@@ -68,10 +68,7 @@ const ViewPet = ({ data }) => {
               <Box as="span" fontWeight="bold" marginRight=".5rem">
                 Comment:
               </Box>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-              tempora quam nulla veniam possimus at culpa voluptatum sit
-              necessitatibus consequuntur accusantium fuga eligendi laudantium,
-              id accusamus error facilis nihil ab?
+              {data.comment}
             </Box>
           </Box>
         </Box>

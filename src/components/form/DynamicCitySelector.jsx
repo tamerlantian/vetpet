@@ -16,7 +16,7 @@ const DynamicCitySelector = ({
         <Spinner />
       ) : (
         data.offices?.map(({ _id, city }) => {
-          return <option value={_id}>{city}</option>;
+          return <option key={_id} value={_id}>{city}</option>;
         })
       )}
     </_Select>

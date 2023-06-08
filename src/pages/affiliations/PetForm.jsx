@@ -42,6 +42,7 @@ const PetForm = ({ onClose, action, loading, defaultValues = {} }) => {
       reset();
       onClose();
     } catch (error) {
+      console.log(error);
       if (error.status !== 409) {
         toastMsg("An error ocurred", "error");
       }

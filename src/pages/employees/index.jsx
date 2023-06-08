@@ -1,4 +1,4 @@
-import { Table, AddUser, Header, Pagination } from "../../components";
+import { Table, AddUser, Header, Pagination, NoContentMessage } from "../../components";
 import { useFetchEmployeesQuery } from "../../store";
 import { Spinner, Container } from "@chakra-ui/react";
 import { employeesConfig } from "../../data/dumpData";
@@ -21,7 +21,7 @@ const Employees = () => {
       </div>
     );
   } else if (error) {
-    content = <div>Error</div>;
+    content = <NoContentMessage />
   } else {
     content = (
       <>

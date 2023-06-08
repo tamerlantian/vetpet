@@ -11,9 +11,9 @@ const Evaluate = ({ id, petState }) => {
     petState === "unassigned" ? setState("pending") : setState("unassigned");
   }, [petState]);
 
+  
   const handleStateUpdate = async () => {
     try {
-      console.log("STATE: ", state);
       updatePet({ id, data: { state } }).unwrap();
       toastMsg("State assigned", "success");
     } catch (error) {
@@ -21,7 +21,7 @@ const Evaluate = ({ id, petState }) => {
     }
   };
 
-  return <button onClick={handleStateUpdate}>Evaluate</button>;
+  return <button onClick={handleStateUpdate} className={'w-full flex self-start'}>Evaluate</button>;
 };
 
 export default Evaluate;

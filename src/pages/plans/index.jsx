@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Header, Pagination } from "../../components";
+import { Table, Header, Pagination, NoContentMessage } from "../../components";
 import { useFetchPlansQuery } from "../../store";
 import { Spinner, Container } from "@chakra-ui/react";
 import { plansConfig } from "../../data/dumpData";
@@ -22,7 +22,7 @@ const Plans = () => {
       </div>
     );
   } else if (error) {
-    content = <div>Error</div>;
+    content = <NoContentMessage />
   } else {
     content = (
       <>

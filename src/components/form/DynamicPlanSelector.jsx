@@ -9,7 +9,7 @@ const DynamicPlanSelector = ({
   validations = {},
 }) => {
   const { data, isLoading } = useFetchPlansQuery();
-  
+
   return (
     <_Select placeholder={placeholder} {...register(name, validations)}>
       {isLoading ? (
@@ -17,7 +17,7 @@ const DynamicPlanSelector = ({
       ) : (
         data.plans?.map(({ name, _id, price }) => {
           return (
-            <option value={_id}>
+            <option key={_id} value={_id}>
               {name} - ${price}
             </option>
           );

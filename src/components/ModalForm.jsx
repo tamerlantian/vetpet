@@ -8,7 +8,7 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 
-const ModalForm = ({ children, title, isOpen, onClose, onOpen }) => {
+const ModalForm = ({ children, title, isOpen, onClose, onOpen, ...rest }) => {
   const childrenWithProps = Children.map(children, (child) => {
     if (!isValidElement(child)) return null;
     return cloneElement(child, { onClose });
@@ -16,7 +16,7 @@ const ModalForm = ({ children, title, isOpen, onClose, onOpen }) => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered {...rest}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{title}</ModalHeader>

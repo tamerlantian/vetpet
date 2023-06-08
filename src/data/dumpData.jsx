@@ -14,9 +14,10 @@ import moment from "moment";
 import ViewPet from "../pages/affiliations/ViewPet";
 import Evaluate from "../pages/requests/Evaluate";
 import { SERVER } from "../config/config";
+import AssignDecision from "../pages/requests/AssignDecision";
 
 const pictureLinkBuilder = (photoName) => {
-  return `${SERVER}${photoName}`;
+  return photoName ? `${SERVER}${photoName}` : "";
 };
 
 export const links = [
@@ -248,7 +249,7 @@ export const petsStaffConfig = [
         <OptionButton>
           <DeletePet id={data._id} title="Delete pet" />
           <Evaluate id={data._id} petState={data.state} />
-          <div>Decision</div>
+          {data.state === "pending" && <AssignDecision id={data._id} />}
         </OptionButton>
       </>
     ),

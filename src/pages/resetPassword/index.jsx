@@ -38,7 +38,6 @@ const ResetPassword = () => {
     setFocus("password");
   }, []);
 
-  console.log(resetToken);
   const fields = watch(["password", "confirmPassword"]);
 
   useEffect(() => {

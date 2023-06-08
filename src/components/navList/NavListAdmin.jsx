@@ -8,9 +8,7 @@ import { FiMapPin } from "react-icons/fi";
 import { IoCartOutline } from "react-icons/io5";
 import NavItem from "./NavItem";
 
-const NavListAdmin = ({
-  handleCloseSideBar,
-}) => {
+const NavListAdmin = ({ handleCloseSideBar }) => {
   const items = [
     {
       title: "home",
@@ -71,11 +69,12 @@ const NavListAdmin = ({
       <div className="mt-10">
         {items.map(({ title, links }) => {
           return (
-            <div>
+            <div key={title}>
               <p className="text-gray-400 m-3 mt-4 uppercase">{title}</p>
               {links.map(({ name, icon }) => {
                 return (
                   <NavItem
+                    key={name}
                     to={name}
                     handleAction={handleCloseSideBar}
                     linkName={name}

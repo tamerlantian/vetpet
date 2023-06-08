@@ -12,7 +12,7 @@ import { ErrorMessage } from "../";
 import getDirtyFieldsData from "../../utils/getDirtyFieldsData";
 
 // userForm or AddUserForm
-const AddUserForm = ({ onClose, action, defaultValues, loading }) => {
+const AddUserForm = ({ onClose, action, defaultValues = {}, loading }) => {
   const toastMsg = useToasMsg();
   // state for errors coming from the server
   const [errMsg, setErrMsg] = useState({});

@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Table, Pagination } from "../../components";
+import { Header, Table, Pagination, NoContentMessage } from "../../components";
 import { Container, Spinner } from "@chakra-ui/react";
 import { useFetchPetsQuery } from "../../store";
 import { petsStaffConfig } from "../../data/dumpData";
@@ -21,7 +21,7 @@ const Affiliations = () => {
       </div>
     );
   } else if (error) {
-    content = <div>Error</div>;
+    content = <NoContentMessage />;
   } else {
     content = (
       <>
@@ -41,8 +41,7 @@ const Affiliations = () => {
     <Container maxW="90rem" className="mt-4">
       <Header category="Menu" title="Requests" />
       <div className="bg-white mt-5 p-5 rounded-3xl">
-        <div className="mb-10 relative left-5">
-        </div>
+        <div className="mb-10 relative left-5"></div>
         {content}
       </div>
     </Container>

@@ -23,8 +23,15 @@ const petsSlice = createSlice({
       state.results = payload.results;
       state.totalPets = payload.totalPets;
     },
+    resetState: (state) => {
+      state.currentPage = 1;
+      state.limit = 5;
+      state.totalPages = 0;
+      state.totalPets = 0;
+      state.results = 0;
+    },
   },
 });
 
 export default petsSlice.reducer;
-export const { addPage, subPage, setPage } = petsSlice.actions;
+export const { addPage, subPage, setPage, resetState } = petsSlice.actions;

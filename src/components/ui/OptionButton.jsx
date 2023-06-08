@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-} from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
 const optionButton = ({ children }) => {
-  console.log(children);
   return (
     <Menu>
       <MenuButton

@@ -1,10 +1,13 @@
 import { apiSlice } from "../slices/apiSlice";
 
 const petsApi = apiSlice.injectEndpoints({
-  tagTypes: "Pets",
+  tagTypes: ["Pet"],
   endpoints: (builder) => ({
     fetchMyPets: builder.query({
-      providesTags: ["MyPets", "Pets"],
+      providesTags: (result, error, arg) =>
+        result
+          ? result.pets.map(({ _id }) => ({ type: "MyPet", id: _id }))
+          : ["Pet"],
       query: (page = 1, limit = 5) => `/pet/mypets?page=${page}&limit=${limit}`,
       transformResponse: (result) => ({
         pets: result.data.pets,
@@ -14,7 +17,10 @@ const petsApi = apiSlice.injectEndpoints({
       }),
     }),
     fetchPets: builder.query({
-      providesTags: ["Pets"],
+      providesTags: (result, error, arg) =>
+        result
+          ? result.pets.map(({ _id }) => ({ type: "Pet", id: _id }))
+          : ["Pet"],
       query: (page = 1, limit = 5) => `/pet?page=${page}&limit=${limit}`,
       transformResponse: (result) => ({
         pets: result.data.pets,
@@ -24,14 +30,19 @@ const petsApi = apiSlice.injectEndpoints({
       }),
     }),
     updatePet: builder.mutation({
-      invalidatesTags: ["Pets"],
+      invalidatesTags: (result, error, arg) => [
+        { type: "Pet", id: arg.id },
+        { type: "MyPet", id: arg.id },
+      ],
       query: ({ id, data }) => {
-        console.log(id, data);
         return { url: `/pet/${id}`, method: "PATCH", body: data };
       },
     }),
     addPet: builder.mutation({
-      invalidatesTags: ["Pets"],
+      invalidatesTags: (result, error, arg) => [
+        { type: "MyPet", id: result.data.pet._id },
+        { type: "Pet", id: result.data.pet._id },
+      ],
       query: (data) => ({
         url: "/pet/mypets",
         method: "POST",
@@ -39,7 +50,10 @@ const petsApi = apiSlice.injectEndpoints({
       }),
     }),
     deletePet: builder.mutation({
-      invalidatesTags: ["MyPets"],
+      invalidatesTags: (result, error, arg) => [
+        { type: "Pet", id: arg.id },
+        { type: "MyPet", id: arg.id },
+      ],
       query: (id) => ({
         url: `/pet/mypets/${id}`,
         method: "DELETE",

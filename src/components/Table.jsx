@@ -34,7 +34,7 @@ const Table = ({ data, config }) => {
           <Tr>
             {config.map(({ tag }, i) => {
               return (
-                <Th key={tag} className={0 === i ? "hidden" : ""}>
+                <Th key={tag || i} className={0 === i ? "hidden" : ""}>
                   {tag}
                 </Th>
               );
