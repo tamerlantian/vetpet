@@ -43,7 +43,10 @@ const ProfileMenu = ({ onOpen }) => {
       <MenuList alignItems={"center"}>
         <br />
         <Center>
-          <Avatar size={"2xl"} src={`${SERVER}${user.photo}`} />
+          <Avatar
+            size={"2xl"}
+            src={user.photo ? `${SERVER}${user.photo}` : ""}
+          />
         </Center>
         <br />
         <VStack spacing={0}>

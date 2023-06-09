@@ -1,4 +1,3 @@
-import React from "react";
 import { Select as _Select, Spinner } from "@chakra-ui/react";
 import { useFetchOfficesQuery } from "../../store";
 

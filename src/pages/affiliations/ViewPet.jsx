@@ -1,4 +1,11 @@
-import { useDisclosure, Box, Badge, Tag, Avatar } from "@chakra-ui/react";
+import {
+  useDisclosure,
+  Box,
+  Badge,
+  Tag,
+  Avatar,
+  MenuItem,
+} from "@chakra-ui/react";
 import { ModalForm } from "../../components";
 
 const ViewPet = ({ data }) => {
@@ -17,9 +24,9 @@ const ViewPet = ({ data }) => {
 
   return (
     <>
-      <button className="w-full flex justify-start" onClick={onOpen}>
+      <MenuItem className="w-full flex justify-start" onClick={onOpen}>
         View
-      </button>
+      </MenuItem>
       <ModalForm
         title="Pet information"
         isOpen={isOpen}

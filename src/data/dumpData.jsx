@@ -16,6 +16,8 @@ import ViewPet from "../pages/affiliations/ViewPet";
 import Evaluate from "../pages/requests/Evaluate";
 import { SERVER } from "../config/config";
 import AssignDecision from "../pages/requests/AssignDecision";
+import defaultImage from "../../public/default_product.png";
+import defaultLocation from "../../public/default_location.png";
 
 const pictureLinkBuilder = (photoName) => {
   return photoName ? `${SERVER}${photoName}` : "";
@@ -132,10 +134,10 @@ export const productsConfig = [
   },
   {
     tag: "Image",
-    render: ({ id }) => (
+    render: ({ id, image }) => (
       <img
         className="rounded-xl h-20 md:ml-3"
-        src={`https://picsum.photos/seed/${id}/300/200`}
+        src={image ? image : defaultImage}
       />
     ),
   },
@@ -265,10 +267,10 @@ export const officesConfig = [
   },
   {
     tag: "Image",
-    render: ({ id }) => (
+    render: ({ id, image }) => (
       <img
         className="rounded-xl h-20 md:ml-3"
-        src={`https://picsum.photos/seed/${id}/300/200`}
+        src={image ? image : defaultLocation}
       />
     ),
   },

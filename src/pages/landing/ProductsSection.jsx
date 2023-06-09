@@ -1,4 +1,3 @@
-import React from "react";
 import { SimpleGrid, Box, Stack, Spinner } from "@chakra-ui/react";
 import ProductCard from "./ProductCard";
 import SectionTitle from "./SectionTitle";

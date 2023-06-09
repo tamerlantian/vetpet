@@ -1,4 +1,3 @@
-import React from "react";
 import { BiUser } from "react-icons/bi";
 import { HiOutlineUserPlus } from "react-icons/hi2";
 import { CiViewList } from "react-icons/ci";

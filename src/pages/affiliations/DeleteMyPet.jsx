@@ -1,4 +1,4 @@
-import { useDisclosure } from "@chakra-ui/react";
+import { MenuItem, useDisclosure } from "@chakra-ui/react";
 import { AlertDialog } from "../../components";
 import { useDeleteMyPetMutation } from "../../store";
 import { useSelector } from "react-redux";
@@ -13,9 +13,9 @@ const DeletePet = ({ id }) => {
 
   return (
     <>
-      <button className="w-full flex justify-start" onClick={onOpen}>
+      <MenuItem className="w-full flex justify-start" onClick={onOpen}>
         Delete
-      </button>
+      </MenuItem>
       <AlertDialog
         id={id}
         isOpen={isOpen}

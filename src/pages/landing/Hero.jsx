@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Button,
   Flex,
@@ -7,6 +6,7 @@ import {
   VStack,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import backgroundHero from "../../../public/background_hero.jpg";
 
 const Hero = () => {
   return (
@@ -14,7 +14,7 @@ const Hero = () => {
       <Flex
         w={"full"}
         h={"100vh"}
-        backgroundImage={"https://wallpapercave.com/wp/wp3123618.jpg"}
+        backgroundImage={backgroundHero}
         backgroundSize={"cover"}
         backgroundPosition={"center center"}
         backgroundBlendMode={"saturation"}

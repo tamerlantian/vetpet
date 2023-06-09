@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Box,
   Button,
@@ -49,11 +48,11 @@ const PriceItem = ({ data }) => {
           {data.name}
         </Text>
         <HStack justifyContent={"center"}>
-          <Text fontSize={"3xl"} fontWeight={"600"}>
+          {/* <Text fontSize={"3xl"} fontWeight={"600"}>
             $
-          </Text>
-          <Text fontSize={"5xl"} fontWeight={"900"}>
-            {data.price}
+          </Text> */}
+          <Text fontSize={"4xl"} fontWeight={"900"}>
+            {Intl.NumberFormat("es-CO", { style: "currency", currency: 'COP'}).format(data.price)}
           </Text>
           <Text fontSize={"3xl"} color={"gray.500"}>
             /month

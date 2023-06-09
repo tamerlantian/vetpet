@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Select as _Select, Spinner } from "@chakra-ui/react";
 import { useFetchPlansQuery } from "../../store";
 

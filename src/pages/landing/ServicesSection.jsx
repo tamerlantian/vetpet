@@ -1,4 +1,3 @@
-import React from "react";
 import SectionTitle from "./SectionTitle";
 import { Box, SimpleGrid, Stack } from "@chakra-ui/react";
 import ServiceCard from "./ServiceCard";
@@ -34,7 +33,7 @@ const ServicesSection = () => {
       <SectionTitle title={"Services"} />
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} marginTop={10}>
         {data.map((serviceData) => (
-          <ServiceCard data={serviceData} />
+          <ServiceCard key={serviceData.name} data={serviceData} />
         ))}
       </SimpleGrid>
       <Stack align={"flex-end"} mt={4}>

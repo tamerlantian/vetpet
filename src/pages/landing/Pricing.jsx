@@ -1,5 +1,4 @@
 import { Box, Stack, Text, VStack } from "@chakra-ui/react";
-import React from "react";
 import SectionTitle from "./SectionTitle";
 import PriceItem from "./PriceItem";
 
@@ -18,7 +17,7 @@ const Pricing = () => {
       planDetails: ["Laboratory Services", "Vaccinations", "Pet Training Classes", "Veterinary Consultations", "Pet Grooming", "Pet Boarding"],
     },
     {
-      name: "diamong",
+      name: "diamond",
       mostPopular: false,
       price: 9000,
       planDetails: ["Pet Grooming", "Veterinary Consultations", "Pet Boarding", "Vaccinations"],

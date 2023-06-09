@@ -1,4 +1,3 @@
-import React from "react";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { HiAtSymbol } from "react-icons/hi";
 

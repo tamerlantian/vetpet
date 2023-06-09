@@ -1,6 +1,6 @@
-import React from "react";
 import SectionTitle from "./SectionTitle";
 import { Box, Heading, Image, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import sectionImage from "../../../public/section_image_1.jpg";
 
 const Section = () => {
   return (
@@ -9,13 +9,13 @@ const Section = () => {
       <SimpleGrid columns={[1, 2]} gap={6} mt={10}>
         <Box order={1}>
           <Image
-            src="https://www.sadenir.com.uy/wp-content/uploads/2020/11/veterinarian-check-ing-puppy-s-health-2.jpg"
+            src={sectionImage}
             w={"100%"}
             alt="a veterinarian carrying a dog"
-            rounded={'lg'}
+            rounded={"lg"}
           />
         </Box>
-        <Stack textAlign={'right'} spacing={5}>
+        <Stack textAlign={"right"} spacing={5}>
           <Heading as={"h3"} size={"md"}>
             Our mission is the well-being of your pet.
           </Heading>

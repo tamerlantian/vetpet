@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useUpdatePetMutation } from "../../store";
 import useToastMsg from "../../hooks/useToastMsg";
 

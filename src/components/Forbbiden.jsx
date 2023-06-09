@@ -1,6 +1,5 @@
 import { Flex, VStack, Text, Image, Box } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import React from "react";
 import image403 from "../../public/403 Error Forbidden-amico.png";
 
 const Forbbiden = () => {

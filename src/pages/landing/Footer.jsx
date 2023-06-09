@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { AiFillGithub, AiFillTwitterCircle } from "react-icons/ai";
-import React from "react";
 import { Logo } from "../../components";
 
 const SocialButton = ({ children, label, href }) => {

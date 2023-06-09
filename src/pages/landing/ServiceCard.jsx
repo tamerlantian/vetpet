@@ -1,6 +1,4 @@
-import React from "react";
-import { Box, SimpleGrid, Icon, Text, Stack, Flex, Image } from "@chakra-ui/react";
-
+import { Box, SimpleGrid, Icon, Text, Stack, Flex, Image } from "@chakra-ui/react"
 
 const ServiceCard = ({ data }) => {
   return (

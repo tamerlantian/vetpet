@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef } from "react";
 import {
   AlertDialog as _AlertDialog,
   AlertDialogBody,
@@ -18,9 +18,9 @@ const AlertDialog = ({
   onClose,
   onAction,
   isLastItem,
-  prevPage
+  prevPage,
 }) => {
-  const cancelRef = React.useRef();
+  const cancelRef = useRef();
   const displayToast = useToastMsg();
   const dispatch = useDispatch();
 

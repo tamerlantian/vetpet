@@ -29,8 +29,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       {/* PRIVATE ROUTES */}
-      {/* Role user */}
       <Route element={<PersistLogin />}>
+        {/* Role user */}
         <Route element={<RequiredAuth allowedRoles={["user"]} />}>
           <Route path="/user" element={<Layout />}>
             <Route path="/user" element={<Affiliations />} />

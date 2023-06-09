@@ -1,5 +1,5 @@
 import { apiSlice } from "../slices/apiSlice";
-import {  setCredentials } from "../slices/authSlice";
+import { setCredentials } from "../slices/authSlice";
 
 const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -31,9 +31,7 @@ const authApi = apiSlice.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           dispatch(setCredentials(data));
-        } catch (error) {
-          console.log(error);
-        }
+        } catch (error) {}
       },
     }),
     forgotPassword: builder.mutation({
@@ -50,7 +48,6 @@ const authApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    
   }),
 });
 
