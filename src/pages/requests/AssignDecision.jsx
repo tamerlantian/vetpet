@@ -10,6 +10,7 @@ import {
   FormLabel,
   useBreakpointValue,
   HStack,
+  MenuItem,
 } from "@chakra-ui/react";
 import { ErrorMessage, ModalForm } from "../../components";
 import { useUpdatePetMutation } from "../../store";
@@ -94,12 +95,7 @@ const AssignDecision = ({ id }) => {
 
   return (
     <>
-      <Box
-        onClick={onOpen}
-        role="button"
-        w={"full"}
-        children="Assign decision"
-      />
+     <MenuItem className="w-full flex justify-start" onClick={onOpen}>Assign decision</MenuItem>
       <ModalForm
         title={"Assign decision"}
         isOpen={isOpen}

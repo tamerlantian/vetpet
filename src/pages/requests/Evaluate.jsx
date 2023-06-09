@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUpdatePetMutation } from "../../store";
 import useToastMsg from "../../hooks/useToastMsg";
+import { MenuItem } from "@chakra-ui/react";
 
 const Evaluate = ({ id, petState }) => {
   const toastMsg = useToastMsg();
@@ -21,7 +22,7 @@ const Evaluate = ({ id, petState }) => {
     }
   };
 
-  return <button onClick={handleStateUpdate} className={'w-full flex self-start'}>Evaluate</button>;
+  return <MenuItem onClick={handleStateUpdate} className={'w-full flex self-start'}>Evaluate</MenuItem>;
 };
 
 export default Evaluate;
