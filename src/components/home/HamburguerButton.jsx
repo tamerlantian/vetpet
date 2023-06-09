@@ -1,11 +1,11 @@
-import React from "react";
+import { useRef } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import { FiMenu } from "react-icons/fi";
 import { Drawer, Links } from "../";
 
 const Hamburguer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
+  const btnRef = useRef();
   return (
     <>
       <button ref={btnRef} onClick={onOpen}>

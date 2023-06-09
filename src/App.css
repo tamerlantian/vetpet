@@ -7,6 +7,11 @@
 .navbar {
   z-index: 10000;
 }
+
+.sidebar--active {
+  width: calc(100vw - 18rem);
+}
+
 @media screen and (max-width: 800px) {
   .sidebar {
     z-index: 10000000;
@@ -71,7 +76,7 @@ html {
 
 .hero__img {
   max-height: 450px;
-  width: 100%; 
+  width: 100%;
   background-position: center;
   object-fit: cover;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Input, FormControl, FormLabel } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "../../components";

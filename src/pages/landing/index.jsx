@@ -1,4 +1,3 @@
-import React from "react";
 import Hero from "./Hero";
 import { Container } from "@chakra-ui/react";
 import ProductsSection from "./ProductsSection";

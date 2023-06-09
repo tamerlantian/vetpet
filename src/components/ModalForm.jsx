@@ -1,4 +1,4 @@
-import React, { Children, cloneElement, isValidElement } from "react";
+import { Children, cloneElement, isValidElement } from "react";
 import {
   Modal,
   ModalOverlay,

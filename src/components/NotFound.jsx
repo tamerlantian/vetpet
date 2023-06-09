@@ -1,6 +1,5 @@
 import { Flex, VStack, Text, Image, Box } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import React from "react";
 import image404 from "../../public/404 Error with a cute animal-amico.png";
 
 const NotFound = () => {

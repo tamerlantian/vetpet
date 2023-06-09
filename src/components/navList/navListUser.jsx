@@ -1,4 +1,3 @@
-import React from "react";
 import { BiUser } from "react-icons/bi";
 import { RiFileList2Line } from "react-icons/ri";
 import NavItem from "./NavItem";

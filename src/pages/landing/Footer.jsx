@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { AiFillGithub, AiFillTwitterCircle } from "react-icons/ai";
-import React from "react";
 import { Logo } from "../../components";
 
 const SocialButton = ({ children, label, href }) => {
@@ -70,12 +69,20 @@ const Footer = () => {
   return (
     <Box bg={"gray.50"} color={"gray.700"} mt={20}>
       <Container as={Stack} maxW={"6xl"} py={10}>
-        <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} justifyItems={"center"}>
-          <Stack spacing={6}>
+        <SimpleGrid
+          columns={{ base: 1, sm: 2, md: 3 }}
+          justifyItems={"center"}
+          spacing={6}
+        >
+          <Stack
+            spacing={6}
+            display={"flex"}
+            alignItems={{ base: "center", md: "flex-start" }}
+          >
             <Box>
               <Logo />
             </Box>
-            <Box>
+            <Box textAlign={{ base: "center", md: "left" }}>
               <Text fontSize={"sm"}>Opening hours: 07:00 - 17:00</Text>
               <Text fontSize={"sm"}>Contact: +57 320 8897458 - 4454578</Text>
             </Box>
@@ -83,7 +90,7 @@ const Footer = () => {
           {footerItems.map(({ header, links }) => {
             return (
               <Stack key={header} align={"flex-start"}>
-                <Text  fontWeight={"500"} fontSize={"lg"} mb={2}>
+                <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
                   {header}
                 </Text>
                 {links.map(({ name, link }) => {
@@ -113,12 +120,15 @@ const Footer = () => {
           justify={{ md: "space-between" }}
           align={{ md: "center " }}
         >
-          <Text>© 2022 MascotaFeliz. All rights reserved</Text>
+          <Text>© 2022 VetPet. All rights reserved</Text>
           <Stack direction={"row"} spacing={6}>
-            <SocialButton label={"Github"} href="#">
+            <SocialButton
+              label={"Github"}
+              href="https://github.com/tamerlantian"
+            >
               <AiFillGithub />
             </SocialButton>
-            <SocialButton label={"Twitter"} href="#">
+            <SocialButton label={"Twitter"} href="https://twitter.com/2301_ian">
               <AiFillTwitterCircle />
             </SocialButton>
           </Stack>

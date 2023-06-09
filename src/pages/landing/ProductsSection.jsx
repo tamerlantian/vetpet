@@ -1,4 +1,3 @@
-import React from "react";
 import { SimpleGrid, Box, Stack, Spinner } from "@chakra-ui/react";
 import ProductCard from "./ProductCard";
 import SectionTitle from "./SectionTitle";
@@ -41,7 +40,7 @@ const ProductsSection = () => {
         {content}
       </SimpleGrid>
       <Stack align={"flex-end"} mt={4}>
-        <PrimaryButton name={"view all"} />
+        <PrimaryButton isDisabled name={"view all"} />
       </Stack>
     </Box>
   );

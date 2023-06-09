@@ -1,5 +1,5 @@
-import React from "react";
-import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import { Fragment } from "react";
+import { Menu, MenuButton, MenuList } from "@chakra-ui/react";
 
 const optionButton = ({ children }) => {
   return (
@@ -18,7 +18,7 @@ const optionButton = ({ children }) => {
       </MenuButton>
       <MenuList>
         {children?.map((item, i) => {
-          return item && <MenuItem key={i}>{item}</MenuItem>;
+          return item && <Fragment key={i}>{item}</Fragment>;
         })}
       </MenuList>
     </Menu>

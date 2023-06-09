@@ -1,4 +1,3 @@
-import React from "react";
 import { Header, Table, Pagination, NoContentMessage } from "../../components";
 import { Container, Spinner } from "@chakra-ui/react";
 import { useFetchPetsQuery } from "../../store";

@@ -1,4 +1,3 @@
-import React from "react";
 import { Header } from "../../components";
 import { Container, GridItem } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
@@ -31,7 +30,7 @@ const Profile = () => {
             <Avatar
               size="2xl"
               name="Christian Nwamba"
-              src={`${SERVER}${photo}`}
+              src={photo ? `${SERVER}${photo}` : ""}
             />
           </Box>
           <Box

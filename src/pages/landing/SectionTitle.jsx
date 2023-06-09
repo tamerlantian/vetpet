@@ -1,4 +1,3 @@
-import React from "react";
 import { useBreakpointValue, Text } from "@chakra-ui/react";
 
 const SectionTitle = ({ title }) => {

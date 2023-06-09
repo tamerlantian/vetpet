@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Stack,
   Card,
@@ -9,13 +8,14 @@ import {
   Badge,
 } from "@chakra-ui/react";
 import textHider from "../../utils/textHider";
+import defaultImage from "../../../public/default_product.png";
 
 const ProductCard = ({ imageLink, productName, price, description, kind }) => {
   return (
     <Card maxW={"sm"}>
       <CardBody>
         <Image
-          src={imageLink}
+          src={imageLink || defaultImage}
           alt="Green double couch with wooden legs"
           borderRadius="lg"
         />
@@ -34,7 +34,10 @@ const ProductCard = ({ imageLink, productName, price, description, kind }) => {
           fontWeight={"semibold"}
           fontSize={"2xl"}
         >
-          {`$${price}`}
+          {`${Intl.NumberFormat("es-CO", {
+            style: "currency",
+            currency: "COP",
+          }).format(price)}`}
         </Text>
       </CardBody>
     </Card>

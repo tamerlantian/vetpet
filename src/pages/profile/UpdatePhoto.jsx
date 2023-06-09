@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import  { useEffect, useRef } from "react";
 import { Button } from "@chakra-ui/react";
 import { useUpdateMeMutation } from "../../store";
 import { useForm } from "react-hook-form";

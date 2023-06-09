@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import {
   useDisclosure,
   Box,
@@ -38,7 +38,6 @@ const Form = ({ petId, onCancel }) => {
       reset();
       toasMsg("Decision assigned", "success");
     } catch (error) {
-      console.log(error);
       toasMsg("An error occured", "error");
     }
   };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { setCredentials } from "../../store/slices/authSlice";
 import { ErrorMessage, InputEmail, InputPassword } from "../../components";
 import { useLoginMutation } from "../../store";

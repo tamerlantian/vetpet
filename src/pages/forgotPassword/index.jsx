@@ -1,4 +1,3 @@
-import React from "react";
 import { AuthLayout, ErrorMessage } from "../../components";
 import {
   FormControl,

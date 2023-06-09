@@ -1,4 +1,3 @@
-import React from "react";
 import { Header, Table, Pagination, NoContentMessage } from "../../components";
 import AddProduct from "./AddProduct";
 import { useFetchProductsQuery } from "../../store";
@@ -6,6 +5,7 @@ import { Container, Spinner } from "@chakra-ui/react";
 import { productsConfig } from "../../data/dumpData";
 import { useSelector } from "react-redux";
 import { addPage, subPage } from "../../store/slices/productsSlice";
+
 
 const Products = () => {
   const { currentPage } = useSelector((state) => state.productsSlice);

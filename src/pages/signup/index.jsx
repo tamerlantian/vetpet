@@ -1,4 +1,3 @@
-import React from "react";
 import SignupForm from "./SignupForm";
 import { useSignupMutation } from "../../store";
 import { AuthLayout } from "../../components";
