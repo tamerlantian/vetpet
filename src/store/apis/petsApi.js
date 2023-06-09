@@ -7,7 +7,7 @@ const petsApi = apiSlice.injectEndpoints({
       providesTags: (result, error, arg) =>
         result
           ? result.pets.map(({ _id }) => ({ type: "MyPet", id: _id }))
-          : ["Pet"],
+          : ["MyPet"],
       query: (page = 1, limit = 5) => `/pet/mypets?page=${page}&limit=${limit}`,
       transformResponse: (result) => ({
         pets: result.data.pets,
@@ -40,8 +40,8 @@ const petsApi = apiSlice.injectEndpoints({
     }),
     addPet: builder.mutation({
       invalidatesTags: (result, error, arg) => [
-        { type: "MyPet", id: result.data.pet._id },
-        { type: "Pet", id: result.data.pet._id },
+        { type: "MyPet" },
+        { type: "Pet" },
       ],
       query: (data) => ({
         url: "/pet/mypets",
@@ -78,6 +78,6 @@ export const {
   useDeletePetMutation,
   useFetchPetsQuery,
   useUpdatePetMutation,
-  useDeleteMyPetMutation
+  useDeleteMyPetMutation,
 } = petsApi;
 export { petsApi };

@@ -8,7 +8,7 @@ const AddUser = ({ actionTitle }) => {
   const [addUser, { isLoading }] = useAddUserMutation();
   return (
     <>
-      <Button leftIcon={<IoMdAdd />} colorScheme="purple" onClick={onOpen}>
+      <Button leftIcon={<IoMdAdd />} size={{base:"sm", md: "md"}} colorScheme="purple" onClick={onOpen}>
         {actionTitle}
       </Button>
       <ModalForm

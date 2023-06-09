@@ -1,5 +1,13 @@
 import SectionTitle from "./SectionTitle";
-import { Box, Heading, Image, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Image,
+  SimpleGrid,
+  Stack,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import sectionImage from "../../../public/section_image_1.jpg";
 
 const Section = () => {
@@ -16,10 +24,14 @@ const Section = () => {
           />
         </Box>
         <Stack textAlign={"right"} spacing={5}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading
+            textAlign={useBreakpointValue({ base: "center", md: "right" })}
+            as={"h3"}
+            size={"md"}
+          >
             Our mission is the well-being of your pet.
           </Heading>
-          <Text fontSize={"lg"}>
+          <Text fontSize={{ base: "md", md: "lg" }}>
             "To offer well-being to both animals and the families of our
             patients through the provision of veterinary medical and
             complementary services. Our team shares values and ethical

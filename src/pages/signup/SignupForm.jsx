@@ -33,13 +33,13 @@ const SignupForm = () => {
 
   useEffect(() => {
     setFocus("cardId");
-  }, []);
+  }, [])
 
   const onSubmit = async (data) => {
     try {
       await signup(data).unwrap();
       toastMsg("Your account was created!", "success");
-      navigate("/dashboard");
+      navigate("/user/affiliation");
       reset();
     } catch (error) {
       if (error.status !== 409) {
@@ -50,7 +50,7 @@ const SignupForm = () => {
 
   return (
     <form
-      className="w-full shadow-xl p-8 rounded-lg bg-white"
+      className="w-full mt-10 shadow-xl p-8 rounded-lg bg-white"
       onSubmit={handleSubmit(onSubmit)}
     >
       <VStack textAlign="center">
