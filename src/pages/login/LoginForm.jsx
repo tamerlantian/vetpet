@@ -11,6 +11,7 @@ import {
   Text,
   VStack,
   HStack,
+  Stack
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -81,7 +82,7 @@ const LoginForm = () => {
 
   return (
     <form
-      className="w-full p-8 shadow-xl rounded-lg bg-white"
+      className="w-full mt-10 p-8 shadow-xl rounded-lg bg-white"
       onSubmit={handleSubmit(onSubmit)}
     >
       <VStack textAlign="center">
@@ -89,14 +90,14 @@ const LoginForm = () => {
         <Box as="h1" fontSize="1.8rem" fontWeight="bold">
           Sign in
         </Box>
-        <HStack>
+        <Stack direction={{ base: "column", md: "row"}} spacing={{ base: ".1rem", md: ".3rem"}}>
           <Text display="inline" color="gray.500">
             Don't have an account yet?
           </Text>
           <Link to="/signup" className="underline text-blue-500">
             Sign up
           </Link>
-        </HStack>
+        </Stack>
       </VStack>
 
       <FormControl className="mt-5" isInvalid={errors?.email}>

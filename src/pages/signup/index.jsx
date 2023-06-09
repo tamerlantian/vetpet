@@ -1,5 +1,4 @@
 import SignupForm from "./SignupForm";
-import { useSignupMutation } from "../../store";
 import { AuthLayout } from "../../components";
 
 const Signup = () => {

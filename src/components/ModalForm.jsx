@@ -16,7 +16,7 @@ const ModalForm = ({ children, title, isOpen, onClose, onOpen, ...rest }) => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered {...rest}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered size={{base: "xs", md: "md"}} {...rest}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{title}</ModalHeader>
