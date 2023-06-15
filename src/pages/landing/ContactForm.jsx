@@ -9,7 +9,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { ErrorMessage } from "../../components";
-import { useAddProspectMutation } from "../../store";
+import { useAddProspectMutation } from "../../store/apis/prospectsSlice";
 import { useForm } from "react-hook-form";
 import useToastMsg from "../../hooks/useToastMsg";
 

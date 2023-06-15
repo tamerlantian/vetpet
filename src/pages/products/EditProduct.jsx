@@ -2,7 +2,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { ModalForm } from "../../components";
 import ProductForm from "./ProductForm";
-import { useEditProductMutation } from "../../store";
+import { useEditProductMutation } from "../../store/apis/productsSlice";
 
 const EditProduct = ({ data }) => {
   const [editProduct, { isLoading }] = useEditProductMutation();

@@ -65,6 +65,10 @@ export const config = [
     },
   },
   {
+    tag: "active",
+    render: ({ active }) => `${active ? "Yes" : "No"}`,
+  },
+  {
     tag: "Email",
     render: ({ email }) => email,
   },
@@ -104,6 +108,10 @@ export const employeesConfig = [
         </div>
       );
     },
+  },
+  {
+    tag: "active",
+    render: ({ active }) => `${active ? "Yes" : "No"}`,
   },
   {
     tag: "Email",

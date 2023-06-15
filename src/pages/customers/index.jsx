@@ -1,14 +1,31 @@
-import { Table, AddUser, Header, Pagination, NoContentMessage } from "../../components";
-import { useFetchUsersQuery } from "../../store";
-import { Spinner, Container } from "@chakra-ui/react";
+import {
+  Table,
+  AddUser,
+  Header,
+  NoContentMessage,
+  SearchBar,
+} from "../../components";
+import { Spinner, Container, HStack } from "@chakra-ui/react";
 import { config } from "../../data/dumpData";
-import { useSelector } from "react-redux";
-import { addPage, subPage } from "../../store/slices/customersSlice";
+import { useGetUsersQuery } from "../../store/slices/usersSlice";
+import { useEffect, useState } from "react";
+import { useDebouncedValue } from "@mantine/hooks";
+import { Pagination } from "@mantine/core";
 
 const Customers = () => {
-  const { currentPage } = useSelector((state) => state.customersSlice);
-  const { data, isLoading, isFetching, error } =
-    useFetchUsersQuery(currentPage);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debounced] = useDebouncedValue(searchTerm, 300);
+  const [page, setPage] = useState(1);
+  const limit = 5;
+  const { data, isLoading, isError, refetch } = useGetUsersQuery({
+    page,
+    limit,
+    name: debounced,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [debounced]);
 
   let content;
   if (isLoading) {
@@ -17,19 +34,31 @@ const Customers = () => {
         <Spinner />
       </div>
     );
-  } else if (error) {
-    content = <NoContentMessage />
+  } else if (isError) {
+    content = (
+      <>
+        <NoContentMessage />
+      </>
+    );
   } else {
     content = (
       <>
-        <Table data={data.users} config={config} />
-        <Pagination
-          isLoading={isFetching}
-          totalPages={data.totalPages}
-          currentPage={currentPage}
-          nextPage={addPage}
-          prevPage={subPage}
+        <SearchBar
+          debounced={debounced}
+          onRefetch={refetch}
+          setSearchTerm={setSearchTerm}
+          searchTerm={searchTerm}
+          setPage={setPage}
         />
+        <Table data={data.users} config={config} />
+        <HStack my={6} justifyContent={"flex-end"}>
+          <Pagination
+            value={page}
+            onChange={setPage}
+            total={data.paging.totalPages}
+            color="gray"
+          />
+        </HStack>
       </>
     );
   }

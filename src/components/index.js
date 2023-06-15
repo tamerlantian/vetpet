@@ -9,6 +9,9 @@ export { default as ErrorMessage } from "./form/ErrorMessage";
 export { default as AuthLayout } from "./AuthLayout";
 export { default as NoContentMessage } from "./NoContentMessage";
 
+// ui
+export { default as SearchBar } from "./ui/SearchBar";
+
 // client components
 export { default as EditUser } from "./clientComponents/EditUser";
 export { default as DeleteUser } from "../pages/customers/DeleteCustomer";

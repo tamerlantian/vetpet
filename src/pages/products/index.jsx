@@ -1,16 +1,27 @@
-import { Header, Table, Pagination, NoContentMessage } from "../../components";
+import { Header, Table, NoContentMessage, SearchBar } from "../../components";
 import AddProduct from "./AddProduct";
-import { useFetchProductsQuery } from "../../store";
-import { Container, Spinner } from "@chakra-ui/react";
+import { useFetchProductsQuery } from "../../store/apis/productsSlice";
+import { Container, HStack, Spinner } from "@chakra-ui/react";
 import { productsConfig } from "../../data/dumpData";
-import { useSelector } from "react-redux";
 import { addPage, subPage } from "../../store/slices/productsSlice";
-
+import { useDebouncedValue } from "@mantine/hooks";
+import { useEffect, useState } from "react";
+import { Pagination } from "@mantine/core";
 
 const Products = () => {
-  const { currentPage } = useSelector((state) => state.productsSlice);
-  const { data, isLoading, isFetching, error } =
-    useFetchProductsQuery(currentPage);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debounced] = useDebouncedValue(searchTerm, 300);
+  const [page, setPage] = useState(1);
+  const limit = 5;
+  const { data, isLoading, error, refetch } = useFetchProductsQuery({
+    page,
+    limit,
+    name: debounced,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [debounced]);
 
   let content;
   if (isLoading) {
@@ -24,14 +35,22 @@ const Products = () => {
   } else {
     content = (
       <>
-        <Table data={data?.products} config={productsConfig} />
-        <Pagination
-          isLoading={isFetching}
-          totalPages={data.totalPages}
-          currentPage={currentPage}
-          nextPage={addPage}
-          prevPage={subPage}
+        <SearchBar
+          debounced={debounced}
+          onRefetch={refetch}
+          setSearchTerm={setSearchTerm}
+          searchTerm={searchTerm}
+          setPage={setPage}
         />
+        <Table data={data?.products} config={productsConfig} />
+        <HStack my={6} justifyContent={"flex-end"}>
+          <Pagination
+            value={page}
+            onChange={setPage}
+            total={data.paging.totalPages}
+            color="gray"
+          />
+        </HStack>
       </>
     );
   }
