@@ -1,7 +1,7 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { ModalForm, AddUserForm } from "..";
-import { useEditUserMutation } from "../../store";
+import { useEditUserMutation } from "../../store/slices/usersSlice";
 
 const EditUser = ({ data, title }) => {
   const [editUser, { isLoading }] = useEditUserMutation();

@@ -9,7 +9,7 @@ import { HomeLayout } from "./pages";
 import Layout from "./pages/layout";
 import Dashboard from "./pages/dashboard";
 import Offices from "./pages/offices";
-import Customers from "./pages/customers";
+import Customers from "./pages/customers/index";
 import Employees from "./pages/employees";
 import Plans from "./pages/plans";
 import Products from "./pages/products";

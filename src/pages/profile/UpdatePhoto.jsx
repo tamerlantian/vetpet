@@ -1,15 +1,14 @@
-import  { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Button } from "@chakra-ui/react";
-import { useUpdateMeMutation } from "../../store";
 import { useForm } from "react-hook-form";
 import useToastMsg from "../../hooks/useToastMsg";
+import { useUpdateMeMutation } from "../../store/slices/usersSlice";
 
 const UpdatePhoto = () => {
   const {
     register,
     handleSubmit,
     reset,
-    watch,
     formState: { dirtyFields },
   } = useForm();
   const toastMsg = useToastMsg();
@@ -21,7 +20,7 @@ const UpdatePhoto = () => {
     try {
       const formData = new FormData();
       formData.append("photo", data.photo[0]);
-      reset()
+      reset();
       await updateMe(formData).unwrap();
       toastMsg("Updated successfully", "success");
     } catch (error) {

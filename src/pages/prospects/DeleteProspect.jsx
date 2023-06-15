@@ -1,11 +1,9 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AlertDialog } from "../../components";
-import { useDeleteProspectMutation } from "../../store";
+import { useDeleteProspectMutation } from "../../store/apis/prospectsSlice";
 import { useSelector } from "react-redux";
 import { subPage } from "../../store/slices/prospectsSlice";
-  
-
 
 const DeleteProspect = ({ id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

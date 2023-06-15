@@ -1,13 +1,13 @@
-import { Center, Text } from '@chakra-ui/react'
+import { Center, Text } from "@chakra-ui/react";
 
-const NoContentMessage = () => {
+const NoContentMessage = ({ errorMessage }) => {
   return (
     <Center>
-        <Text fontWeight={"bold"} fontSize={"xl"}>
-          You don't have anything here yet.
-        </Text>
-      </Center>
-  )
-}
+      <Text fontWeight={"bold"} fontSize={"xl"}>
+        {errorMessage || "You don't have anything here yet."}
+      </Text>
+    </Center>
+  );
+};
 
-export default NoContentMessage
+export default NoContentMessage;

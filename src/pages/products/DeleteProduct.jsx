@@ -1,7 +1,7 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AlertDialog } from "../../components";
-import { useDeleteProductMutation } from "../../store";
+import { useDeleteProductMutation } from "../../store/apis/productsSlice";
 import { useSelector } from "react-redux";
 import { subPage } from "../../store/slices/productsSlice";
 

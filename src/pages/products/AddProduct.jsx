@@ -2,7 +2,7 @@ import { useDisclosure, Button } from "@chakra-ui/react";
 import { IoMdAdd } from "react-icons/io";
 import { ModalForm } from "../../components";
 import ProductForm from "./ProductForm";
-import { useAddProductMutation } from "../../store";
+import { useAddProductMutation } from "../../store/apis/productsSlice";
 
 const AddProduct = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

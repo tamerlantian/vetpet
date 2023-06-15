@@ -2,7 +2,7 @@ import { SimpleGrid, Box, Stack, Spinner } from "@chakra-ui/react";
 import ProductCard from "./ProductCard";
 import SectionTitle from "./SectionTitle";
 import PrimaryButton from "./PrimaryButton";
-import { useFetchProductsQuery } from "../../store";
+import { useFetchProductsQuery } from "../../store/apis/productsSlice";
 
 const ProductsSection = () => {
   const { data, isLoading, error } = useFetchProductsQuery({

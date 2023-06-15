@@ -5,8 +5,9 @@ import {
   Tr,
   Th,
   Td,
-  TableContainer,
+  TableContainer
 } from "@chakra-ui/react";
+
 
 const Table = ({ data, config }) => {
   const dataRendered = data.map((dataRow) => {
