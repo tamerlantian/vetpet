@@ -1,19 +1,24 @@
 import { apiSlice } from "../slices/apiSlice";
 
-const petsApi = apiSlice.injectEndpoints({
-  tagTypes: ["Pet"],
+export const petsExtApiSlice = apiSlice.injectEndpoints({
+  tagTypes: ["Pet", "MyPet"],
   endpoints: (builder) => ({
     fetchMyPets: builder.query({
       providesTags: (result, error, arg) =>
         result
           ? result.pets.map(({ _id }) => ({ type: "MyPet", id: _id }))
           : ["MyPet"],
-      query: (page = 1, limit = 5) => `/pet/mypets?page=${page}&limit=${limit}`,
+      query: ({ page, limit, name }) => {
+        const queryName = name ? `&name=${name}` : "";
+        return `/pet/mypets?page=${page}&limit=${limit}${queryName}`;
+      },
       transformResponse: (result) => ({
         pets: result.data.pets,
         results: result.results,
-        totalPages: result.totalPages,
-        totalPets: result.totalPets,
+        paging: {
+          totalPages: result.paging.totalPages,
+          docs: result.paging.docs,
+        },
       }),
     }),
     fetchPets: builder.query({
@@ -21,12 +26,17 @@ const petsApi = apiSlice.injectEndpoints({
         result
           ? result.pets.map(({ _id }) => ({ type: "Pet", id: _id }))
           : ["Pet"],
-      query: (page = 1, limit = 5) => `/pet?page=${page}&limit=${limit}`,
+      query: ({ page, limit, name }) => {
+        const queryName = name ? `&name=${name}` : "";
+        return `/pet?page=${page}&limit=${limit}${queryName}`;
+      },
       transformResponse: (result) => ({
         pets: result.data.pets,
         results: result.results,
-        totalPages: result.totalPages,
-        totalPets: result.totalPets,
+        paging: {
+          totalPages: result.paging.totalPages,
+          docs: result.paging.docs,
+        },
       }),
     }),
     updatePet: builder.mutation({
@@ -79,5 +89,4 @@ export const {
   useFetchPetsQuery,
   useUpdatePetMutation,
   useDeleteMyPetMutation,
-} = petsApi;
-export { petsApi };
+} = petsExtApiSlice;

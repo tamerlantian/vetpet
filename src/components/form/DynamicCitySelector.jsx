@@ -1,5 +1,5 @@
 import { Select as _Select, Spinner } from "@chakra-ui/react";
-import { useFetchOfficesQuery } from "../../store";
+import { useFetchOfficesQuery } from "../../store/apis/officesSlice";
 
 const DynamicCitySelector = ({
   placeholder,
@@ -7,7 +7,7 @@ const DynamicCitySelector = ({
   register,
   validations = {},
 }) => {
-  const { data, isLoading } = useFetchOfficesQuery();
+  const { data, isLoading } = useFetchOfficesQuery({ limit: 10, page: 1 });
 
   return (
     <_Select placeholder={placeholder} {...register(name, validations)}>
@@ -15,7 +15,11 @@ const DynamicCitySelector = ({
         <Spinner />
       ) : (
         data.offices?.map(({ _id, city }) => {
-          return <option key={_id} value={_id}>{city}</option>;
+          return (
+            <option key={_id} value={_id}>
+              {city}
+            </option>
+          );
         })
       )}
     </_Select>

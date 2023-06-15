@@ -4,7 +4,7 @@ import { Input, FormControl, FormLabel, Button } from "@chakra-ui/react";
 import useToasMsg from "./../../hooks/useToastMsg";
 import { ErrorMessage } from "../../components";
 import getDirtyFieldsData from "../../utils/getDirtyFieldsData";
-import { useUpdateMeMutation } from "../../store/slices/usersSlice";
+import { useUpdateMeMutation } from "../../store/apis/usersSlice";
 
 const EditMeForm = ({ defaultValues = {} }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);

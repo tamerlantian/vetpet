@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import useToastMsg from "../../hooks/useToastMsg";
-import { useUpdateMeMutation } from "../../store/slices/usersSlice";
+import { useUpdateMeMutation } from "../../store/apis/usersSlice";
 
 const UpdatePhoto = () => {
   const {

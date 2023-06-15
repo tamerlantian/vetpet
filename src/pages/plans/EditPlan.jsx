@@ -2,7 +2,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { ModalForm } from "../../components";
 import PlanForm from "./PlanForm";
-import { useEditPlanMutation } from "../../store";
+import { useEditPlanMutation } from "../../store/apis/plansSlice";
 
 const EditPlan = ({ data }) => {
   const [editPlan, { isLoading }] = useEditPlanMutation();

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useUpdatePetMutation } from "../../store";
+import { useUpdatePetMutation } from "../../store/apis/petsSlice";
 import useToastMsg from "../../hooks/useToastMsg";
 import { MenuItem } from "@chakra-ui/react";
 

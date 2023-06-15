@@ -1,7 +1,7 @@
 import { useDisclosure, Button } from "@chakra-ui/react";
 import { ModalForm } from "../../components";
 import { IoMdAdd } from "react-icons/io";
-import { useAddOfficeMutation } from "../../store";
+import { useAddOfficeMutation } from "../../store/apis/officesSlice";
 import OfficeForm from "./OfficeForm";
 
 const AddOffice = ({ buttonName }) => {

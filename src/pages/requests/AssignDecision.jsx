@@ -13,7 +13,7 @@ import {
   MenuItem,
 } from "@chakra-ui/react";
 import { ErrorMessage, ModalForm } from "../../components";
-import { useUpdatePetMutation } from "../../store";
+import { useUpdatePetMutation } from "../../store/apis/petsSlice";
 import { useForm } from "react-hook-form";
 import useToastMsg from "../../hooks/useToastMsg";
 

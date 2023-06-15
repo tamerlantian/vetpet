@@ -3,7 +3,6 @@ import AddProduct from "./AddProduct";
 import { useFetchProductsQuery } from "../../store/apis/productsSlice";
 import { Container, HStack, Spinner } from "@chakra-ui/react";
 import { productsConfig } from "../../data/dumpData";
-import { addPage, subPage } from "../../store/slices/productsSlice";
 import { useDebouncedValue } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { Pagination } from "@mantine/core";
@@ -13,7 +12,7 @@ const Products = () => {
   const [debounced] = useDebouncedValue(searchTerm, 300);
   const [page, setPage] = useState(1);
   const limit = 5;
-  const { data, isLoading, error, refetch } = useFetchProductsQuery({
+  const { data, isLoading, isError, refetch } = useFetchProductsQuery({
     page,
     limit,
     name: debounced,
@@ -30,7 +29,7 @@ const Products = () => {
         <Spinner />
       </div>
     );
-  } else if (error) {
+  } else if (isError) {
     content = <NoContentMessage />;
   } else {
     content = (

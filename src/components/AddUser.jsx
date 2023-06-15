@@ -1,7 +1,7 @@
 import { useDisclosure, Button } from "@chakra-ui/react";
 import { ModalForm, AddUserForm } from ".";
 import { IoMdAdd } from "react-icons/io";
-import { useAddUserMutation } from "../store/slices/usersSlice";
+import { useAddUserMutation } from "../store/apis/usersSlice";
 
 const AddUser = ({ actionTitle }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

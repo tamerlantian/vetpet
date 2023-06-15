@@ -1,7 +1,7 @@
 import { useDisclosure, Button } from "@chakra-ui/react";
 import { ModalForm } from "../../components";
 import { IoMdAdd } from "react-icons/io";
-import { useAddPetMutation } from "../../store";
+import { useAddPetMutation } from "../../store/apis/petsSlice";
 import PetForm from "./PetForm";
 
 const AddPet = ({ buttonName }) => {

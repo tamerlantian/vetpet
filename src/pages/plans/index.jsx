@@ -1,17 +1,26 @@
-import { Table, Header, Pagination, NoContentMessage } from "../../components";
-import { useFetchPlansQuery } from "../../store";
-import { Spinner, Container } from "@chakra-ui/react";
+import { Table, Header, NoContentMessage, SearchBar } from "../../components";
+import { useFetchPlansQuery } from "../../store/apis/plansSlice";
+import { Spinner, Container, HStack } from "@chakra-ui/react";
 import { plansConfig } from "../../data/dumpData";
-import { useSelector } from "react-redux";
-import { addPage, subPage } from "../../store/slices/plansSlice";
 import AddPlan from "./AddPlan";
+import { Pagination } from "@mantine/core";
+import { useEffect, useState } from "react";
+import { useDebouncedValue } from "@mantine/hooks";
 
 const Plans = () => {
-  const { currentPage, limit } = useSelector((state) => state.plansSlice);
-  const { data, isLoading, isFetching, error } = useFetchPlansQuery(
-    currentPage,
-    limit
-  );
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debounced] = useDebouncedValue(searchTerm, 300);
+  const [page, setPage] = useState(1);
+  const limit = 5;
+  const { data, isLoading, refetch, isError } = useFetchPlansQuery({
+    page,
+    limit,
+    name: debounced,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [debounced]);
 
   let content;
   if (isLoading) {
@@ -20,19 +29,27 @@ const Plans = () => {
         <Spinner />
       </div>
     );
-  } else if (error) {
-    content = <NoContentMessage />
+  } else if (isError) {
+    content = <NoContentMessage />;
   } else {
     content = (
       <>
-        <Table data={data.plans} config={plansConfig} />
-        <Pagination
-          isLoading={isFetching}
-          totalPages={data.totalPages}
-          currentPage={currentPage}
-          nextPage={addPage}
-          prevPage={subPage}
+       <SearchBar
+          debounced={debounced}
+          onRefetch={refetch}
+          setSearchTerm={setSearchTerm}
+          searchTerm={searchTerm}
+          setPage={setPage}
         />
+        <Table data={data.plans} config={plansConfig} />
+        <HStack my={6} justifyContent={"flex-end"}>
+          <Pagination
+            value={page}
+            onChange={setPage}
+            total={data.paging.totalPages}
+            color="gray"
+          />
+        </HStack>
       </>
     );
   }
