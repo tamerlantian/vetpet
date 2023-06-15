@@ -17,8 +17,6 @@ const AlertDialog = ({
   isOpen,
   onClose,
   onAction,
-  isLastItem,
-  prevPage,
 }) => {
   const cancelRef = useRef();
   const displayToast = useToastMsg();
@@ -27,7 +25,6 @@ const AlertDialog = ({
   const handleDelete = async () => {
     try {
       await onAction(id).unwrap();
-      if (isLastItem) dispatch(prevPage(1));
       onClose();
       displayToast("Successfully deleted", "success", 2000, true);
     } catch (error) {

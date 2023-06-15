@@ -1,15 +1,11 @@
 import { MenuItem, useDisclosure } from "@chakra-ui/react";
 import { AlertDialog } from "../../components";
-import { useDeletePetMutation } from "../../store";
-import { useSelector } from "react-redux";
-import { subPage } from "../../store/slices/officesSlice";
+import { useDeletePetMutation } from "../../store/apis/petsSlice";
 
 const DeletePet = ({ id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [deletePet] = useDeletePetMutation();
-  const { results, limit, totalPets } = useSelector((state) => state.petsSlice);
-
-  const isLastItem = results === 1 && totalPets > limit;
+  
 
   return (
     <>
@@ -23,8 +19,6 @@ const DeletePet = ({ id }) => {
         onClose={onClose}
         onAction={deletePet}
         actionName="Delete pet"
-        isLastItem={isLastItem}
-        prevPage={subPage}
       />
     </>
   );

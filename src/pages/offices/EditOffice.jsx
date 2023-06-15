@@ -2,7 +2,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { ModalForm} from "../../components";
 import OfficeForm from "./OfficeForm"
-import { useEditOfficeMutation } from "../../store";
+import { useEditOfficeMutation } from "../../store/apis/officesSlice";
 
 const EditOffice = ({ data }) => {
   const [editOffice, { isLoading }] = useEditOfficeMutation();

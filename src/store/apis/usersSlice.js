@@ -1,4 +1,5 @@
-import { apiSlice } from "./apiSlice";
+import { apiSlice } from "../slices/apiSlice";
+import { updateUser } from "../slices/authSlice";
 
 export const usersExtApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Select as _Select, Spinner } from "@chakra-ui/react";
-import { useFetchPlansQuery } from "../../store";
+import { useFetchPlansQuery } from "../../store/apis/plansSlice";
 
 const DynamicPlanSelector = ({
   placeholder,
@@ -8,7 +8,7 @@ const DynamicPlanSelector = ({
   register,
   validations = {},
 }) => {
-  const { data, isLoading } = useFetchPlansQuery();
+  const { data, isLoading } = useFetchPlansQuery({ limit: 10, page: 1 });
 
   return (
     <_Select placeholder={placeholder} {...register(name, validations)}>

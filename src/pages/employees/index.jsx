@@ -7,7 +7,7 @@ import {
 } from "../../components";
 import { Spinner, Container, HStack } from "@chakra-ui/react";
 import { employeesConfig } from "../../data/dumpData";
-import { useGetEmployeesQuery } from "../../store/slices/usersSlice";
+import { useGetEmployeesQuery } from "../../store/apis/usersSlice";
 import { useDebouncedValue } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { Pagination } from "@mantine/core";

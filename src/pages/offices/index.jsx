@@ -2,19 +2,30 @@ import {
   Table,
   AddOffice,
   Header,
-  Pagination,
   NoContentMessage,
+  SearchBar,
 } from "../../components";
-import { useFetchOfficesQuery } from "../../store";
-import { Spinner, Container } from "@chakra-ui/react";
+import { useFetchOfficesQuery } from "../../store/apis/officesSlice";
+import { Spinner, Container, HStack } from "@chakra-ui/react";
 import { officesConfig } from "../../data/dumpData";
-import { useSelector } from "react-redux";
-import { addPage, subPage } from "../../store/slices/officesSlice";
+import { useEffect, useState } from "react";
+import { useDebouncedValue } from "@mantine/hooks";
+import { Pagination } from "@mantine/core";
 
 const Offices = () => {
-  const { currentPage } = useSelector((state) => state.officesSlice);
-  const { data, isLoading, isFetching, error } =
-    useFetchOfficesQuery(currentPage);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debounced] = useDebouncedValue(searchTerm, 300);
+  const [page, setPage] = useState(1);
+  const limit = 5;
+  const { data, isLoading, isError, refetch } = useFetchOfficesQuery({
+    limit,
+    page,
+    name: debounced,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [debounced]);
 
   let content;
   if (isLoading) {
@@ -23,19 +34,27 @@ const Offices = () => {
         <Spinner />
       </div>
     );
-  } else if (error) {
+  } else if (isError) {
     content = <NoContentMessage />;
   } else {
     content = (
       <>
-        <Table data={data.offices} config={officesConfig} />
-        <Pagination
-          isLoading={isFetching}
-          totalPages={data.totalPages}
-          currentPage={currentPage}
-          nextPage={addPage}
-          prevPage={subPage}
+        <SearchBar
+          debounced={debounced}
+          onRefetch={refetch}
+          setSearchTerm={setSearchTerm}
+          searchTerm={searchTerm}
+          setPage={setPage}
         />
+        <Table data={data.offices} config={officesConfig} />
+        <HStack my={6} justifyContent={"flex-end"}>
+          <Pagination
+            value={page}
+            onChange={setPage}
+            total={data.paging.totalPages}
+            color="gray"
+          />
+        </HStack>
       </>
     );
   }

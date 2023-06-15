@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useGetUsersQuery } from "../../store/slices/usersSlice";
+import { useGetUsersQuery } from "../../store/apis/usersSlice";
 
 const SearchBar = ({ setSearchTerm, searchTerm, setPage }) => {
   const onChange = (e) => {
