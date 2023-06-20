@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDeviceTracker } from "../../hooks/useDeviceTracker";
 import { Box, Button, Flex, HStack } from "@chakra-ui/react";
 import PrimaryButton from "../../pages/landing/PrimaryButton";
+import { PublicRoutes } from "../../models/routes";
 
 const HomeNavbar = () => {
   const isMobile = useDeviceTracker(900);
@@ -29,7 +30,7 @@ const HomeNavbar = () => {
               variant={"link"}
               fontSize={"sm"}
               fontWeight={"400"}
-              to={"/login"}
+              to={PublicRoutes.LOGIN}
             >
               Sign In
             </Button>

@@ -14,6 +14,7 @@ import { Logo } from "../../components";
 import { useForgotPasswordMutation } from "../../store";
 import { useForm } from "react-hook-form";
 import useToastMsg from "../../hooks/useToastMsg";
+import { PublicRoutes } from "../../models/routes";
 
 const ForgotPassword = () => {
   const [forgotPassword, { isLoading }] =
@@ -32,7 +33,7 @@ const ForgotPassword = () => {
       await forgotPassword(data);
       reset();
       toastMsg("Email sent", "success");
-      navigate("/login");
+      navigate(PublicRoutes.LOGIN);
     } catch (error) {
       toastMsg("Email not sent", "error");
     }

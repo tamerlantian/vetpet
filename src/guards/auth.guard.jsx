@@ -4,8 +4,9 @@ import {
   selectCurrentToken,
   selectCurrentUser,
 } from "../store/slices/authSlice";
+import { PublicRoutes } from "../models/routes";
 
-const RequiredAuth = ({ allowedRoles }) => {
+const AuthGuard = ({ allowedRoles }) => {
   const user = useSelector(selectCurrentUser);
   const token = useSelector(selectCurrentToken);
   const location = useLocation();
@@ -15,8 +16,8 @@ const RequiredAuth = ({ allowedRoles }) => {
   ) : token ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />
   ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
+    <Navigate to={PublicRoutes.LOGIN} state={{ from: location }} replace />
   );
 };
 
-export default RequiredAuth;
+export default AuthGuard;

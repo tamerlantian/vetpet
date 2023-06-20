@@ -1,88 +1,53 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider,
-  Route,
-} from "react-router-dom";
-import { RequiredAuth, PersistLogin } from "./components";
-import { HomeLayout } from "./pages";
-import Layout from "./pages/layout";
-import Dashboard from "./pages/dashboard";
-import Offices from "./pages/offices";
-import Customers from "./pages/customers/index";
-import Employees from "./pages/employees";
-import Plans from "./pages/plans";
-import Products from "./pages/products";
-import Prospects from "./pages/prospects";
-import Login from "./pages/login";
-import Profile from "./pages/profile";
-import Signup from "./pages/signup";
-import Affiliations from "./pages/affiliations";
-import Requests from "./pages/requests/index";
-import Landing from "./pages/landing";
-import ForgotPassword from "./pages/forgotPassword";
-import ResetPassword from "./pages/resetPassword";
-import NotFound from "./components/NotFound";
-import Forbbiden from "./components/Forbbiden";
+import { Suspense, lazy } from "react";
+import { Route, BrowserRouter } from "react-router-dom";
+import { PersistLogin, FallbackSpinner } from "./components";
+import { PrivateRoutes, PublicRoutes } from "./models/routes";
+import { AuthGuard } from "./guards";
+import { RoutesWithNotFound } from "./utils";
+import Home from "./pages/home";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <>
-      {/* PRIVATE ROUTES */}
-      <Route element={<PersistLogin />}>
-        {/* Role user */}
-        <Route element={<RequiredAuth allowedRoles={["user"]} />}>
-          <Route path="/user" element={<Layout />}>
-            <Route path="/user" element={<Affiliations />} />
-            <Route path="affiliation" element={<Affiliations />} />
-            <Route path="profile" element={<Profile />} />
-          </Route>
-        </Route>
-
-        {/* Role staff */}
-        <Route element={<RequiredAuth allowedRoles={["staff"]} />}>
-          <Route path="/staff" element={<Layout />}>
-            <Route path="/staff" element={<Prospects />} />
-            <Route path="prospects" element={<Prospects />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="requests" element={<Requests />} />
-          </Route>
-        </Route>
-
-        {/* Role admin */}
-        <Route element={<RequiredAuth allowedRoles={["admin"]} />}>
-          <Route path="/admin" element={<Layout />}>
-            <Route path="/admin" element={<Dashboard />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="clients" element={<Customers />} />
-            <Route path="plans" element={<Plans />} />
-            <Route path="prospects" element={<Prospects />} />
-            <Route path="offices" element={<Offices />} />
-            <Route path="employees" element={<Employees />} />
-            <Route path="products" element={<Products />} />
-            <Route path="profile" element={<Profile />} />
-          </Route>
-        </Route>
-      </Route>
-
-      {/* PUBLIC ROUTES */}
-      <Route path="/" element={<HomeLayout />}>
-        <Route path="/" element={<Landing />} />
-        <Route path="landing" element={<Landing />} />
-      </Route>
-
-      <Route path="*" element={<NotFound />} />
-      <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
-      <Route path="/reset-password" element={<ForgotPassword />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/unauthorized" element={<Forbbiden />} />
-    </>
-  )
-);
+const Login = lazy(() => import("./pages/login"));
+const ResetPassword = lazy(() => import("./pages/resetPassword"));
+const ForgotPassword = lazy(() => import("./pages/forgotPassword"));
+const Signup = lazy(() => import("./pages/signup"));
+const Admin = lazy(() => import("./pages/admin"));
+const Staff = lazy(() => import("./pages/staff"));
+const User = lazy(() => import("./pages/user"));
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <Suspense fallback={<FallbackSpinner />}>
+      <BrowserRouter>
+        <RoutesWithNotFound>
+          <Route path="/*" element={<Home />} />
+          <Route path={PublicRoutes.LOGIN} element={<Login />} />
+          <Route
+            path={PublicRoutes.RESETPASSWORD}
+            element={<ResetPassword />}
+          />
+          <Route
+            path={PublicRoutes.FORGOTPASSWORD}
+            element={<ForgotPassword />}
+          />
+          <Route path={PublicRoutes.SIGNUP} element={<Signup />} />
+
+          <Route element={<PersistLogin />}>
+            <Route element={<AuthGuard allowedRoles={["admin"]} />}>
+              <Route path={`${PrivateRoutes.ADMIN}/*`} element={<Admin />} />
+            </Route>
+
+            <Route element={<AuthGuard allowedRoles={["staff"]} />}>
+              <Route path={`${PrivateRoutes.STAFF}/*`} element={<Staff />} />
+            </Route>
+
+            <Route element={<AuthGuard allowedRoles={["user"]} />}>
+              <Route path={`${PrivateRoutes.USER}/*`} element={<User />} />
+            </Route>
+          </Route>
+        </RoutesWithNotFound>
+      </BrowserRouter>
+    </Suspense>
+  );
 };
 
 export default App;

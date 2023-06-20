@@ -5,7 +5,6 @@ import {
   FormLabel,
   Button,
   Box,
-  Text,
   VStack,
   HStack,
   Flex,
@@ -17,6 +16,7 @@ import { VscArrowRight } from "react-icons/vsc";
 import { Link, useNavigate } from "react-router-dom";
 import useToastMsg from "../../hooks/useToastMsg";
 import { Logo } from "../../components";
+import { PublicRoutes } from "../../models/routes";
 
 const SignupForm = () => {
   const [signup, results] = useSignupMutation();
@@ -33,7 +33,7 @@ const SignupForm = () => {
 
   useEffect(() => {
     setFocus("cardId");
-  }, [])
+  }, []);
 
   const onSubmit = async (data) => {
     try {
@@ -62,7 +62,10 @@ const SignupForm = () => {
           <Box as="p" display="inline" color="gray.500">
             Already have an account?
           </Box>
-          <Link to="/login" className="underline text-blue-500">
+          <Link
+            to={`/${PublicRoutes.LOGIN}`}
+            className="underline text-blue-500"
+          >
             {" "}
             Sign in
           </Link>

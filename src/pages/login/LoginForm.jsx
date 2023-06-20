@@ -11,12 +11,13 @@ import {
   Text,
   VStack,
   HStack,
-  Stack
+  Stack,
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Logo } from "../../components";
+import { PublicRoutes } from "../../models/routes";
 
 const LoginForm = () => {
   const [loginUser, results] = useLoginMutation();
@@ -90,11 +91,17 @@ const LoginForm = () => {
         <Box as="h1" fontSize="1.8rem" fontWeight="bold">
           Sign in
         </Box>
-        <Stack direction={{ base: "column", md: "row"}} spacing={{ base: ".1rem", md: ".3rem"}}>
+        <Stack
+          direction={{ base: "column", md: "row" }}
+          spacing={{ base: ".1rem", md: ".3rem" }}
+        >
           <Text display="inline" color="gray.500">
             Don't have an account yet?
           </Text>
-          <Link to="/signup" className="underline text-blue-500">
+          <Link
+            to={`/${PublicRoutes.SIGNUP}`}
+            className="underline text-blue-500"
+          >
             Sign up
           </Link>
         </Stack>
@@ -124,7 +131,7 @@ const LoginForm = () => {
           variant={"link"}
           fontSize={"sm"}
           color={"blue.500"}
-          to={"/reset-password"}
+          to={`/${PublicRoutes.FORGOTPASSWORD}`}
         >
           Forgot password?
         </Button>
