@@ -11,6 +11,7 @@ export { default as NoContentMessage } from "./NoContentMessage";
 
 // ui
 export { default as SearchBar } from "./ui/SearchBar";
+export { default as FallbackSpinner } from "./ui/FallbackSpinner";
 
 // client components
 export { default as EditUser } from "./clientComponents/EditUser";
@@ -33,7 +34,6 @@ export { default as Drawer } from "./home/Drawer";
 export { default as HamburguerButton } from "./home/HamburguerButton";
 export { default as Links } from "./home/Links";
 
-export { default as RequiredAuth } from "./RequiredAuth";
 export { default as PersistLogin } from "./PersistLogin";
 
 // form

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../store/slices/authSlice";
 import { useEffect, useState } from "react";
 import useRefreshToken from "../hooks/useRefreshToken";
-import { Spinner, Container, Flex } from "@chakra-ui/react";
+import FallbackSpinner from "./ui/FallbackSpinner";
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,30 +23,7 @@ const PersistLogin = () => {
     !token ? verifyRefreshToken() : setIsLoading(false);
   }, []);
 
-  return (
-    <>
-      {isLoading ? (
-        <Container centerContent>
-          <Flex
-            h={"100vh"}
-            w={"full"}
-            justifyContent={"center"}
-            alignItems={"center"}
-          >
-            <Spinner
-              thickness="3px"
-              speed="0.60s"
-              emptyColor="gray.200"
-              color="purple.400"
-              size="xl"
-            />
-          </Flex>
-        </Container>
-      ) : (
-        <Outlet />
-      )}
-    </>
-  );
+  return <>{isLoading ? <FallbackSpinner /> : <Outlet />}</>;
 };
 
 export default PersistLogin;

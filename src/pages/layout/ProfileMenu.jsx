@@ -11,12 +11,12 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { MdKeyboardArrowDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/slices/authSlice";
 import useLogout from "../../hooks/useLogout";
 import { SERVER } from "../../config/config";
+import { PublicRoutes } from "../../models/routes";
 
 const ProfileMenu = ({ onOpen }) => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const ProfileMenu = ({ onOpen }) => {
 
   const handleLogout = async () => {
     await logout();
-    navigate("/login");
+    navigate(PublicRoutes.LOGIN);
   };
 
   return (

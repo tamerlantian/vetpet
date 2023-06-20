@@ -18,6 +18,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useChangePasswordMutation } from "../../store";
 import { useForm } from "react-hook-form";
 import useToastMsg from "../../hooks/useToastMsg";
+import { PublicRoutes } from "../../models/routes";
 
 const ResetPassword = () => {
   const [passwordMatched, setPasswordMatched] = useState(true);
@@ -57,7 +58,7 @@ const ResetPassword = () => {
       reset();
       await changePassword({ data, resetToken }).unwrap();
       toastMsg("Password changed", "success");
-      navigate("/login");
+      navigate(PublicRoutes.LOGIN);
     } catch (error) {
       toastMsg("An error ocurred", "error");
     }
