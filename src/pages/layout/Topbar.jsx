@@ -27,8 +27,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 const Topbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const isMobile = useDeviceTracker(900);
-  const { activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick } =
-    useStateContext();
+  const { setActiveMenu } = useStateContext();
 
   // this effect is watching for changes in the screenSize to apply the changes to the activemenu variable
   useEffect(() => {
